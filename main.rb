@@ -61,7 +61,7 @@ end
 
 get'/people' do
   sql = "select * from people"
-  run_sql(sql)
+  @people = run_sql(sql)
   erb :people
 end
 
@@ -71,25 +71,27 @@ get'/person/:id' do
   name = params[:name]
   occupation = params[:occupation]
   sql = "select * from people where id = #{'id'}"
-  run_sql(sql)
+  @person = run_sql(sql)
   erb :person
 end
 
 # creates an new person and assigns
 get '/create_person' do
-
   erb :create_person
 end
 
 #posts the person back to people
 post '/create_person' do
-
+  id = params[:id]
+  name = params[:name]
+  occupation = params[:occupation]
   erb :people
 end
 
 # gives you the person information
 get '/people/:id/edit/' do
-
+  sql = "select * from people where id = #{id}"
+  @people = run_sql(sql)
 end
 
 
