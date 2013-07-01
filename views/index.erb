@@ -1,0 +1,21 @@
+<h1>Manage Your Movie Production Here</h1>
+<p>This is where I show a dash board</p>
+
+<h2>Your Movie Produciton Summary</h2>
+<%= @got_movies.count %>
+
+
+<a href='/movies'><button>View All Movies</button></a>
+
+
+<br>
+<h2>Your Tasks Summary</h2>
+<%= @got_todos.count %>
+
+<a href='/todos'><button>View All Tasks</button></a>
+
+<br>
+<h2>Your Slaves Summary</h2>
+<%= @got_people.first %>
+
+<a href='/people'><button>View All Slaves</button></a>
