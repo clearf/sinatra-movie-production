@@ -1,0 +1,14 @@
+<h3>Your Contacts</h3>
+  <% @people.each do |person| %>
+    <%= person %><br>
+  <% end %>
+
+<h3>Add a person</h3>
+<form action="/new_person" method="post">
+  <ul>
+    <li>Name: <input type="text" name="name"></li>
+    <li>Title: <input type="text" name="title"></li>
+    <li>Phone: <input type="text" name="phone"></li>
+    <button>Add</button>
+  </ul>
+</form>

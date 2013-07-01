@@ -1,0 +1,23 @@
+<h3>Films You're Working On</h3>
+  <% @movies.each do |movie| %>
+    <%= movie %><br>
+  <% end %>
+
+<h3>Add a film</h3>
+<form action="/new_movie" method="post">
+<ul>
+  <li>Title: <input type="text" name="task"></li>
+  <li>Director:
+    <select name="movie_id">
+      <% @movies.each do |movie| %>
+        <option name="movie_id" value="<%= movie['id'] %>">
+        <%= movie['name'] %>
+      <% end %>
+    </select></li>
+  <li>Release year: <input type="text" name="year"></li>
+  <li>Image URL: <input type="text" name="image"></li>
+  <button>Add</button>
+</ul>
+</form>
+
+<a href="/">Back to home page</a>

@@ -1,0 +1,30 @@
+<% @tasks.each do |task| %>
+  <%= task %><br>
+<% end %>
+
+<h3>Add a task</h3>
+<form action="/new_task" method="post">
+<ul>
+  <li>Task: <input type="text" name="task"></li>
+  <li>Notes: <input type="text" name="description"></li>
+  <li>Person assigned to:
+    <select name="person_id">
+      <% @people.each do |person| %>
+        <option name="person_id" value="<%= person['id'] %>">
+        <%= person['name'] %>
+      <% end %>
+    </select></li>
+  <li>For film:
+    <select name="movie_id">
+      <% @movies.each do |movie| %>
+        <option name="movie_id" value="<%= movie['id'] %>">
+        <%= movie['title'] %>
+      <% end %>
+    </select></li>
+  <button>Add</button>
+</ul>
+</form>
+
+<a href="/film_manager">View and manage films</a> | <a href="/contact_manager">View and manage contacts</a>
+
+<a href="/">Back to home page</a>
