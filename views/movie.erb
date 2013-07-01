@@ -2,6 +2,9 @@
   Title: <%= movie['title'] %><br/>
   Release Date: <%= movie['release_date'] %><br/>
   Director: <%= movie['director'] %>
+  <form action="/delete/movies/<%= movie['id'] %>" method="post">
+    <button>Delete</button>
+  </form>
 <% end %>
 <br/>
 <br/>

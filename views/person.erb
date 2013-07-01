@@ -2,6 +2,9 @@
   Name: <%= person['name'] %><br/>
   Movie: <%= person['movie'] %><br/>
   Task: <%= person['task'] %>
+  <form action="/delete/people/<%= person['id'] %>" method="post">
+    <button>Delete</button>
+  </form>
 <% end %>
 <br/>
 <br/>

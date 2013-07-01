@@ -89,3 +89,24 @@ post '/new_todo' do
   run_sql(sql)
   redirect to('/todos')
 end
+
+post '/delete/movies/:id' do
+  id = params[:id]
+  sql = "DELETE FROM movies WHERE id = #{id}"
+  run_sql(sql)
+  redirect to('/movies')
+end
+
+post '/delete/people/:id' do
+  id = params[:id]
+  sql = "DELETE FROM people WHERE id = #{id}"
+  run_sql(sql)
+  redirect to('/people')
+end
+
+post '/delete/todos/:id' do
+  id = params[:id]
+  sql = "DELETE FROM tasks WHERE id = #{id}"
+  run_sql(sql)
+  redirect to('/todos')
+end
