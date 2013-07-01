@@ -1,6 +1,6 @@
+DROP TABLE movies;
 DROP TABLE tasks;
 DROP TABLE people;
-DROP TABLE movies;
 
 
 CREATE TABLE movies

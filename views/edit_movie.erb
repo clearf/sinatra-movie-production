@@ -1,0 +1,11 @@
+<h2>Edit Movie</h2>
+
+<form action="/movies/<%= @movie['id'] %>" method="post">
+  <label for="movie">Movie</label><br>
+  <input type="text" name="movie_name" value="<%= @movie['movie_name'] %>"><br>
+  <label for="release">Release</label><br>
+  <input type="text" name="release" value="<%= @movie[release] %>"><br>
+  <label for="director">Director</label><br>
+  <input type="text" name="director" value="<%= @movie['director'] %>"><br>
+  <button>Save Changes</button>
+</form>

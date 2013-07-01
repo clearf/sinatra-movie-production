@@ -38,10 +38,31 @@ end
 
 get '/movies/:id' do
   id = params[:id]
+  movie_name = params[:movie_name]
+  release = params[:release]
+  director = params[:director]
   sql = "SELECT * FROM movies WHERE id = #{id}"
   @movie = run_sql(sql).first
   erb :movie
 end
+
+get '/movies/:id/edit' do
+  id = params[:id]
+  sql = "SELECT * FROM movies WHERE id = #{id}"
+  @movie = run_sql(sql).first
+  erb :edit_movie
+end
+
+post '/movies/:id' do
+  id = params[:id]
+  movie_name = params[:movie_name]
+  release = params[:release]
+  director = params[:director]
+  sql = "UPDATE movies SET (movie_name, release, director) = ('#{movie_name}',#{release},'#{director}')  WHERE id = #{id}"
+  @movie = run_sql(sql).first
+  redirect to '/movies'
+end
+
 
 get '/todos' do
   sql = "SELECT * FROM tasks"
