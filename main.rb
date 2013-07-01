@@ -60,14 +60,18 @@ end
 # get all the people
 
 get'/people' do
-
+  sql = "select * from people"
+  run_sql(sql)
   erb :people
 end
 
 # get each individual person
 
-get'/person' do
-
+get'/person/:id' do
+  name = params[:name]
+  occupation = params[:occupation]
+  sql = "select * from people where id = #{'id'}"
+  run_sql(sql)
   erb :person
 end
 
@@ -97,4 +101,12 @@ end
 get'/movies/' do
 
 end
+
+get '/movies/:id' do
+
+end
+
+
+
+
 
