@@ -36,14 +36,27 @@ post '/people/new' do
   redirect to('/people')
 end
 
-
-
 #list movies
 get '/movies' do
   sql = "SELECT * FROM movies"
   @movies = run_sql(sql)
   erb :movies
 end
+
+get '/movies/new' do
+  sql = "SELECT * FROM people"
+  @people = run_sql(sql)
+  erb :new_movie
+end
+
+post '/movies/new' do
+  name = params[:name]
+  person_id = params[:person_id]
+  sql = "INSERT INTO movies (name, person_id) VALUES ('#{name}', '#{person_id}')"
+  run_sql(sql)
+  redirect to('/movies')
+end
+
 
 #list tasks
 get '/tasks' do
