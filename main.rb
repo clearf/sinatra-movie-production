@@ -83,6 +83,16 @@ post '/todos/new' do
   redirect to '/todos'
 end
 
+get '/todos/:id' do
+  id = params[:id]
+  task_name = params[:task_name]
+  description = params[:description]
+  movie_id = params[:movie_id]
+  sql = "SELECT * FROM tasks WHERE id = #{id}"
+  @todo = run_sql(sql).first
+  erb :todo
+end
+
 get '/people' do
   sql = "SELECT * FROM people"
   @people = run_sql(sql)
