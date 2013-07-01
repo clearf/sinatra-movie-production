@@ -37,5 +37,13 @@ post '/new_person' do
 end
 
 get '/new_movie' do
+  sql = "SELECT id, name FROM people"
+  @people = sql_query(sql)
   erb :new_movie
+end
+
+post '/new_movie' do
+  sql = "INSERT INTO movies (name, release_date, person_id) VALUES ('#{params[:name]}', '#{params[:release_date]}', #{params[:person_id]})"
+  sql_query(sql)
+  redirect to '/'
 end
