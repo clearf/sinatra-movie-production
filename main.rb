@@ -30,6 +30,12 @@ get '/people' do
   erb :people
 end
 
+get '/people/new' do
+  sql = "SELECT id, person_name FROM people"
+  @movies = run_sql(sql)
+  erb :person_new
+end
+
 get '/movies' do
   sql = "SELECT * FROM movies"
   @movies = run_sql(sql)
