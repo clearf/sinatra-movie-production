@@ -28,6 +28,7 @@ get '/movies/new' do
 end
 
 post '/movies/new' do
+  id = params[:id]
   movie_name = params[:movie_name]
   release = params[:release]
   director = params[:director]
@@ -75,6 +76,7 @@ get '/todos/new' do
 end
 
 post '/todos/new' do
+  id = params[:id]
   task_name = params[:task_name]
   description = params[:description]
   movie_id = params[:movie_id]
@@ -115,3 +117,36 @@ get '/people' do
   @people = run_sql(sql)
   erb :people
 end
+
+get '/people/new' do
+  erb :new_person
+end
+
+post '/people/new' do
+  id = params[:id]
+  person = params[:person]
+  movie_id = params[:movie_id]
+  task_id = params[:task_id]
+  sql = "INSERT INTO people (person, movie_id, task_id) VALUES ('#{person}', '#{movie_id}','#{task_id}');"
+  run_sql(sql)
+  redirect to '/people'
+end
+
+
+get '/people/:id/edit' do
+  id = params[:id]
+  sql = "SELECT * FROM people WHERE id = #{id}"
+  @person = run_sql(sql).first
+  erb :edit_person
+end
+
+post '/people/:id' do
+  id = params[:id]
+  person = params[:person]
+  movie_id = params[:movie_id]
+  task_id = params[:task_id]
+  sql = "UPDATE people SET (person, movie_id, task_id) = ('#{person}', '#{movie_id}','#{task_id}')  WHERE id = #{id}"
+  @person = run_sql(sql).first
+  redirect to '/people'
+end
+

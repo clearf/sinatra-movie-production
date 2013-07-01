@@ -1,0 +1,11 @@
+<h2>Edit Person</h2>
+
+<form action="/people/<%= @person['id'] %>" method="post">
+  <label for="person">Person</label><br>
+  <input type="text" name="person" value="<%= @person['person'] %>"><br>
+  <label for="movie_id">Movie ID</label><br>
+  <input type="text" name="movie_id" value="<%= @person['movie_id'] %>"><br>
+  <label for="task_id">Task ID</label><br>
+  <input type="text" name="task_id" value="<%= @person['task_id'] %>"><br>
+  <button>Save Changes</button>
+</form>
