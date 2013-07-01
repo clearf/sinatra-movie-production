@@ -1,3 +1,20 @@
+.tasks{
+    float: left;
+}
+
+.movies{
+    float: left;
+    margin-left: 100px;
+}
+
+.people{
+    float: left;
+    margin-left: 100px;
+
+}
+
+
+
 p{
     font-family: Georgia;
 }
@@ -15,11 +32,34 @@ body{
     font-family: Georgia;
 }
 
+.header{
+    background-color: rgba(202,202,202,4);
+    margin-left: -10px;
+    margin-right: 30px;
+    padding: 10px;
+}
+
 .header li {
    display: inline;
     padding-right: 10px;
 }
 
+.header a {
+    color: #333
+}
+
+.header a:hover{
+    color: #0099FF;
+}
+
 li{
     list-style: none
+}
+
+a{
+    text-decoration: none;
+    color: #0099FF;
+}
+a:hover{
+    text-transform: uppercase;
 }

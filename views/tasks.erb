@@ -1,3 +1,23 @@
-<% @tasks.each do |task| %>
-<%= task %>
+<div class = "tasks">
+  <h1>Tasks</h1>
+  <% @tasks.each do |task| %>
+    <li><a href="tasks/<%= task['id'] %>"><%= task['name'] %></a></li>
 <% end %>
+</div>
+
+<div class = "movies">
+  <h1>Movies</h1>
+  <% @movies.each do |movie| %>
+      <li><a href="movies/<%= movie['id'] %>"><%= movie['name'] %></a></li>
+  <% end %>
+</div>
+
+<div class = "people">
+  <h1>People</h1>
+  <% @people.each do |person| %>
+      <li><a href="people/<%= person['id'] %>"><%= person['name'] %></a></li>
+  <% end %>
+
+
+</div>
+

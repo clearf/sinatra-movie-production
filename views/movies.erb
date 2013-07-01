@@ -1,3 +1,3 @@
 <% @movies.each do |movie| %>
-    <%= movie %>
+    <li><a href="movies/<%= movie['id'] %>"><%= movie['name'] %></a></li>
 <% end %>

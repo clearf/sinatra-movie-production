@@ -16,7 +16,17 @@ end
 
 #shows root page
 get '/' do
-   erb :index
+  sql = "select * from tasks"
+  @tasks = run_sql(sql)
+
+  sql = "select * from movies"
+  @movies = run_sql(sql)
+
+
+  sql = "select * from people"
+  @people = run_sql(sql)
+
+  erb :tasks
 end
 
 #shows form to add a new movie
