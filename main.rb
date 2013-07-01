@@ -43,7 +43,11 @@ end
 #################### PEOPLE SECTION ####################
 # HERE THE USER INPUT A NEW MOVIE
 get '/people' do
+  sql_get_people = "SELECT * FROM people"
+  @got_people = run_sql(sql_get_people)
+
   erb :people
+
 end
 
 

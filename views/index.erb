@@ -2,8 +2,7 @@
 <p>This is where I show a dash board</p>
 
 <h2>Your Movie Produciton Summary</h2>
-<%= @got_movies.count %>
-
+<%= @got_movies.count == 0 %>
 
 <a href='/movies'><button>View All Movies</button></a>
 
@@ -16,6 +15,9 @@
 
 <br>
 <h2>Your Slaves Summary</h2>
+<ul>
+  You currently have
+</ul>
 <%= @got_people.first %>
 
 <a href='/people'><button>View All Slaves</button></a>

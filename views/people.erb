@@ -1,1 +1,22 @@
-<p>This is where I show a bunch of people</p>
+<h1>This is where I show a bunch of people</h1>
+<p>Here's a list of people that are currently slaving away for your movies. You can click the individual person to view and edit the details or delete the person.</p>
+
+<% if @got_people.count == 0 %>
+    <ul class = "bullet_message">
+      <li>You currently do not have anyone working on your movies.</li>
+    </ul>
+<% else %>
+    <% @got_people.each do |person| %>
+      <ul>
+        <li><button>View details</button>
+          <%= person['name'] %>(<%= person['title'] %>): # tasks assinged</li>
+      </ul>
+    <% end %>
+<% end %>
+
+
+
+
+<br/>
+<p>Click the button below to add more slaves to work on your movies!</p>
+<a href='/'><button>Add More Slaves</button></a>
