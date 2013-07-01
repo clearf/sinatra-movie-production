@@ -1,0 +1,13 @@
+<form action="/new_movie" method="POST">
+  Movie Name: <input type="text" name="name" autofocus></br></br>
+  Release Date: <input type="date" name="release_date"></br></br>
+  Person:
+  <select name="person_id">
+    <% @people.each do |person| %>
+      <option value="<%= person["id"] %>">
+        <%= person["name"] %>
+      </option>
+    <% end %>
+  </select></br></br>
+  <button>Create New Movie</button>
+</form>
