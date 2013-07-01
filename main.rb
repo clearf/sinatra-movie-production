@@ -25,16 +25,30 @@ get '/people' do
   erb :people
 end
 
+#Input Form To Add New Person
 get '/people/new' do
   erb :new_person
 end
 
+#Input to Database from Form
 post '/people/new' do
   name = params[:name]
   sql = "INSERT INTO people (name) VALUES ('#{name}')"
   run_sql(sql)
   redirect to('/people')
 end
+
+#Individual People Page
+get '/people/:id' do
+@person = params[:id]
+sql = "SELECT * FROM people WHERE id ='#{@person}'"
+@person_details = run_sql(sql).first
+sql = "SELECT * FROM tasks where person_id ='#{@person}'"
+@tasks = run_sql(sql).first
+erb :person
+end
+
+
 
 #list movies
 get '/movies' do

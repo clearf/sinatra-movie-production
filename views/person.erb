@@ -1,0 +1,9 @@
+<h1>Name: <%= @person_details['name'].capitalize %></h1>
+<h2>Tasks:</h2>
+<ul>
+  <li><a href="/tasks/<%= @tasks['id'] %>"><%= @tasks['name'].capitalize %></a></li>
+    <ul>
+      <li><%= @tasks['description'] %></li>
+    </ul>
+</ul>
+

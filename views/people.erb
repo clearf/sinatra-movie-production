@@ -1,6 +1,6 @@
 <h1>List of People:</h1>
 <ul>
 <% @people.each do |person| %>
-<li><%= person['name'].capitalize %></li>
+<li><a href="/people/<%= person['id'] %>"><%= person['name'].capitalize %></a></li>
 <% end %>
 </ul>
