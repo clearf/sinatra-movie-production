@@ -12,6 +12,11 @@ helpers do
   end
 end
 
+#Launch page
+get '/' do
+  erb :index
+end
+
 #Show list of tasks
 get '/tasks' do
   sql = "SELECT * from tasks"

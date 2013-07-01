@@ -1,3 +1,6 @@
+<h1>Movies</h1>
 <% @movies.each do |movie| %>
-<%= movie %>
+<p>Name: <%= movie["name"] %></p>
+<p>Release Date: <%= movie["release_date"] %></p>
+<p>Director: <%= movie["director"] %></p><br>
 <% end %>
