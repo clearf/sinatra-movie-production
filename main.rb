@@ -41,15 +41,37 @@ end
 
 
 #################### PEOPLE SECTION ####################
-# HERE THE USER INPUT A NEW MOVIE
+# SHOW ALL PEOPLE WORKING
 get '/people' do
   sql_get_people = "SELECT * FROM people"
   @got_people = run_sql(sql_get_people)
-
   erb :people
-
 end
 
+# HERE USER CAN ADD A NEW PERSON
+get '/people/new' do
+  erb :new_person
+end
+
+post '/people/new' do
+  name = params[:name].capitalize
+  title = params[:title].capitalize
+  phone = params[:phone]
+  idiot = params[:idiot]
+
+  sql_add_person = "INSERT INTO people (name, title, phone, idiot) VALUES ('#{name}', '#{title}', '#{phone}', '#{idiot}')"
+  run_sql(sql_add_person)
+
+  redirect to('/people')
+end
+
+# SHOW DETAILS OF EACH INDIVIDUAL
+get '/people/:id' do
+  id = params[:id]
+  sql_get_person = "SELECT * FROM people WHERE id = #{id}"
+  @got_person = run_sql(sql_get_person)
+  erb :person
+end
 
 #################### TODO SECTION ####################
 get '/todos' do

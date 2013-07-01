@@ -1,4 +1,6 @@
-<h1>This is where I show a bunch of people</h1>
+<h1>Manage Your Slaves!</h1>
+
+<h2>Your Current Slaves</h2>
 <p>Here's a list of people that are currently slaving away for your movies. You can click the individual person to view and edit the details or delete the person.</p>
 
 <% if @got_people.count == 0 %>
@@ -8,15 +10,16 @@
 <% else %>
     <% @got_people.each do |person| %>
       <ul>
-        <li><button>View details</button>
-          <%= person['name'] %>(<%= person['title'] %>): # tasks assinged</li>
+        <li><a href='/people/<%= person['id'] %>'><button>View details</button></a>
+           <%= person['name'] %>: # tasks assinged</li>
       </ul>
     <% end %>
 <% end %>
 
-
-
-
 <br/>
+<h2>Add More Slaves</h2>
 <p>Click the button below to add more slaves to work on your movies!</p>
-<a href='/'><button>Add More Slaves</button></a>
+<a href='/people/new'><button>Add More Slaves</button></a>
+
+<br>
+STYLIZE THE PERSON NAME

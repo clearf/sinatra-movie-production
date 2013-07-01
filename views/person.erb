@@ -1,0 +1,27 @@
+<h1>Details of <%= @got_person.first['name'] %></h1>
+
+<ul>
+  <li>Slave ID#: <%= @got_person.first['id'] %></li>
+  <li>Name: <%= @got_person.first['name'] %></li>
+  <li>Title: <%= @got_person.first['title'] %></li>
+  <li>Phone: <%= @got_person.first['phone'] %></li>
+  <li>Idiot? <%= if @got_person.first['idiot'] == 't'; "Yes"; else; "No"; end %></li>
+</ul>
+
+Actions you can take:<br>
+<button>Edit This Person</button><br>
+<button>Delete This Person</button><br>
+
+
+<br>
+<p> NEED TO SHOW NUMBER OF TASKS ASSIGNED </p>
+<p> ALSO SHOW A PICTURE? </p>
+
+
+
+
+
+
+
+
+
