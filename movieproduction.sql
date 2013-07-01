@@ -1,6 +1,6 @@
-DROP TABLE TODOS
-DROP TABLE MOVIES
-DROP TABLE PEOPLE
+DROP TABLE TASKS;
+DROP TABLE MOVIES;
+DROP TABLE PEOPLE;
 
 CREATE TABLE PEOPLE
 (ID SERIAL PRIMARY KEY,
@@ -9,20 +9,22 @@ CREATE TABLE PEOPLE
   phone VARCHAR(15)
   );
 
-CREATE TABLE TASKS
-(ID SERIAL PRIMARY KEY,
-  task VARCHAR(127),
-  description TEXT,
-  person_id INT references people(id),
-  movie_id INT references movies(id),
-  completed BOOLEAN,
-);
-
 CREATE TABLE MOVIES
 (ID SERIAL PRIMARY KEY,
   title VARCHAR(255),
   director_id INT references movies(id),
   image TEXT
 );
+
+CREATE TABLE TASKS
+(ID SERIAL PRIMARY KEY,
+  task VARCHAR(127),
+  description TEXT,
+  person_id INT references people(id),
+  movie_id INT references movies(id),
+  completed BOOLEAN
+);
+
+
 
 
