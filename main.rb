@@ -70,6 +70,19 @@ get '/todos' do
   erb :todos
 end
 
+get '/todos/new' do
+  erb :new_todo
+end
+
+post '/todos/new' do
+  task_name = params[:task_name]
+  description = params[:description]
+  movie_id = params[:movie_id]
+  sql = "INSERT INTO tasks (task_name, description, movie_id) VALUES ('#{task_name}', '#{description}','#{movie_id}');"
+  run_sql(sql)
+  redirect to '/todos'
+end
+
 get '/people' do
   sql = "SELECT * FROM people"
   @people = run_sql(sql)
