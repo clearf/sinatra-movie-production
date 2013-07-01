@@ -4,12 +4,12 @@ require 'sinatra/reloader' if development?
 require 'pry'
 
 helpers do
-def run_sql(sql)
-  db = PG.connect(dbname: 'production', host:'localhost')
-  result = db.exec(sql)
-  db.close
-  result
-end
+  def run_sql(sql)
+    db = PG.connect(dbname: 'production', host:'localhost')
+    result = db.exec(sql)
+    db.close
+    result
+  end
 end
 
 #Show list of tasks
@@ -23,6 +23,8 @@ end
 get '/tasks/new' do
   sql = "SELECT id, name FROM movies"
   @movies = run_sql(sql)
+  sql2 = "SELECT id, name FROM contacts"
+  @contacts = run_sql(sql2)
   erb :new_task
 end
 
@@ -42,6 +44,22 @@ get '/tasks/:id' do
   sql = "SELECT * from tasks WHERE id = #{id}"
   @task = run_sql(sql).first
   erb :task
+end
+
+#Edit task
+get '/tasks/:id/edit' do
+  id = params[:id]
+  sql = "SELECT * FROM tasks WHERE id = #{id}"
+  @task = run_sql(sql).first
+  erb :edittask #fix this
+end
+
+#Delete task
+post '/tasks/:id/delete' do
+  id = params[:id]
+  sql = "DELETE FROM tasks where id = #{id}"
+  run_sql(sql)
+  redirect to "/tasks"
 end
 
 #Show list of movies
@@ -73,6 +91,15 @@ get '/movies/:id' do
   erb :movie
 end
 
+#Delete Movie
+post '/movies/:id/delete' do
+  id = params[:id]
+  sql = "DELETE FROM movies WHERE id = #{id}"
+  run_sql(sql)
+  redirect to '/movies'
+end
+
+
 #Show list of contacts
 get '/contacts' do
   sql = "SELECT * from contacts"
@@ -100,7 +127,13 @@ get '/contacts/:id' do
   erb :contact
 end
 
-#Add new task
+# Delete contacts
+post '/contacts/:id/delete' do
+  id = params[:id]
+  sql = "DELETE FROM contacts where id = #{id}"
+  run_sql(sql)
+  redirect to '/contacts'
+end
 
 #Edit task
 #Edit movie
