@@ -29,14 +29,12 @@ end
 
 #Add new task
 
-
 #Show list of movies
 get '/movies' do
   sql = "SELECT * from movies"
   @movies = run_sql(sql)
   erb :movies
 end
-
 
 #Add new movie
 get '/movies/new' do
@@ -52,7 +50,6 @@ post '/movies/new' do
   redirect to '/movies'
 end
 
-
 #View movie detail
 get '/movies/:id' do
   id = params[:id]
@@ -66,6 +63,18 @@ get '/contacts' do
   sql = "SELECT * from contacts"
   @contacts = run_sql(sql)
   erb :contacts
+end
+
+# Add new contact
+get '/contacts/new' do
+  erb :new_contact
+end
+
+post '/contacts/new' do
+  name = params[:name]
+  sql = "INSERT INTO contacts (name) VALUES ('#{name}')"
+  run_sql(sql)
+  redirect to '/contacts'
 end
 
 # Show contact detail
