@@ -51,6 +51,10 @@ end
 
 #shows the form to add a new task
 get '/tasks/new' do
+  sql = "select id, name from people"
+  @people = run_sql(sql)
+  sql = "select id, name from movies"
+  @movies = run_sql(sql)
   erb :new_task
 end
 
@@ -61,7 +65,7 @@ post '/tasks/new' do
   @person_id = params[:person_id]
   @movie_id = params[:movie_id]
   sql = "insert into tasks (name,description,person_id,movie_id) values ('#{@name}', '#{@description}','#{@person_id}','#{@movie_id}')"
-  run_sql(sql)
+  @tasks = run_sql(sql)
   redirect to '/'
 end
 
@@ -76,6 +80,8 @@ end
 #shows individual task
 get '/tasks/:id' do
   @id = params[:id]
+  sql = "select * from tasks where id = '#{@id}'"
+  @task = run_sql(sql).first
   erb :task
 end
 
@@ -89,6 +95,8 @@ end
 #shows individual movie
 get '/movies/:id' do
   @id = params[:id]
+  sql = "select * from movies where id = '#{@id}'"
+  @movie = run_sql(sql).first
   erb :movie
 end
 
@@ -102,6 +110,8 @@ end
 #shows individual person
 get '/people/:id' do
   @id = params[:id]
+  sql = "select * from people where id = '#{@id}'"
+  @person = run_sql(sql).first
   erb :person
 end
 
