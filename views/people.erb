@@ -2,9 +2,12 @@
 
 <% @people.each do |person| %>
   <a href="/people/<%= person['id'] %>">
-    <%= person['name'] %>
+    <%= person['name'] %><br/>
   </a>
 <% end %>
+<br/>
+<br/>
+<a href="/new_person">Create a New Person</a>
 <br/>
 <br/>
 <a href="/">Back to Index</a>

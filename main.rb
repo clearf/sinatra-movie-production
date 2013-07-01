@@ -32,6 +32,14 @@ get '/new_movie' do
   erb :new_movie
 end
 
+post '/new_movie' do
+  title = params[:title]
+  release_date = params[:release_date]
+  sql = "INSERT INTO movies (title, release_date) VALUES ('#{title}', #{release_date});"
+  run_sql(sql)
+  redirect to('/movies')
+end
+
 get '/people' do
   sql = "SELECT * FROM people"
   @people = run_sql(sql)
@@ -43,6 +51,18 @@ get '/people/:id' do
   sql = "SELECT * FROM people WHERE id = #{id}"
   @person = run_sql(sql)
   erb :person
+end
+
+get '/new_person' do
+  erb :new_person
+end
+
+post '/new_person' do
+  name = params[:name]
+  description = params[:description]
+  sql = "INSERT INTO people (name) VALUES ('#{name}');"
+  run_sql(sql)
+  redirect to('/people')
 end
 
 get '/todos' do
