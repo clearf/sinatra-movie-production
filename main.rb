@@ -20,3 +20,10 @@ get '/movies' do
   @movies = run_sql(sql)
   erb :movies
 end
+
+get '/movies/:id' do
+  id = params[:id]
+  sql = "SELECT * FROM movies WHERE id = #{id}"
+  @movie = run_sql(sql)
+  erb :movie
+end

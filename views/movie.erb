@@ -1,0 +1,5 @@
+<% @movie.each do |movie| %>
+  Title: <%= movie['title'] %><br/>
+  Release Date: <%= movie['release_date'] %><br/>
+  Director: <%= movie['director'] %>
+<% end %>
