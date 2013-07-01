@@ -77,3 +77,15 @@ get '/todos/:id' do
   @task = run_sql(sql)
   erb :todo
 end
+
+get '/new_todo' do
+  erb :new_todo
+end
+
+post '/new_todo' do
+  name = params[:name]
+  description = params[:description]
+  sql = "INSERT INTO tasks (name, description) VALUES ('#{name}', '#{description}');"
+  run_sql(sql)
+  redirect to('/todos')
+end

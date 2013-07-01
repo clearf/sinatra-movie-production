@@ -2,9 +2,12 @@
 
 <% @tasks.each do |todo| %>
   <a href="/todos/<%= todo['id'] %>">
-    <%= todo['name'] %>
+    <%= todo['name'] %><br/>
   </a>
 <% end %>
+<br/>
+<br/>
+<a href="/new_todo">Create a New Task</a>
 <br/>
 <br/>
 <a href="/">Back to Index</a>
