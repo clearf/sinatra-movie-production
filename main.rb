@@ -16,10 +16,15 @@ end
 get '/tasks' do
   sql = "SELECT * from tasks"
   @tasks = run_sql(sql)
-  erb:tasks
+  erb :tasks
 end
 
 #Show list of movies
+get '/movies' do
+  sql = "SELECT * from movies"
+  @movies = run_sql(sql)
+  erb :movies
+end
 
 #Show list of contacts
 
