@@ -27,6 +27,11 @@ get '/movies' do
 end
 
 #Show list of contacts
+get '/contacts' do
+  sql = "SELECT * from contacts"
+  @contacts = run_sql(sql)
+  erb :contacts
+end
 
 #Add new task
 #Add new movie
