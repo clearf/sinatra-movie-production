@@ -40,3 +40,16 @@ get '/people/:id' do
   @person = run_sql(sql)
   erb :person
 end
+
+get '/todos' do
+  sql = "SELECT * FROM tasks"
+  @tasks = run_sql(sql)
+  erb :todos
+end
+
+get '/todos/:id' do
+  id = params[:id]
+  sql = "SELECT * FROM tasks WHERE id = #{id}"
+  @task = run_sql(sql)
+  erb :todo
+end
