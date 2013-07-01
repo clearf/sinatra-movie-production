@@ -19,6 +19,23 @@ get '/tasks' do
   erb :tasks
 end
 
+#Add new task
+get '/tasks/new' do
+  sql = "SELECT id, name FROM movies"
+  @movies = run_sql(sql)
+  erb :new_task
+end
+
+post '/tasks/new' do
+  name = params[:name]
+  descriptions = params[:descriptions]
+  movie_id = params[:movie_id]
+  contact_id = params[:contact_id]
+  sql = "INSERT INTO tasks (name, descriptions, movie_id, contact_id) VALUES ('#{name}', '#{descriptions}',#{movie_id}, #{contact_id});"
+  run_sql(sql)
+  redirect to '/tasks'
+end
+
 #Show task detail
 get '/tasks/:id' do
   id = params[:id]
@@ -26,8 +43,6 @@ get '/tasks/:id' do
   @task = run_sql(sql).first
   erb :task
 end
-
-#Add new task
 
 #Show list of movies
 get '/movies' do
@@ -86,8 +101,6 @@ get '/contacts/:id' do
 end
 
 #Add new task
-#Add new movie
-#Add new contact
 
 #Edit task
 #Edit movie
