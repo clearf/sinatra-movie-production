@@ -27,12 +27,31 @@ get '/tasks/:id' do
   erb :task
 end
 
+#Add new task
+
+
 #Show list of movies
 get '/movies' do
   sql = "SELECT * from movies"
   @movies = run_sql(sql)
   erb :movies
 end
+
+
+#Add new movie
+get '/movies/new' do
+  erb :new_movie
+end
+
+post '/movies/new' do
+  name = params[:name]
+  release_date = params[:release_date]
+  director = params[:director]
+  sql = "INSERT INTO movies (name, release_date, director) VALUES ('#{name}', '#{release_date}', '#{director}');"
+  run_sql(sql)
+  redirect to '/movies'
+end
+
 
 #View movie detail
 get '/movies/:id' do
