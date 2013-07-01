@@ -48,7 +48,17 @@ sql = "SELECT * FROM tasks where person_id ='#{@person}'"
 erb :person
 end
 
+# post '/people/:id/delete' do
+#   @person_id = params[:id]
+#   sql = "DELETE FROM people where id = '#{@person_id}'"
+#   run_sql(sql)
+#   sql = "DELETE FROM movies where person_id = '#{@person_id}'"
+#   run_sql(sql)
+#   sql = "DELETE FROM tasks where person_id = '#{@person_id}'"
+#   run_sql(sql)
 
+#   redirect to ('/people')
+# end
 
 #list movies
 get '/movies' do
@@ -117,6 +127,13 @@ get '/tasks/:id' do
   sql = "Select * FROM movies"
   @movie_details = run_sql(sql)
   erb :todo
+end
+
+post '/tasks/:id/delete' do
+  @task_id = params[:id]
+  sql = "DELETE FROM tasks where id = '#{@task_id}'"
+  run_sql(sql)
+redirect to ('/tasks')
 end
 
 
