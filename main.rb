@@ -25,6 +25,19 @@ get '/people' do
   erb :people
 end
 
+get '/people/new' do
+  erb :new_person
+end
+
+post '/people/new' do
+  name = params[:name]
+  sql = "INSERT INTO people (name) VALUES ('#{name}')"
+  run_sql(sql)
+  redirect to('/people')
+end
+
+
+
 #list movies
 get '/movies' do
   sql = "SELECT * FROM movies"
@@ -32,13 +45,14 @@ get '/movies' do
   erb :movies
 end
 
-
 #list tasks
 get '/tasks' do
   sql = "SELECT * FROM tasks"
   @tasks = run_sql(sql)
   erb :todos
 end
+
+
 
 
 
