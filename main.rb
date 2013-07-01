@@ -71,6 +71,16 @@ post '/movies/new' do
   redirect to('/movies')
 end
 
+#Individual Movie Page
+get '/movies/:id' do
+  @movie_id = params[:id]
+  sql = "SELECT * FROM movies WHERE id= '#{@movie_id}'"
+  @movie_details = run_sql(sql).first
+  sql = "SELECT * FROM tasks where movie_id ='#{@movie_id}'"
+  @tasks = run_sql(sql).first
+  erb :movie
+end
+
 
 #list tasks
 get '/tasks' do
@@ -97,6 +107,16 @@ post '/tasks/new' do
   sql = "INSERT INTO tasks (name, description, movie_id, person_id) VALUES ('#{name}', '#{description}', #{movie_id}, #{person_id}) "
   run_sql(sql)
   redirect to('/tasks')
+end
+
+#Individual Task Page
+get '/tasks/:id' do
+  @task_id = params[:id]
+  sql = "SELECT * FROM tasks where id='#{@task_id}'"
+  @task_details = run_sql(sql).first
+  sql = "Select * FROM movies"
+  @movie_details = run_sql(sql)
+  erb :todo
 end
 
 

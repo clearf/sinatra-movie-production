@@ -1,0 +1,14 @@
+<h1>Name: <%= @movie_details['name'].capitalize %></h1>
+<h2>Tasks:</h2>
+<ul>
+    <% if @tasks %>
+  <li><a href="/tasks/<%= @tasks['id'] %>"><%= @tasks['name'].capitalize %></a></li>
+    <ul>
+      <li><%= @tasks['description'] %></li>
+    </ul>
+    <% else %>
+    <p>No Tasks</p>
+    <% end %>
+</ul>
+
+<p><a href="/movies">Movies</a></p>

@@ -1,0 +1,9 @@
+<h1>Task: <%= @task_details['name'].capitalize %></h1>
+<h2><%= @task_details['description'] %></h2>
+<% @movie_details.each do |movie| %>
+  <% if movie['id'] == @task_details['movie_id'] %>
+  <%= movie['name'] %>
+  <% else %>
+  <% end %>
+<% end %>
+<p><a href="/tasks">Tasks</a></p>
