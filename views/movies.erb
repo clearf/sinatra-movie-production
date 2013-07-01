@@ -1,0 +1,9 @@
+<h1>Movies</h1>
+
+<!-- creates a list with the name of each movie
+each list item includes a link to that movie's page -->
+<ul>
+<% @movies.each do |movie| %>
+  <li><a href="/movie/<%= movie['id'] %>"><%= movie['name'] %></a></li>
+<% end %>
+</ul>
