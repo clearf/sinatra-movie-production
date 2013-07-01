@@ -36,6 +36,13 @@ post '/movies/new' do
   redirect to '/movies'
 end
 
+get '/movies/:id' do
+  id = params[:id]
+  sql = "SELECT * FROM movies WHERE id = #{id}"
+  @movie = run_sql(sql).first
+  erb :movie
+end
+
 get '/todos' do
   sql = "SELECT * FROM tasks"
   @tasks = run_sql(sql)
