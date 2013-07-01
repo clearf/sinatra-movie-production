@@ -93,6 +93,23 @@ get '/todos/:id' do
   erb :todo
 end
 
+get '/todos/:id/edit' do
+  id = params[:id]
+  sql = "SELECT * FROM tasks WHERE id = #{id}"
+  @todo = run_sql(sql).first
+  erb :edit_todo
+end
+
+post '/todos/:id' do
+  id = params[:id]
+  task_name = params[:task_name]
+  description = params[:description]
+  movie_id = params[:movie_id]
+  sql = "UPDATE tasks SET (task_name, description, movie_id) = ('#{task_name}','#{description}','#{movie_id}')  WHERE id = #{id}"
+  @todo = run_sql(sql).first
+  redirect to '/todos'
+end
+
 get '/people' do
   sql = "SELECT * FROM people"
   @people = run_sql(sql)
