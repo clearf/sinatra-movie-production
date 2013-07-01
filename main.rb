@@ -4,7 +4,7 @@ require 'pg'
 
 helpers do
   def run_sql(sql)
-    db = PG.connect(dbname: 'westeros', host: 'localhost')
+    db = PG.connect(dbname: 'movies', host: 'localhost')
     result = db.exec(sql)
     db.close
     result
@@ -16,5 +16,7 @@ get '/' do
 end
 
 get '/movies' do
+  sql = "SELECT * FROM movies"
+  @movies = run_sql(sql)
   erb :movies
 end
