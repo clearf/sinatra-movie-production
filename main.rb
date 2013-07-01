@@ -72,6 +72,8 @@ get '/todos' do
 end
 
 get '/todos/new' do
+  sql = "SELECT id, movie_name FROM movies"
+  @movies = run_sql(sql)
   erb :new_todo
 end
 
