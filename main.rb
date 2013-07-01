@@ -19,6 +19,14 @@ get '/tasks' do
   erb :tasks
 end
 
+#Show task detail
+get '/tasks/:id' do
+  id = params[:id]
+  sql = "SELECT * from tasks WHERE id = #{id}"
+  @task = run_sql(sql).first
+  erb :task
+end
+
 #Show list of movies
 get '/movies' do
   sql = "SELECT * from movies"
@@ -26,11 +34,27 @@ get '/movies' do
   erb :movies
 end
 
+#View movie detail
+get '/movies/:id' do
+  id = params[:id]
+  sql = "SELECT * FROM movies WHERE id = #{id}"
+  @movie = run_sql(sql).first
+  erb :movie
+end
+
 #Show list of contacts
 get '/contacts' do
   sql = "SELECT * from contacts"
   @contacts = run_sql(sql)
   erb :contacts
+end
+
+# Show contact detail
+get '/contacts/:id' do
+  id = params[:id]
+  sql = "SELECT * FROM contacts where id = #{id}"
+  @contact = run_sql(sql).first
+  erb :contact
 end
 
 #Add new task
