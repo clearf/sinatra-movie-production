@@ -18,14 +18,23 @@ get '/' do
   erb :index
 end
 
-
 get '/todos' do
   sql = "SELECT * FROM tasks"
   @tasks = run_sql(sql)
   erb :todos
 end
 
+get '/people' do
+  sql = "SELECT * FROM people"
+  @people = run_sql(sql)
+  erb :people
+end
 
+get '/movies' do
+  sql = "SELECT * FROM movies"
+  @movies = run_sql(sql)
+  erb :movies
+end
 
 
 
