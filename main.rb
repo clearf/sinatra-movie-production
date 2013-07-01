@@ -23,14 +23,17 @@ end
 # gets all the tasks
 
 get '/todos' do
-
+  sql = "select * from todos"
+  run_sql(sql)
 erb :todos
 end
 
 # gives each individual task
 
 get '/:id/todo' do
-
+  id = params[:id]
+  sql = "select * from todos where id = #{id}"
+  @todo= run_sql(sql)
 erb :todo
 end
 
@@ -48,8 +51,6 @@ post '/create_todo' do
   @todos = run_sql(sql)
   erb :todos
 end
-
-
 
 
 #         #
@@ -82,6 +83,7 @@ post '/create_person' do
   erb :people
 end
 
+# gives you the person information
 get '/people/:id/edit/' do
 
 end

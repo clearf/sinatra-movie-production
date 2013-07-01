@@ -1,3 +1,11 @@
-<% @todos.each do |task| %>
-  <%= task %>
-  <% end %>
+<h1>Meta Movie Task List</h1>
+<div>
+<ul>
+<% @todos.each do |item| %>
+  <li class="todo_index">
+    <a href="/todo/<%= item['id'] %>"><%=item ['task'] %></a>
+  </li>
+<%end%>
+</ul>
+</div>
+<a href="/create_todo">Add a new item to do!</a>
