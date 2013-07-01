@@ -1,0 +1,6 @@
+<h1>List of Movies:</h1>
+<ul>
+<% @movies.each do |movie| %>
+<li><%= movie['name'].capitalize %></li>
+<% end %>
+</ul>
