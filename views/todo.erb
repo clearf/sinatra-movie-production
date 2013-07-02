@@ -1,6 +1,6 @@
 <div class="wrapper well">
   <%= @task['errand'] %>
   <%= @task['description'] %>
-  <%= @movie_name['name'] %>
+  <a href="/movie/<%= @movie_name['id'] %>"><%= @movie_name['name'] %></a>
   <%= @person_name['name'] %>
 </div>

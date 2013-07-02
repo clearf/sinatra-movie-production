@@ -2,7 +2,7 @@
   <% @movies.each do |movie| %>
       <div class="movielist">
         <div class="movie_image">
-          <img src="<%= movie['image'] %>" />
+          <a href="/movie/<%= movie['id'] %>"><img src="<%= movie['image'] %>" /></a>
         </div>
         <div class="movie_name">
           <h3 class="movie_title"><a href="/movie/<%= movie['id'] %>"><%= movie['name'] %></a></h3>
