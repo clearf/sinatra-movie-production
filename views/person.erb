@@ -1,0 +1,9 @@
+<p>Name: <%= @person["name"] %></p>
+
+<form action="/edit_person/<%= @person["id"] %>" method="post">
+  <button>Edit Person</button>
+</form><br>
+
+<form action="/delete_person/<%= @person["id"] %>" method="post">
+  <button>Delete Person</button>
+</form><br>

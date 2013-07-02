@@ -1,6 +1,6 @@
 <h1>All People</h1>
 <ul>
 <% @people.each do |person| %>
-  <li><a href="/person_tasks/<%= person["id"] %>"><%= person["name"] %></a></li>
+  <li><a href="/person/<%= person["id"] %>"><%= person["name"] %></a></li>
 <% end %>
 </ul>
