@@ -34,12 +34,12 @@ get '/movies/new' do
 end
 
 #adds a new movie
+#Bug: doesn't like Movies with ' in the title
 post '/movies/new' do
   @name = params[:name]
-  @title = params[:title]
   @release_date = params[:release_date]
   @director = params[:director]
-  sql = "insert into movies (name,title,release_date,director) values ('#{@name}','#{@title}','#{@release_date}', '#{@director}')"
+  sql = "insert into movies (name,release_date,director) values ('#{@name}','#{@release_date}', '#{@director}')"
   run_sql(sql)
   redirect to '/'
 end
@@ -57,6 +57,7 @@ get '/movies/:id/edit' do
 end
 
 #this edits the movie
+#Bug: doesn't like Movies with ' in the title
 post '/movies/:id/edit' do
   @id = params[:id]
   @name = params[:name]
@@ -183,6 +184,11 @@ get '/tasks/:id' do
   @id = params[:id]
   sql = "select * from tasks where id = '#{@id}'"
   @task = run_sql(sql).first
+  sql = "select * from movies where id = '#{@id}'"
+  @movie = run_sql(sql).first
+  sql = "select * from people where id = '#{@id}'"
+  @person = run_sql(sql).first
+
   erb :task
 end
 
