@@ -6,12 +6,12 @@ require 'sinatra/reloader' if development?
 #Begin Homework
 helpers do
   # This helps us run SQL commands
-  def run_sql(sql)
-    db = PG.connect(:dbname => 'westeros', :host => 'localhost')
+   def run_sql(sql)
+    db = PG.connect(:dbname => 'movies', :host => 'localhost')
     result = db.exec(sql)
     db.close
     result
-  end
+    end
 end
 
 #Routing
@@ -20,7 +20,7 @@ get '/' do
 end
 
 get '/home' do
-  erb :home
+  redirect to('/')
 end
 
 get '/people' do

@@ -4,14 +4,17 @@
 @import url(http://fonts.googleapis.com/css?family=Fauna+One);
 
 body {
-  background-image: url('./images/grey_wash_wall.png');
+  margin: 0 auto;
+  background-image: url('/views/images/grey_wash_wall.png');
   background-repeat: repeat;
   background-color: #424242;
   font-family: "Oxygen:300";
   color: #E6E6E6;
 }
 h1 {
-  font-family: inherit;
+  color: #EFFBF2;
+  text-shadow: 3px 10px 3px #2E2E2E;
+  text-align: center;
   letter-spacing: 2.45px;
 }
 
@@ -23,6 +26,9 @@ a {
 }
 .container {
   padding: 200px;
+  text-align: center;
+  display: block;
+  font-family: "Oxygen:300"
 }
 .main {
   text-align: center;
@@ -32,5 +38,13 @@ a {
 .pure-menu {
   text-align: center;
   font-weight: bolder;
+  padding-top: 5px;
 }
-
+.index_content {
+  text-align: center;
+  display: block;
+  padding: 50px;
+  font-family: "Fauna One";
+  font-size: 30px;
+  letter-spacing: 2px;
+}
