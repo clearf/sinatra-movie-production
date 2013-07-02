@@ -53,7 +53,7 @@ footer {
   margin-top: 20px;
 }
 
-.edit {
+.admin {
   float: right;
 }
 
@@ -101,7 +101,7 @@ input[type=text] {
 
 .movies_image img {
   width: auto;
-  height: 280px;
+  max-height: 280px;
   border: 2px solid #3D6785;
 }
 

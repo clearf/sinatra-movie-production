@@ -3,7 +3,12 @@
     <img src="<%= @movie['image'] %>" />
   </div>
   <div class="movie_content">
-     <a href="/movie/<%= @movie['id'] %>/edit" class="edit">Edit</a>
+    <div class="admin">
+       <a href="/movie/<%= @movie['id'] %>/edit"><button class="btn btn-warning btn-mini">Edit</button></a>
+       <form action="/movie/<%= @movie['id'] %>/delete" method="post">
+        <button class="btn btn-warning btn-mini">Delete</button>
+      </form>
+    </div>
     <h3 class="headtitle"><%= @movie['name'] %></h3>
     <h4><%= @movie['director'] %></h4>
     <h4><%= @movie['releasedate'] %></h4>

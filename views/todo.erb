@@ -1,5 +1,10 @@
 <div class="wrapper well">
-  <a href="/todo/<%= @task['id'] %>/edit" class="edit">Edit</a>
+  <div class="admin">
+    <a href="/todo/<%= @task['id'] %>/edit"><button class="btn btn-warning btn-mini">Edit</button></a>
+    <form action="/todo/<%= @task['id'] %>/delete" method="post">
+      <button class="btn btn-warning btn-mini">Delete</button>
+    </form>
+  </div>
   <h3><span class="headtitle">Errand:</span> <%= @task['errand'] %></h3>
   <h4><span class="headtitle">Details:</span> <%= @task['description'] %></h4>
   <h4><span class="headtitle">For Movie:</span> <a href="/movie/<%= @movie_name['id'] %>"><%= @movie_name['name'] %></a>
