@@ -11,48 +11,45 @@ set :database, {adapter: "postgresql",
                 username: 'postgres',
                 password: 'postgres'}
 
+class Movie < ActiveRecord::Base
+  has_many :people
+  belongs_to :task
+end
+
+class Person < ActiveRecord::Base
+  belongs_to :task
+end
+
+class Task < ActiveRecord::Base
+  has_many :people
+  has_many :movies
+end
+
 #shows root page
 
 get '/' do
-  sql = "select * from tasks"
-  @tasks = run_sql(sql)
-
-  sql = "select * from movies"
-  @movies = run_sql(sql)
-
-  sql = "select * from people"
-  @people = run_sql(sql)
-
+  @tasks = Task.all
+  @movies = Movie.all
+  @people = Person.all
   erb :index
 end
 
 #shows form to add a new movie
 get '/movies/new' do
-  sql = "select id, name from people"
-  @people = run_sql(sql)
+  @people = Person.all
   erb :new_movie
 end
 
 #adds a new movie
 #Bug: doesn't like Movies with ' in the title
 post '/movies/new' do
-  @name = params[:name]
-  @release_date = params[:release_date]
-  @director = params[:director]
-  sql = "insert into movies (name,release_date,director) values ('#{@name}','#{@release_date}', '#{@director}')"
-  run_sql(sql)
+  Movie.create(params)
   redirect to '/'
 end
 
 #shows form to edit movie
 get '/movies/:id/edit' do
-  @id = params[:id]
-  @name = params[:name]
-  @title = params[:title]
-  @release_date = params[:release_date]
-  @director = params[:director]
-  sql = "select * from movies where id = #{@id}"
-  @movie = run_sql(sql).first
+  @movie = Movie.find(params[:id])
   erb :movie_edit
 end
 
@@ -60,11 +57,12 @@ end
 #Bug: doesn't like Movies with ' in the title
 post '/movies/:id/edit' do
   @id = params[:id]
-  @name = params[:name]
-  @release_date = params[:release_date]
-  @person_id = params[:director]
-  sql = "update movies set (name,release_date) = ('#{@name}', '#{@release_date}') where id = #{@id}"
-  run_sql(sql)
+  movie = Movie.find(id)
+  movie.name = params[:name]
+  movie.release_date = params[:release_date]
+  movie.director = params[:director]
+  movie.save
+
   redirect to "/"
 end
 
@@ -84,10 +82,11 @@ end
 
 #adds a new person
 post '/people/new' do
-  @name = params[:name]
-  @title = params[:title]
-  sql = "insert into people (name,title) values ('#{@name}', '#{@title}')"
-  run_sql(sql)
+  #@name = params[:name]
+  #@title = params[:title]
+  #sql = "insert into people (name,title) values ('#{@name}', '#{@title}')"
+  #run_sql(sql)
+  Person.create(params)
   redirect to '/'
 end
 
@@ -193,12 +192,10 @@ get '/tasks/:id' do
   erb :task
 end
 
-
+#need to fix form to have a dropdown and remove excess inputs
 #shows individual movie
 get '/movies/:id' do
-  @id = params[:id]
-  sql = "select * from movies where id = '#{@id}'"
-  @movie = run_sql(sql).first
+  @movie = Movie.find(params[:id])
   erb :movie
 end
 
