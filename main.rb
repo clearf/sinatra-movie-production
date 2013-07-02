@@ -40,6 +40,23 @@ post '/new_movie' do
   redirect to('/movies')
 end
 
+post '/delete/movies/:id' do
+  id = params[:id]
+  sql = "DELETE FROM movies WHERE id = #{id}"
+  run_sql(sql)
+  redirect to('/movies')
+end
+
+post '/edit_movie/:id' do
+  id = params[:id]
+  title = params[:title]
+  release_date = params[:release_date]
+  director = params[:director]
+  sql = "UPDATE movies SET (title, release_date, director) = ('#{title}', #{release_date}, '#{director}') WHERE id = #{id}"
+  run_sql(sql)
+  redirect to('/movies')
+end
+
 get '/people' do
   sql = "SELECT * FROM people"
   @people = run_sql(sql)
@@ -61,6 +78,23 @@ post '/new_person' do
   name = params[:name]
   description = params[:description]
   sql = "INSERT INTO people (name) VALUES ('#{name}');"
+  run_sql(sql)
+  redirect to('/people')
+end
+
+post '/delete/people/:id' do
+  id = params[:id]
+  sql = "DELETE FROM people WHERE id = #{id}"
+  run_sql(sql)
+  redirect to('/people')
+end
+
+post '/edit_person/:id' do
+  id = params[:id]
+  name = params[:name]
+  movie = params[:movie]
+  task = params[:task]
+  sql = "UPDATE people SET (name, movie, task) = ('#{name}', #{movie}, '#{task}') WHERE id = #{id}"
   run_sql(sql)
   redirect to('/people')
 end
@@ -90,23 +124,20 @@ post '/new_todo' do
   redirect to('/todos')
 end
 
-post '/delete/movies/:id' do
-  id = params[:id]
-  sql = "DELETE FROM movies WHERE id = #{id}"
-  run_sql(sql)
-  redirect to('/movies')
-end
-
-post '/delete/people/:id' do
-  id = params[:id]
-  sql = "DELETE FROM people WHERE id = #{id}"
-  run_sql(sql)
-  redirect to('/people')
-end
-
 post '/delete/todos/:id' do
   id = params[:id]
   sql = "DELETE FROM tasks WHERE id = #{id}"
+  run_sql(sql)
+  redirect to('/todos')
+end
+
+post '/edit_todo/:id' do
+  id = params[:id]
+  name = params[:name]
+  description = params[:description]
+  movie_id = params[:movie_id]
+  person_id = params[:person_id]
+  sql = "UPDATE tasks SET (name, description, person_id, movie_id) = ('#{name}', '#{description}', #{person_id}, #{movie_id}) WHERE id = #{id}"
   run_sql(sql)
   redirect to('/todos')
 end
