@@ -6,6 +6,15 @@ require 'sinatra/activerecord'
 
 set :database, {adapter: 'postgresql', database: 'production', host: 'localhost'}
 
+class Task < ActiveRecord::Base
+end
+
+class Movie < ActiveRecord::Base
+end
+
+class Contact < ActiveRecord::Base
+end
+
 #Launch page
 get '/' do
   erb :index
@@ -13,39 +22,27 @@ end
 
 #Show list of tasks
 get '/tasks' do
-  sql = "SELECT * from tasks"
-  @tasks = run_sql(sql)
+  @tasks = Task.all
   erb :tasks
 end
 
-#Add new task
+#Add new task ## DOES NOT WORK ##
 get '/tasks/new' do
-  sql = "SELECT id, name FROM movies"
-  @movies = run_sql(sql)
-  sql2 = "SELECT id, name FROM contacts"
-  @contacts = run_sql(sql2)
   erb :new_task
 end
 
 post '/tasks/new' do
-  name = params[:name]
-  descriptions = params[:descriptions]
-  movie_id = params[:movie_id]
-  contact_id = params[:contact_id]
-  sql = "INSERT INTO tasks (name, descriptions, movie_id, contact_id) VALUES ('#{name}', '#{descriptions}',#{movie_id}, #{contact_id});"
-  run_sql(sql)
-  redirect to '/tasks'
+  task = Task.create(params)
+  redirect to "/tasks/#{task.id}"
 end
 
 #Show task detail
 get '/tasks/:id' do
-  id = params[:id]
-  sql = "SELECT * from tasks WHERE id = #{id}"
-  @task = run_sql(sql).first
+  @task = Task.find(params[:id])
   erb :task
 end
 
-#Edit task
+#Edit task ##UPDATE ##
 get '/tasks/:id/edit' do
   id = params[:id]
   sql = "SELECT * FROM tasks WHERE id = #{id}"
@@ -53,7 +50,7 @@ get '/tasks/:id/edit' do
   erb :edittask #fix this
 end
 
-#Delete task
+#Delete task ##UPDATE##
 post '/tasks/:id/delete' do
   id = params[:id]
   sql = "DELETE FROM tasks where id = #{id}"
@@ -63,8 +60,7 @@ end
 
 #Show list of movies
 get '/movies' do
-  sql = "SELECT * from movies"
-  @movies = run_sql(sql)
+  @movies = Movie.all
   erb :movies
 end
 
@@ -74,11 +70,7 @@ get '/movies/new' do
 end
 
 post '/movies/new' do
-  name = params[:name]
-  release_date = params[:release_date]
-  director = params[:director]
-  sql = "INSERT INTO movies (name, release_date, director) VALUES ('#{name}', '#{release_date}', '#{director}');"
-  run_sql(sql)
+  movie = Movie.create(params)
   redirect to '/movies'
 end
 
