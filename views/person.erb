@@ -10,8 +10,10 @@
 
 Actions you can take:<br>
 <a href="/people/edit/<%= @got_person.first['id'] %>"><button>Edit This Person</button></a><br>
-<button>Delete This Person</button><br>
 
+<form action="/people/delete/<%= @got_person.first['id'] %>" method="post">
+  <button>Delete This Person</button><br>
+</form>
 
 <br>
 <p> NEED TO SHOW NUMBER OF TASKS ASSIGNED </p>

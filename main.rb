@@ -68,6 +68,7 @@ get '/people/new' do
   erb :new_person
 end
 
+# ADD A NEW PERSON TO DATABASE AND REDIRECT
 post '/people/new' do
   name = params[:name]
   title = params[:title]
@@ -89,6 +90,7 @@ get '/people/edit/:id' do
   erb :edit_person
 end
 
+# EDIT THE DATABASE AND REDIRECT
 post '/people/edit/:id' do
   id = params[:id]
   name = params[:name]
@@ -102,18 +104,15 @@ post '/people/edit/:id' do
   redirect to("/people/#{id}")
 end
 
-# # HERE USER CAN DELETE A NEW PERSON
-# post '/people/delete' do
-#   name = params[:name].capitalize
-#   title = params[:title].capitalize
-#   phone = params[:phone]
-#   idiot = params[:idiot]
+# HERE USER CAN DELETE A PERSON
+  post '/people/delete/:id' do
+  id = params[:id]
 
-#   sql_add_person = "UPDATE INTO people (name, title, phone, idiot) VALUES ('#{name}', '#{title}', '#{phone}', '#{idiot}')"
-#   run_sql(sql_add_person)
+  sql_delete_person = "DELETE FROM people WHERE id = #{id}"
+  run_sql(sql_delete_person)
 
-#   redirect to('/people')
-# end
+  redirect to('/people')
+end
 
 # SHOW DETAILS OF EACH INDIVIDUAL
 get '/people/:id' do
