@@ -1,6 +1,18 @@
-<% @tasks.each do |task| %>
-  <%= task %><br>
-<% end %>
+<h1>Your To-Do List</h1>
+  <ul>
+    <% @tasks.each do |task| %>
+      <li>
+        <h4><%= task['task'] %></h4>
+        <p><%= task['notes'] %></p>
+        <p>Completed? <span><%= task['completed'] %></span></p>
+        <form action='/edit_task' method='get'>
+          <button>Edit task</button>
+        </form>
+        <form action='/delete_task/<%= task['id'] %>' method='post'>
+          <button>Delete task</button>
+        </form>
+      </li>
+    <% end %>
 
 <h3>Add a task</h3>
 <form action="/new_task" method="post">
@@ -26,5 +38,3 @@
 </form>
 
 <p><a href="/movies">View and manage films</a> | <a href="/people">View and manage contacts</a></p>
-
-<p><a href="/">Back to home page</a></p>

@@ -37,6 +37,14 @@ post '/new_task' do
   redirect to('/')
 end
 
+post '/delete_task/:id' do
+  id = params[:id]
+  sql = "DELETE FROM tasks WHERE id = #{id}"
+  run_sql(sql)
+
+  redirect to('/')
+end
+
 get '/movies' do
   sql = "SELECT id, name FROM people"
   @people = run_sql(sql)
