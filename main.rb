@@ -11,21 +11,25 @@ def run_sql(sql)
   return result
 end
 
-# Method to fetch IBMD data and save into local movies.csv file
-# def download_movie_info(title)
-#   # Fetch movie data from IMBD per the title entered.
-#   raw_movie_data = Imdb::Search.new(title).movies.first
+# METHOD TO FETCH IBMD DATA AND SAVE INTOT HE DATABASE
+def download_movie(title)
+  # DOWNLOAD AND ASSIGN DATA TO VARIABLES
+  movie_data = Imdb::Search.new(title).movies.first
 
-#   # Organize the fetched movie data into array
-#   array_movie_data = []
-#   array_movie_data << raw_movie_data.title << raw_movie_data.year << raw_movie_data.company << raw_movie_data.genres.join(", ").to_s << raw_movie_data.length << raw_movie_data.director << raw_movie_data.mpaa_rating << raw_movie_data.tagline << raw_movie_data.poster << raw_movie_data.release_date
+  title = movie_data.title
+  year = movie_data.year
+  company = movie_data.company
+  genres = movie_data.genres.join(", ").to_s
+  length = movie_data.length
+  director = movie_data.director
+  mpaa_rating = movie_data.mpaa_rating
+  poster = movie_data.poster
 
-#   # Save the array into 'movies.csv' file as pipe-separated data for later access
-#   f = File.new('movies.csv', 'a+')
-#   f.puts(array_movie_data.join("|"))
-#   f.close
-#   return array_movie_data
-# end
+  # SAVE THE ASSIGNED VARIABLE INTO DATABASE
+  sql_add_movie = "INSERT INTO movies (title, year, company, genres, length, director, mpaa_rating, poster) VALUES
+    ('#{title}', '#{year}', '#{company}', '#{genres}', '#{length}', '#{director}', '#{mpaa_rating}', '#{poster}')"
+  run_sql(sql_add_movie)
+end
 
 
 #################### MAIN LANDING PAGE ####################
@@ -52,9 +56,21 @@ get '/movies' do
 end
 
 # HERE THE USER INPUT A NEW MOVIE
-get '/movies/add' do
-  erb :movies_add
+get '/movies/new' do
+  erb :new_movie
 end
+
+post '/movies/new' do
+  title = params[:title]
+  download_movie(title)
+
+  sql_get_movies = "SELECT * FROM movies"
+  added_movie_index = run_sql(sql_get_movies).count - 1
+  added_movie_id = run_sql(sql_get_movies)[added_movie_index]['id']
+
+  redirect to("/movies/#{added_movie_id}")
+end
+
 
 
 #################### PEOPLE SECTION ####################

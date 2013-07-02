@@ -11,7 +11,7 @@
     <% @got_movies.each do |movie| %>
       <ul>
         <li><a href='/movie/<%= movie['id'] %>'><button>View details</button></a>
-           <%= movie['name'] %>: XX tasks remaining</li>
+           <%= movie['title'] %>: XX tasks remaining</li>
       </ul>
     <% end %>
 <% end %>
