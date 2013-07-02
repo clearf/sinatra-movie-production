@@ -2,6 +2,7 @@ require 'pg'
 require 'sinatra'
 require 'sinatra/reloader' if development?
 require 'imdb'
+require 'sass'
 
 helpers do
   def run_sql(sql)
