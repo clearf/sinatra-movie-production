@@ -1,8 +1,8 @@
 <h1>Movies</h1>
 
-<div>
+<div class="list">
 <% @movies.each do |movie| %>
-  <a href="/movies/<%= movie['id'] %>">
+  <a href="/movies/<%= movie['id'] %>" class="sublist">
     <%= movie['title'] %><br/>
   </a>
 <% end %>

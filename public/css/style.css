@@ -19,6 +19,17 @@ h2 {
   color: #424699;
 }
 
+.list {
+  width: 200px;
+  line-height: 1.62;
+  font-size: 120%;
+  color: #424699;
+}
+
+.sublist {
+  color: gray;
+}
+
 a {color: #424699;}
 
 div {

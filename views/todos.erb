@@ -1,8 +1,8 @@
 <h1>Tasks</h1>
 
-<div>
+<div class="list">
 <% @tasks.each do |todo| %>
-  <a href="/todos/<%= todo['id'] %>">
+  <a href="/todos/<%= todo['id'] %>" class="sublist">
     <%= todo['name'] %><br/>
   </a>
 <% end %>
