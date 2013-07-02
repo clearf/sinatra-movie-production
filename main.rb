@@ -66,3 +66,15 @@ get '/people' do
   erb :people
 end
 
+post '/new_person' do
+  name = params[:name]
+  title = params[:title]
+  phone = params[:phone]
+
+  sql = "INSERT INTO people (name, title, phone) VALUES ('#{name}', '#{title}', '#{phone}')"
+  run_sql(sql)
+
+  redirect to('/people')
+end
+
+
