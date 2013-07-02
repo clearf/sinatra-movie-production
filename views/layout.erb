@@ -2,21 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Now with style</title>
+    <title>Movie Production App</title>
     <link rel="stylesheet" href="/css/reset.css">
     <link rel='stylesheet' href='/css/style.css'>
     <link rel="stylesheet" href="/css/normalize.css">
+
 </head>
 <body>
+
 <div id="container">
+  <nav>
+    <a href="/movies">Movies</a>
+    <a href="/todos">Tasks</a>
+    <a href="/people">People</a>
+  </nav>
+</div>
+
+<div id="container">
+
 
 <%= yield %>
 
 </div>
 
 <footer>
-<a href="/">home</a>
-   |  movie production app created by nick lombardi
+movie production app created by nick lombardi
 </footer>
 </body>
 </html>

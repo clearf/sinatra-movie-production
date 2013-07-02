@@ -14,7 +14,7 @@ helpers do
 end
 
 get '/' do
-  erb :index
+  erb :movies
 end
 
 get '/movies' do
