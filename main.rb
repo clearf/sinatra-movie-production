@@ -30,6 +30,8 @@ end
 
 #shows form to add a new movie
 get '/movies/new' do
+  sql = "select id, name from people"
+  @people = run_sql(sql)
   erb :new_movie
 end
 
@@ -64,6 +66,7 @@ post '/movies/:id/edit' do
   @title = params[:title]
   @release_date = params[:release_date]
   @director = params[:director]
+  @person_id = params[:director]
   sql = "update movies set (name,title,release_date,director) = ('#{@name}', '#{@title}', '#{@release_date}', '#{@director}') where id = #{@id}"
   run_sql(sql)
   redirect to "/"
