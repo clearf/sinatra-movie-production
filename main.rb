@@ -102,10 +102,39 @@ get '/todos/:id/edit' do
   people_sql = "SELECT * FROM people"
   movies_sql = "SELECT * FROM movies"
 
-#Got my instance variables
+  #Got my instance variables
   @todo = run_sql(sql)[0]
   @people = run_sql(people_sql)
   @movies = run_sql(movies_sql)
 
   erb :edit_todo
+end
+
+#PEEPLE
+get '/people' do
+  person_id = params[:person_id]
+
+  sql = "SELECT * FROM people"
+  @people = run_sql(sql)
+
+  erb :people
+end
+
+get '/people/:id' do
+  id = params[:id]
+
+  sql = "SELECT * FROM people WHERE id = #{id}"
+  @person = run_sql(sql)[0]
+
+  erb :person
+end
+post '/people' do
+
+  name = params[:name]
+  email = params[:email]
+
+  sql = "INSERT INTO people (name, email) VALUES ('#{name}','#{email}')"
+  run_sql(sql)
+
+  redirect to('/people')
 end

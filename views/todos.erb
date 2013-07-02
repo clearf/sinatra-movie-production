@@ -1,6 +1,6 @@
 <!--- From todo app -->
 <div class="todos_container">
-  <h2 span style="font-size: 35px; color: #81F79F"">Tasks</h2>
+  <h2 span style="font-size: 35px; color: #81F79F">Tasks</h2>
     <%@todos.each do |todo|%>
       <p></br>
         <a href = '/todos/<%=todo["id"]%>'><%=todo["task"]%></a>
