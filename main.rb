@@ -165,7 +165,7 @@ get '/tasks' do
 end
 
 # individual task page - may be changed once flow is determined
-get '/task/:id' do
+get '/tasks/:id' do
   id = params[:id]
   erb :todo
 end
