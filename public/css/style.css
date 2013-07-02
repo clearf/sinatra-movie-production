@@ -1,0 +1,18 @@
+h1{
+  background-color: #BDC3C7;
+  width: 500px;
+  padding: 5px 10px 5px 10px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+}
+
+.buttons {
+background-color:  #1abc9c;
+  line-height: 20px;
+  width: 140px;
+  padding: 12px 18px 13px 18px;
+  font-family: sans-serif;
+  border-radius: 6px;
+  margin: 20px 10px 20px 10px;
+  text-decoration: none;
+}

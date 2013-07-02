@@ -1,0 +1,22 @@
+<h1>Name: <%= @person_details['name'].capitalize %></h1>
+<h2>Tasks:</h2>
+<ul>
+  <% if @tasks['person_id']   %>
+  <li><a href="/tasks/<%= @tasks['id'] %>"><%= @tasks['name'].capitalize %></a></li>
+    <ul>
+      <li><%= @tasks['description'] %></li>
+    </ul>
+</ul>
+  <% else %>
+<% end %>
+<h2>Movies:</h2>
+<ul>
+   <% if @movies['person_id']   %>
+  <li><a href="/movies/<%= @movies['id'] %>"><%= @movies['name'].capitalize %></a></li>
+</ul>
+<% else %>
+<% end %>
+<form action="/people/<%= @person_details['id'] %>/delete" method="post">
+<button>DELETE CONTACT</button>
+<p><a href="/people/<%= @person_details['id']%>/edit">Edit Name</a></p>
+<p><a href="/people">People</a></p>

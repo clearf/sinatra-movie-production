@@ -1,0 +1,12 @@
+<h1>List of Tasks:</h1>
+<% @tasks.each do |task| %>
+<a href="/tasks/<%= task['id']%>"><%= task['name'].capitalize %></a>
+<ul>
+<li><%= task['description'] %></li>
+</ul>
+<% end %>
+
+<p><a href="/tasks/new">Add A New Task</a></p>
+
+<p><a href="/movies">Movies</a></p>
+<p><a href="/people">People</a></p>
