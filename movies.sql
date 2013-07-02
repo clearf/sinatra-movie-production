@@ -1,3 +1,7 @@
+drop table tasks;
+drop table movies;
+drop table people;
+
 create table movies (
   id serial primary key,
   name varchar(255),
@@ -30,4 +34,11 @@ insert into people (name) values ('Robert Downey Jr');
 insert into people (name) values ('Jeff Bridges');
 insert into people (name) values ('Joey Bagadonuts');
 
-# insert into tasks (name, description, person, movie) values
+insert into tasks (name, description, person, movie) values ('Direct', 'Direct scenes for movie', 1, 1);
+insert into tasks (name, description, person, movie) values ('Direct', 'Direct scenes for movie', 3, 2);
+insert into tasks (name, description, person, movie) values ('Bob Arctor', 'Perform scenes as Bob Arctor', 2, 1);
+insert into tasks (name, description, person, movie) values ('James Barris', 'Perform scenes as James Barris', 4, 1);
+insert into tasks (name, description, person, movie) values ('Tony Stark', 'Perform scenes as Tony Stark', 4, 2);
+insert into tasks (name, description, person, movie) values ('Obadiah Stane', 'Perform scenes as Obadiah Stane', 5, 2);
+insert into tasks (name, description, person, movie) values ('Coffee', 'Get coffee for cast', 6, 1);
+insert into tasks (name, description, person, movie) values ('Coffee', 'Get coffee for cast', 6, 2);

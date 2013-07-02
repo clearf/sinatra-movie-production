@@ -1,1 +1,8 @@
 <h1><%= @person['name'] %></h1>
+
+<h3>Tasks</h3>
+  <ul>
+    <% @tasks.each do |task| %>
+      <li><a href="/task/<%= task['id'] %>"><%= task['name'] %></a></li>
+    <% end %>
+  </ul>

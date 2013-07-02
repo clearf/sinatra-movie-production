@@ -27,8 +27,10 @@ end
 # individual movie page
 get '/movie/:id' do
   id = params[:id]
-  sql = "select * from movies where id = #{id}"
-  @movie = run_sql(sql).first
+  sql_movie = "select * from movies where id = #{id}"
+  @movie = run_sql(sql_movie).first
+  sql_tasks = "select * from tasks where movie = #{id}"
+  @tasks = run_sql(sql_tasks)
   erb :movie
 end
 
@@ -42,8 +44,10 @@ end
 # individual person page
 get '/person/:id' do
   id = params[:id]
-  sql = "select * from people where id = #{id}"
-  @person = run_sql(sql).first
+  sql_person = "select * from people where id = #{id}"
+  @person = run_sql(sql_person).first
+  sql_tasks = "select * from tasks where person = #{id}"
+  @tasks = run_sql(sql_tasks)
   erb :person
 end
 
@@ -53,6 +57,6 @@ get '/tasks' do
 end
 
 # individual task page - may be changed once flow is determined
-get '/tasks/:id' do
+get '/task/:id' do
   erb :todo
 end
