@@ -1,23 +1,45 @@
 <div class="todos_container">
   <h2 span style="color: #81F79F"> Add Task </h2>
-</br>
-  <form action = "/todos" method = "post">
-    <input type = "text" name = "task" placeholder = "Task" autofocus>
-</br>
-    <input type = "text" name = "details" placeholder = "Task Details">
-</br>
-    <input type = "text" name = "due" placeholder = "Due">
-</br>
-</br>
-  Responsible Person:
-</br>
-  <select name = "person_id">
-      <% @people.each do |person| %>
-        <option value = "<%= person['id'] %>">
-          <%= person["name"] %>
-        </option>
-        <!-- Possible to have blank person? -->
-      <% end %>
-    </select>
+  </br>
+
+  <form action ="/todos" method ="post">
+
+      <input type ="text" name ="task" placeholder ="Task" autofocus maxlength="30">
+   </br>
+      <input type ="text" name ="details" placeholder ="Details">
+   </br>
+      <input type ="text" name ="due" placeholder ="Due" maxlength="15">
+
+   </br>
+   </br>
+
+    Responsible Person:
+  </br>
+    <select name = "person_id">
+        <% @people.each do |person| %>
+          <option value = "<%= person['id'] %>">
+            <%= person["name"] %>
+          </option>
+          <!-- Possible to have blank person? -->
+        <% end %>
+      </select>
+  </br>
+  </br>
+    Movie
+  </br>
+    <select name = "movie_id">
+    <% @movies.each do |movie| %>
+      <option value = "<%= movie["id"] %>">
+        <%= movie["title"] %>
+      </option>
+    <% end %>
+   </select>
+  </br>
+  </br>
+  </br>
+   <button class="pure-button pure-button-primary">Add</button>
+
   </form>
 </div>
+
+<!-- I know I need to move away from </br> tags... -->

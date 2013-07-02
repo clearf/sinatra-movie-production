@@ -53,7 +53,7 @@ post '/todos' do
   movie_id = params[:movie_id]
 
 #inserting parameters
-  sql = "INSERT INTO tasks (task, details, due, urgent, person_id, movie_id) VALUES ('#{task}', '#{due}', '#{details}', #{person_id}, #{movie_id})"
+  sql = "INSERT INTO tasks (task, details, due, person_id, movie_id) VALUES ('#{task}', '#{details}', '#{due}', #{person_id}, #{movie_id})"
   run_sql(sql)
 
   redirect to('todos')
