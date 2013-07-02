@@ -133,8 +133,27 @@ post '/people' do
   name = params[:name]
   email = params[:email]
 
-  sql = "INSERT INTO people (name, email) VALUES ('#{name}','#{email}')"
+  sql = "INSERT INTO people (name, email) VALUES ('#{'name'}','#{'email'}')"
   run_sql(sql)
 
   redirect to('/people')
+end
+
+get '/people/:id/edit' do
+  id = params[:id]
+
+  sql = "SELECT * FROM people WHERE id = #{id}"
+  @person = run_sql(sql).first
+
+  erb :edit_person
+end
+
+post '/people/:id/edit' do
+
+  id = params[:id]
+  name = params[:name]
+  email = params[:email]
+
+  sql = "SELECT name FROM people WHERE id = #{id}"
+
 end
