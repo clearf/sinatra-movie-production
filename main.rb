@@ -100,9 +100,10 @@ post '/new_movie' do
   name = params[:name]
   release_date = params[:releasedate]
   director = params[:director]
+  image = params[:image]
 
-  sql = "INSERT INTO movies (name, releasedate, director)
-          VALUES ('#{name}', '#{release_date}', '#{director}');"
+  sql = "INSERT INTO movies (name, releasedate, director, image)
+          VALUES ('#{name}', '#{release_date}', '#{director}', '#{image}');"
   run_sql(sql)
 
   redirect to('/movies')
@@ -124,6 +125,28 @@ get '/movie/:id' do
   @tasks_of_movie = run_sql(sql)
 
   erb :movie
+end
+
+get '/movie/:id/edit' do
+  id = params[:id]
+  sql = "SELECT * FROM movies WHERE id = #{id};"
+  @movie = run_sql(sql).first
+
+  erb :movie_edit
+end
+
+post '/movie/:id' do
+  id = params[:id]
+  name = params[:name]
+  release_date = params[:releasedate]
+  director = params[:director]
+  image = params[:image]
+
+  sql = "UPDATE movies SET (name, releasedate, director, image)
+  = ('#{name}', '#{release_date}', '#{director}', '#{image}') WHERE id = #{id};"
+  run_sql(sql)
+
+  redirect to('/movie/#{id}')
 end
 
 # People Section
