@@ -4,6 +4,8 @@
 each list item includes a link to the page for that person -->
 <ul>
 <% @people.each do |person| %>
-  <li><a href="/person/<%= person['id'] %>"><%= person['name'] %></a></li>
+  <li><a href="/people/<%= person['id'] %>"><%= person['name'] %></a></li>
 <% end %>
 </ul>
+
+<h3><a href="/add_person">Add a person</a></h3>

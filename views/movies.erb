@@ -4,6 +4,8 @@
 each list item includes a link to that movie's page -->
 <ul>
 <% @movies.each do |movie| %>
-  <li><a href="/movie/<%= movie['id'] %>"><%= movie['name'] %></a></li>
+  <li><a href="/movies/<%= movie['id'] %>"><%= movie['name'] %></a></li>
 <% end %>
 </ul>
+
+<h3><a href="/add_movie">Add a movie</a></h3>
