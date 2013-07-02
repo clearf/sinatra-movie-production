@@ -187,9 +187,9 @@ get '/tasks/:id' do
   @id = params[:id]
   sql = "select * from tasks where id = '#{@id}'"
   @task = run_sql(sql).first
-  sql = "select * from movies where id = '#{@id}'"
+  sql = "select * from movies where id = #{@id}"
   @movie = run_sql(sql).first
-  sql = "select * from people where id = '#{@id}'"
+  sql = "select * from people where id = #{@id}"
   @person = run_sql(sql).first
 
   erb :task

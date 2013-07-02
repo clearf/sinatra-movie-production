@@ -1,4 +1,4 @@
-<div class = "tasks">
+<div class = "column tasks">
   <h1>Tasks</h1>
   <% @tasks.each do |task| %>
       <li><a href="tasks/<%= task['id'] %>"><%= task['name'] %></a></li>
@@ -6,7 +6,7 @@
   <p><a href="/tasks/new">Add A Task</a></p>
 </div>
 
-<div class = "movies">
+<div class = "column movies">
   <h1>Movies</h1>
   <% @movies.each do |movie| %>
       <li><a href="movies/<%= movie['id'] %>"><%= movie['name'] %></a></li>
@@ -15,7 +15,7 @@
 
 </div>
 
-<div class = "people">
+<div class = "column people">
   <h1>People</h1>
   <% @people.each do |person| %>
       <li><a href="people/<%= person['id'] %>"><%= person['name'] %></a></li>
