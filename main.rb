@@ -94,14 +94,18 @@ end
 get '/todos/:id/edit' do
 
   id = params[:id]
+  person_id = params[:person_id]
+  movie_id = params[:movies_id]
 
-  sql = "SELECT * from tasks WHERE id = #{id}"
+
+  sql = "SELECT * FROM tasks WHERE id = #{id}"
   people_sql = "SELECT * FROM people"
   movies_sql = "SELECT * FROM movies"
 
+#Got my instance variables
   @todo = run_sql(sql)[0]
-  @people = run_sql(sql)[0]
-  @movies = run_sql(sql)[0]
+  @people = run_sql(people_sql)
+  @movies = run_sql(movies_sql)
 
   erb :edit_todo
 end

@@ -23,7 +23,9 @@ a {
   color: #A9F5A9;
   font-family: "Oxygen", "Arvo:400italic", "Fauna One";
 }
-
+.warning {
+  color: red;
+}
 .container {
   padding: 200px;
   text-align: center;

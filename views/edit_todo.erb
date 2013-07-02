@@ -1,5 +1,5 @@
 <div class="todos_container">
-  <h2 span style="font-size: 35px; color: #81F79F">Edit Task</h2>
+  <h2 span style="font-size: 35px; color:#FFB240">Edit Task</h2>
   <form action = "/todos/<%=@todo['id']%>" method = "post">
 
     <input type = "text" name = "task" value = "<%= @todo['task'] %>">
@@ -8,6 +8,32 @@
   </br>
     <input type = "text" name = "due" value = "<%= @todo['due'] %>">
   </br>
+Responsible Person:
+  </br>
+    <select name = 'person_id'>
+        <% @people.each do |person| %>
+          <option value = "<%= person['id'] %>">
+            <%= person["name"] %>
+          </option>
+          <!-- Possible to have blank person? -->
+        <% end %>
+      </select>
+  </br>
+  </br>
+    Movie
+  </br>
+    <select name = 'movie_id'>
+    <% @movies.each do |movie| %>
+      <option value = "<%= movie['id'] %>">
+        <%= movie["title"] %>
+      </option>
+    <% end %>
+   </select>
+  </br>
+  </br>
+  </br>
+   <button class="pure-button pure-button-primary">Update</button>
+
 
   </form>
 </div>
