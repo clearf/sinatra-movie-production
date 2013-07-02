@@ -1,6 +1,6 @@
 <h1>Tasks</h1>
 
-<% @tasks.each do |task| %>
+<% @todos.each do |task| %>
   <li>
     <a href="/todos/<%= task['id'] %>/edit">
       <%= task['task_name'] %>

@@ -40,7 +40,7 @@ end
 
 post '/movies/new' do
   movie = Movies.create(params)
-  redirect to "/movies/#{movie.id}"
+  redirect to "/movies"
 end
 
 get '/movies/:id' do
@@ -58,64 +58,50 @@ post '/movies/:id' do
   movie.movie_name = params[:movie_name]
   movie.release = params[:release]
   movie.director = params[:director]
+  movie.save
+
   redirect to '/movies'
 end
 
 
 get '/todos' do
-  @tasks = Tasks.all
+  @todos = Tasks.all
   erb :todos
 end
 
 get '/todos/new' do
-  sql = "SELECT id, movie_name FROM movies"
-  @movies = run_sql(sql)
+  @movies = Movies.all
   erb :new_todo
 end
 
 post '/todos/new' do
-  id = params[:id]
-  task_name = params[:task_name]
-  description = params[:description]
-  movie_id = params[:movie_id]
-  sql = "INSERT INTO tasks (task_name, description, movie_id) VALUES ('#{task_name}', '#{description}','#{movie_id}');"
-  run_sql(sql)
+  task = Tasks.create(params)
   redirect to '/todos'
 end
 
 get '/todos/:id' do
-  id = params[:id]
-  task_name = params[:task_name]
-  description = params[:description]
-  movie_id = params[:movie_id]
-  sql = "SELECT * FROM tasks WHERE id = #{id}"
-  @todo = run_sql(sql).first
+  @todo = Tasks.find(params[:id])
   erb :todo
 end
 
 get '/todos/:id/edit' do
-  sql = "SELECT id, movie_name FROM movies"
-  @movies = run_sql(sql)
-  id = params[:id]
-  sql = "SELECT * FROM tasks WHERE id = #{id}"
-  @todo = run_sql(sql).first
+  @movies = Movies.all
+  @todo = Tasks.find(params[:id])
   erb :edit_todo
 end
 
 post '/todos/:id' do
-  id = params[:id]
-  task_name = params[:task_name]
-  description = params[:description]
-  movie_id = params[:movie_id]
-  sql = "UPDATE tasks SET (task_name, description, movie_id) = ('#{task_name}','#{description}','#{movie_id}')  WHERE id = #{id}"
-  @todo = run_sql(sql).first
+  task = Tasks.find(params[:id])
+  task.task_name = params[:task_name]
+  task.description = params[:description]
+  task.movie_id = params[:movie_id]
+  task.save
+
   redirect to '/todos'
 end
 
 post '/todos/:id/delete' do
-  id = params[:id]
-  sql = "DELETE FROM tasks WHERE id = #{id}"
-  @todo = run_sql(sql).first
+  task = Tasks.delete(params[:id])
   redirect to "/todos"
 end
 
