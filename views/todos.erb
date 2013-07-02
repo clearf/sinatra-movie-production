@@ -1,7 +1,7 @@
 <h1>Tasks</h1>
 
 <!-- creates a list with the name of each task
-each list item includes a link to that movie's page -->
+each list item includes a link to that task's page -->
 
 <% @movies.each do |movie| %>
   <h3>Tasks for <%= movie['name'] %></h3>
@@ -13,3 +13,5 @@ each list item includes a link to that movie's page -->
     <% end %>
   </ul>
 <% end %>
+
+<h3><a href="/add_task">Add a task</a></h3>

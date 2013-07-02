@@ -8,6 +8,6 @@
   </ul>
 
 <form action="/people/<%= @person['id'] %>/delete" method="post">
-  <div class="warning">Warning: any tasks assigned to this person will be removed!</div></br>
+  <span class="warning">Warning: any tasks assigned to this person will also be removed!</span><br>
   <button>Delete person</button><br>
 </form>

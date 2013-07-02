@@ -1,9 +1,22 @@
 h1 {
-  color: red;
+  color: #046788;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 30px;
+  text-align: center;
 }
 
 .warning {
+  color: red;
+}
+
+html {
+  background-color: #CCCCCC;
+}
+
+body {
+  background-color: #999999;
+}
+
+button {
   color: red;
 }

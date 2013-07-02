@@ -155,7 +155,7 @@ post '/people/:id/delete' do
   redirect to "/people"
 end
 
-# page with all tasks - may be changed once flow is determined
+# page with all tasks
 get '/tasks' do
   sql_movies = 'select * from movies'
   @movies = run_sql(sql_movies)
@@ -164,7 +164,7 @@ get '/tasks' do
   erb :todos
 end
 
-# individual task page - may be changed once flow is determined
+# individual task page
 get '/tasks/:id' do
   id = params[:id]
   sql_task = "select * from tasks where id = #{id}"
@@ -176,21 +176,49 @@ get '/tasks/:id' do
   erb :todo
 end
 
-get 'add_task' do
+get '/add_task' do
+  sql_movies = 'select * from movies'
+  @movies = run_sql(sql_movies)
+  sql_people = 'select * from people'
+  @people = run_sql(sql_people)
   erb :add_task
 end
 
-post 'add_task' do
+post '/add_task' do
+  name = params[:name]
+  description = params[:description]
+  done = params[:done]
+  movie = params[:movie]
+  person = params[:person]
+  sql = "insert into tasks (name, description, done, movie, person) values ('#{name}', '#{description}', #{done}, #{movie}, #{person})"
+  run_sql(sql)
+  redirect to '/tasks'
 end
 
-get 'tasks/:id/edit' do
+get '/tasks/:id/edit' do
+  id = params[:id]
+  sql_task = "select * from tasks where id = #{id}"
+  @task = run_sql(sql_task).first
+  sql_person = "select * from people where id = #{@task['person']}"
+  @person = run_sql(sql_person).first['name']
+  sql_movie = "select * from movies where id = #{@task['movie']}"
+  @movie = run_sql(sql_movie).first['name']
+  erb :edit_task
 end
 
-post 'tasks/:id/edit' do
+post '/tasks/:id/edit' do
 end
 
-get 'tasks/:id/delete' do
+get '/tasks/:id/delete' do
+  id = params[:id]
+  sql_task = "select * from tasks where id = #{id}"
+  @task = run_sql(sql_task).first
+  sql_person = "select * from people where id = #{@task['person']}"
+  @person = run_sql(sql_person).first['name']
+  sql_movie = "select * from movies where id = #{@task['movie']}"
+  @movie = run_sql(sql_movie).first['name']
+  erb :delete_task
 end
 
-post 'tasks/:id/delete' do
+post '/tasks/:id/delete' do
 end
