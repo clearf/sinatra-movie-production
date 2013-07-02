@@ -1,4 +1,4 @@
-WDI Homework Instructions
+KC Movie Production Management
 =================
 
 KC Movie Production Management is a simple app built with Sinatra and Postgres with the use of IMDB gem.
