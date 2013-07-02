@@ -1,0 +1,21 @@
+<form action="/todo/<%= @task['id'] %>" method="post">
+  <input type="text" name="errand" value="<%= @task['errand'] %>" autofocus>
+  <input type="text" name="description" value="<%= @task['description'] %>">
+  <select name="movie">
+    <option selected="selected" value="<%= @task['movie'] %>">Chosen: <%= @specific_movie['name'] %></option>
+    <% @movies.each do |movie| %>
+      <option value="<%= movie['id'] %>">
+        <%= movie['name'] %>
+      </option>
+    <% end %>
+  </select>
+  <select name="person">
+    <option selected="selected" value="<%= @task['person'] %>">Chosen: <%= @specific_person['name'] %></option>
+    <% @people.each do |person| %>
+      <option value="<%= person['id'] %>">
+        <%= person['name'] %>
+      </option>
+    <% end %>
+  </select>
+  <button>Create New Task</button>
+</form>

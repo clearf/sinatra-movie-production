@@ -57,6 +57,39 @@ get '/todo/:id' do
   erb :todo
 end
 
+get '/todo/:id/edit' do
+  id = params[:id]
+  sql = "SELECT * FROM tasks WHERE id = #{id};"
+  @task = run_sql(sql).first
+
+  sql = "SELECT * FROM movies WHERE id = #{@task['movie']};"
+  @specific_movie = run_sql(sql).first
+
+  sql = "SELECT * FROM people WHERE id = #{@task['person']};"
+  @specific_person = run_sql(sql).first
+
+  sql = "SELECT id, name FROM movies"
+  @movies = run_sql(sql)
+
+  sql = "SELECT id, name FROM people"
+  @people = run_sql(sql)
+
+  erb :todo_edit
+end
+
+post '/todo/:id' do
+  id = params[:id]
+  errand = params[:errand]
+  description = params[:description]
+  person = params[:person]
+  movie = params[:movie]
+
+  sql = "UPDATE tasks SET (errand, description, person, movie) = ('#{errand}', '#{description}', #{person}, #{movie}) WHERE id = #{id};"
+  run_sql(sql)
+
+  redirect to('/')
+end
+
 # Movies Section
 
 get '/new_movie' do
