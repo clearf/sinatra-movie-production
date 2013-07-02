@@ -68,6 +68,26 @@ post '/movies/:id/edit' do
   redirect to "/movies/#{id}"
 end
 
+# page for deleting a specific movie
+get '/movies/:id/delete' do
+  @id = params[:id]
+  sql_movie = "select * from movies where id = #{@id}"
+  @movie = run_sql(sql_movie).first
+  sql_tasks = "select * from tasks where movie = #{@id}"
+  @tasks = run_sql(sql_tasks)
+  erb :delete_movie
+end
+
+# deletes specific movie once form is filled out
+post '/movies/:id/delete' do
+  id = params[:id]
+  sql_tasks = "delete from tasks where movie = #{id}"
+  run_sql(sql_tasks)
+  sql_movie = "delete from movies where id = #{id}"
+  run_sql(sql_movie)
+  redirect to "/movies"
+end
+
 # page with list of people
 get '/people' do
   sql = 'select * from people'
@@ -115,8 +135,32 @@ post '/people/:id/edit' do
   redirect to "/people/#{id}"
 end
 
+# page for deleting a specific person
+get '/people/:id/delete' do
+  @id = params[:id]
+  sql_person = "select * from people where id = #{@id}"
+  @person = run_sql(sql_person).first
+  sql_tasks = "select * from tasks where person = #{@id}"
+  @tasks = run_sql(sql_tasks)
+  erb :delete_person
+end
+
+# deletes specific person once form is filled out
+post '/people/:id/delete' do
+  id = params[:id]
+  sql_tasks = "delete from tasks where person = #{id}"
+  run_sql(sql_tasks)
+  sql_person = "delete from people where id = #{id}"
+  run_sql(sql_person)
+  redirect to "/people"
+end
+
 # page with all tasks - may be changed once flow is determined
 get '/tasks' do
+  sql_movies = 'select * from movies'
+  @movies = run_sql(sql_movies)
+  sql_tasks = 'select * from tasks'
+  @tasks = run_sql(sql_tasks)
   erb :todos
 end
 
