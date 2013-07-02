@@ -2,7 +2,7 @@
   <ul>
     <% @tasks.each do |task| %>
       <li>
-        <h4><%= task['task'] %></h4>
+        <h6><%= task['task'] %></h6>
         <p>Completed?
           <% if task['completed'] == true %>
             <span class="completed">y</span>
