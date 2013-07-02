@@ -1,6 +1,6 @@
-<form action="/tasks/new" method="POST">
-  Name: <input type="text" name="name"><br>
-  Descriptions: <input type="text" name="descriptions"><br>
+<form action="/tasks/<%= @tasks['id'] %>/edit" method="POST">
+  Name: <input type="text" name="name" value="<%= @tasks['name'] %>"><br>
+  Descriptions: <input type="text" name="descriptions" value="<%= @tasks['descriptions'] %>"><br>
   Movie:
   <select name="movie_id">
     <% @movies.each do |movie| %>
