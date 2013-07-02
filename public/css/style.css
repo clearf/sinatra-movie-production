@@ -1,0 +1,28 @@
+h1 {
+  color: #046788;
+  font-weight: bold;
+  font-size: 30px;
+  text-align: center;
+}
+
+.warning {
+  color: red;
+}
+
+html {
+  background-color: #CCCCCC;
+}
+
+body {
+  background-color: #999999;
+}
+
+button {
+  color: red;
+}
+
+#change {
+  text-align: center;
+  font-size: 20px;
+  background-color: white;
+}
