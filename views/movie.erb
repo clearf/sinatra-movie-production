@@ -1,14 +1,19 @@
-<div class="wrapper well">
-  <img src="<%= @movie['image'] %>" />
-  <%= @movie['name'] %>
-  <%= @movie['director'] %>
-  <%= @movie['releasedate'] %>
+<div class="wrapper well row-fluid">
+  <div class="pull-left movie_image">
+    <img src="<%= @movie['image'] %>" />
+  </div>
+  <div class="movie_content">
+     <a href="/movie/<%= @movie['id'] %>/edit" class="edit">Edit</a>
+    <h3><%= @movie['name'] %></h3>
+    <h4><%= @movie['director'] %></h4>
+    <h4><%= @movie['releasedate'] %></h4>
+    <hr>
 
-  <h3>Related Tasks</h3>
-  <ul>
-    <% @tasks_of_movie.each do |task| %>
-      <li><a href="/todo/<%= task['id'] %>"><%= task['errand'] %></a></li>
-    <% end %>
-  </ul>
-  <a href="/movie/<%= @movie['id'] %>/edit">Edit</a>
+    <h4>Related Tasks</h4>
+    <ul>
+      <% @tasks_of_movie.each do |task| %>
+        <li><a href="/todo/<%= task['id'] %>"><%= task['errand'] %></a></li>
+      <% end %>
+    </ul>
+  </div>
 </div>

@@ -1,8 +1,8 @@
 <div class="wrapper well">
+  <a href="/todo/<%= @task['id'] %>/edit" class="edit">Edit</a>
   <h3><span class="headtitle">Errand:</span> <%= @task['errand'] %></h3>
   <h4><span class="headtitle">Details:</span> <%= @task['description'] %></h4>
   <h4><span class="headtitle">For Movie:</span> <a href="/movie/<%= @movie_name['id'] %>"><%= @movie_name['name'] %></a>
   <h4><span class="headtitle">Responsible Person:</span> <%= @person_name['name'] %></h4>
 
-  <a href="/todo/<%= @task['id'] %>/edit">Edit</a>
 </div>

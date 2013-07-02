@@ -8,6 +8,8 @@ Orangish Red #d9474c
 
 */
 
+/* Universal */
+
 html, body{
   background-color: #a6a6b0;
   font-family: 'Advent Pro', sans-serif;
@@ -42,6 +44,12 @@ footer {
   color: #d9474c;
 }
 
+.edit {
+  float: right;
+}
+
+/* People */
+
 .people_page_title {
   margin-left: 16px;
 }
@@ -66,27 +74,41 @@ footer {
   color: #d9474c;
 }
 
+/* Movie */
+
 .movielist {
   width: 25%;
   float: left;
 }
 
-.movie_image {
+.movies_image {
 }
 
-.movie_image img {
+.movies_image img {
   width: auto;
   height: 280px;
   border: 2px solid #3D6785;
 }
 
-.movie_name {
+.movies_name {
   text-align: center;
   padding: 10px 0 20px 0;
 }
 
-.movie_title {
+.movies_title {
   font-size: 1.2em;
   color: #d9474c;
   line-height: 1.2em;
+}
+
+/* Ind Movie Page */
+
+.movie_content {
+  width: 66%;
+  padding-left: 280px;
+}
+
+.movie_image img {
+  height: 360px;
+  width: auto;
 }
