@@ -106,7 +106,7 @@ get '/new_movie' do
 end
 
 post '/new_movie' do
-  name = params[:name]
+  name = params[:name].capitalize
 
   new_movie = Imdb::Search.new(name).movies.first
   release_date = new_movie.release_date

@@ -1,14 +1,14 @@
 <div class="wrapper well">
   <div class="row-fluid ">
     <div class="span3 headtitle"><h3>Errand</h3></div>
-    <div class="span6 headtitle"><h3>Details</h3></div>
-    <div class="span3"></div>
+    <div class="span7 headtitle"><h3>Details</h3></div>
+    <div class="span2"></div>
   </div>
 
   <% @tasks.each do |task| %>
     <div class="row-fluid">
       <div class="span3"><%= task['errand'] %></div>
-      <div class="span5"><%= task['description'] %></div>
+      <div class="span7"><%= task['description'] %></div>
       <div class="span2"><a href="/todo/<%= task['id'] %>">View</a></div>
     </div>
   <% end %>
