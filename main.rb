@@ -23,5 +23,35 @@ get '/home' do
   redirect to('/')
 end
 
-get '/people' do
+#Tasks - People - Movies
+
+#ToDo's take priority. People and movies can be assigned to them.
+#Urgency is priority.
+get '/todos' do
+  sql = "SELECT * FROM TASKS"
+  @todos = run_sql(sql)
+
+  erb :todos
+end
+
+#Add new tasks
+post '/todos' do
+
+  urgent = params[:urgent]
+  unless urgent.nil
+    urgent = true
+  end
+
+  task = params[:task]
+  details = params[:details]
+  due = params[:due]
+  urgent = params[:urgent]
+  person_id = params[:person_id]
+  movie_id = params[:movie_id]
+
+#pulling todos
+  sql = "INSERT INTO tasks (task, details, due, urgent, person_id, movie_id) VALUES ('#{task}', '#{due}', '#{details}', #{urgent}, #{person_id}, #{movie_id})"
+  run_sql(sql)
+
+  redirect to('todos')
 end
