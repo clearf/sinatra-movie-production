@@ -3,11 +3,28 @@ html {background-color: #D4D6FF;}
 h1 {
   color: #424699;
   font-family: Arial;
+  margin-left: 15px
 }
 
 h2 {
   color: #424699;
   font-family: Arial;
+  margin-left: 15px
 }
 
-a {color: black;}
+#home {
+  width: 60px;
+  line-height: 1.62;
+  font-size: 120%;
+  color: #424699;
+}
+
+a {color: #424699;}
+
+div {
+  background-color: #FAFFBD;
+  padding: 15px;
+  border-radius: 10px;
+  width: 200px;
+}
+

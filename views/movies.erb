@@ -1,5 +1,6 @@
 <h1>Movies</h1>
 
+<div>
 <% @movies.each do |movie| %>
   <a href="/movies/<%= movie['id'] %>">
     <%= movie['title'] %><br/>
@@ -11,3 +12,4 @@
 <br/>
 <br/>
 <a href="/">Back to Index</a>
+</div>

@@ -1,5 +1,6 @@
 <h1>Tasks</h1>
 
+<div>
 <% @tasks.each do |todo| %>
   <a href="/todos/<%= todo['id'] %>">
     <%= todo['name'] %><br/>
@@ -11,3 +12,4 @@
 <br/>
 <br/>
 <a href="/">Back to Index</a>
+</div>

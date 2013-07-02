@@ -1,5 +1,6 @@
 <h1>People</h1>
 
+<div>
 <% @people.each do |person| %>
   <a href="/people/<%= person['id'] %>">
     <%= person['name'] %><br/>
@@ -11,3 +12,4 @@
 <br/>
 <br/>
 <a href="/">Back to Index</a>
+</div>

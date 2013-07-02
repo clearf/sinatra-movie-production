@@ -1,14 +1,13 @@
-<%= @people %>
-
+<div>
 <% @movie.each do |movie| %>
   <form action=/edit_movie/<%= movie['id'] %> method="post">
-    Title: <input type="text" name="title" value="<%= movie['title'] %>"><br/>
+    Title: <br/><input type="text" name="title" value="<%= movie['title'] %>"><br/>
     Release Date: <input type="text" name="release_date" value="<%= movie['release_date'] %>"><br/>
     Director: <input type="text" name="director" value="<%= movie['director'] %>">
-    <br/>
+    <br/><br/>
 
     <button>Update</button>
-  </form>
+  </form><br/><br/>
   <form action="/delete/movies/<%= movie['id'] %>" method="post">
     <button>Delete</button>
   </form>
@@ -16,3 +15,4 @@
 <br/>
 <br/>
 <a href="/movies">Back to Movies</a>
+</div>

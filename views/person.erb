@@ -1,10 +1,11 @@
+<div>
 <% @person.each do |person| %>
   <form action=/edit_person/<%= person['id'] %> method="post">
   Name: <input type="text" name="name" value="<%= person['name'] %>"><br/>
   Movie: <input type="text" name="movie" value="<%= person['movie'] %>"><br/>
-  Task: <input type="text" name="task" value="<%= person['task'] %>"><br/>
+  Task: <br/><input type="text" name="task" value="<%= person['task'] %>"><br/><br/>
   <button>Update</button>
-  </form>
+  </form><br/><br/>
   <form action="/delete/people/<%= person['id'] %>" method="post">
     <button>Delete</button>
   </form>
@@ -12,3 +13,4 @@
 <br/>
 <br/>
 <a href="/people">Back to People</a>
+</div>
