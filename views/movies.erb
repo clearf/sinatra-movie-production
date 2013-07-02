@@ -5,7 +5,7 @@
           <img src="<%= movie['image'] %>" />
         </div>
         <div class="movie_name">
-          <p class="movie_title"><%= movie['name'] %></p>
+          <p class="movie_title"><a href="/movie/<%= movie['id'] %>"><%= movie['name'] %></a></p>
           <p><%= movie['director'] %></p>
           <p><%= movie['releasedate'] %></p>
         </div>
