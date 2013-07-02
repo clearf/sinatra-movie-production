@@ -59,6 +59,8 @@ post '/edit_movie/:id' do
   title = params[:title]
   release_date = params[:release_date]
   director = params[:director]
+  sql3 = "SELECT * FROM movies WHERE id = #{id}"
+  @movie = run_sql(sql3)
   sql1= "SELECT * FROM people where id = #{director};"
   @people = run_sql(sql1)
   sql2 = "SELECT * FROM people WHERE id = #{@movie.first['director']};"
