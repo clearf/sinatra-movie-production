@@ -221,4 +221,8 @@ get '/tasks/:id/delete' do
 end
 
 post '/tasks/:id/delete' do
+  id = params[:id]
+  sql = "delete from tasks where id = #{id}"
+  run_sql(sql)
+  redirect to "/tasks"
 end
