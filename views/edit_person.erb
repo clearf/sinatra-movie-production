@@ -1,0 +1,14 @@
+<h1>Edit The Details of Your Slave Here</h1>
+<p>Edit the information of your slave below as needed.</p>
+
+<form action='/people/edit/<%= @got_person.first['id'] %>' method='post'>
+  <input type="text" name="name" value="<%= @got_person.first['name'] %>" size="30px"><br/>
+  <input type="text" name="title" value="<%= @got_person.first['title'] %>" size="30px"><br/>
+  <input type="text" name="phone" value="<%= @got_person.first['phone'] %>" size="30px"><br/>
+  <input type="text" name="idiot" value="<%= @got_person.first['idiot'] %>" size="30px"><br/>
+  <button>Submit</button>
+</form>
+
+
+
+

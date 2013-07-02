@@ -1,1 +1,25 @@
-<p>Here's a bunch of tasks</p>
+<h1>Manage Your Tasks</h1>
+
+<h2>Your Current Tasks</h2>
+<p>Here's a list of your tasks. You can click the individual task to view and edit the details or delete the task.</p>
+
+<% if @got_todos.count == 0 %>
+    <ul class = "bullet_message">
+      <li>You currently do not have any to-do's.</li>
+    </ul>
+<% else %>
+    <% @got_todos.each do |todo| %>
+      <ul>
+        <li><a href='/todo/<%= todo['id'] %>'><button>View details</button></a>
+           <%= todo['name'] %></li>
+      </ul>
+    <% end %>
+<% end %>
+
+<br/>
+<h2>Add More Tasks</h2>
+<p>Click the button below to add more tasks to work on your movies!</p>
+<a href='/todos/new'><button>Add More Tasks</button></a>
+
+<br>
+STYLIZE THE PERSON NAME
