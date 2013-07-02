@@ -1,7 +1,11 @@
 <h3>Your Contacts</h3>
-<% @people.each do |person| %>
-  <%= person %><br>
-<% end %>
+<ul>
+  <% @people.each do |person| %>
+    <li>
+      <a href="/people/<%= person['id'] %>"><%= person['name'] %></a>
+    </li>
+  <% end %>
+</ul>
 
 <h3>Add a person</h3>
 <form action="/new_person" method="post">

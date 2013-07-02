@@ -1,1 +1,7 @@
-<a href="/">Back to home page</a>
+<h4><%= @movie['title'] %></h4>
+<p>Director: <%= @director['name'] %></p>
+<p>Year of release: <%= @movie['year'] %></p>
+<img src="<%= @movie['image'] %>">
+<p><a href="/edit_movie/<%= @movie['id'] %>">Edit film</a></p>
+
+<a href="/movies">Back to films page</a>

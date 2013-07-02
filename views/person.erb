@@ -1,1 +1,6 @@
-<a href="/">Back to home page</a>
+<h4><%= @person['name'] %></h4>
+<p><%= @person['title'] %></p>
+<p><%= @person['phone'] %></p>
+<p><a href="/edit_person/<%= @person['id'] %>">Edit contact</a></p>
+
+<a href="/people">Back to contacts page</a>

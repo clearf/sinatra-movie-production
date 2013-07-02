@@ -3,16 +3,24 @@
     <% @tasks.each do |task| %>
       <li>
         <h4><%= task['task'] %></h4>
-        <p><%= task['notes'] %></p>
-        <p>Completed? <span><%= task['completed'] %></span></p>
-        <form action='/edit_task' method='get'>
-          <button>Edit task</button>
-        </form>
-        <form action='/delete_task/<%= task['id'] %>' method='post'>
-          <button>Delete task</button>
-        </form>
+        <p>Completed?
+          <% if task['completed'] == true %>
+            <span class="completed">y</span>
+          <% else %>
+            <span class="completed">n</span>
+          <% end %>
+        </p>
+        <div class="task-buttons">
+          <form action='/tasks/<%= task['id'] %>' method='get'>
+            <button>View more and edit</button>
+          </form>
+          <form action='/delete_task/<%= task['id'] %>' method='post'>
+            <button>Delete task</button>
+          </form>
+        </div>
       </li>
     <% end %>
+  </ul>
 
 <h3>Add a task</h3>
 <form action="/new_task" method="post">

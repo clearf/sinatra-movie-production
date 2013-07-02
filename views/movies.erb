@@ -1,7 +1,11 @@
 <h3>Films You're Working On</h3>
-  <% @movies.each do |movie| %>
-    <%= movie %><br>
-  <% end %>
+<ul>
+<% @movies.each do |movie| %>
+  <li>
+    <a href="movies/<%= movie['id'] %>"><%= movie['title'] %></a>
+  </li>
+<% end %>
+</ul>
 
 <h3>Add a film</h3>
 <form action="/new_movie" method="post">
