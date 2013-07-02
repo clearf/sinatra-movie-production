@@ -45,6 +45,30 @@ post '/movies/new' do
   redirect to '/'
 end
 
+#shows form to edit movie
+get '/movies/:id/edit' do
+  @id = params[:id]
+  @name = params[:name]
+  @title = params[:title]
+  @release_date = params[:release_date]
+  @director = params[:director]
+  sql = "select * from movies where id = #{@id}"
+  @movie = run_sql(sql).first
+  erb :movie_edit
+end
+
+#this edits the movie
+post '/movies/:id/edit' do
+  @id = params[:id]
+  @name = params[:name]
+  @title = params[:title]
+  @release_date = params[:release_date]
+  @director = params[:director]
+  sql = "update movies set (name,title,release_date,director) = ('#{@name}', '#{@title}', '#{@release_date}', '#{@director}') where id = #{@id}"
+  run_sql(sql)
+  redirect to "/"
+end
+
 #shows form to add a new person
 get '/people/new' do
   erb :new_person
@@ -57,6 +81,26 @@ post '/people/new' do
   sql = "insert into people (name,title) values ('#{@name}', '#{@title}')"
   run_sql(sql)
   redirect to '/'
+end
+
+#shows form to edit person
+get '/people/:id/edit' do
+  @id = params[:id]
+  @name = params[:name]
+  @title = params[:title]
+  sql = "select * from people where id = #{@id}"
+  @person = run_sql(sql).first
+  erb :person_edit
+end
+
+#this edits the person
+post '/people/:id/edit' do
+  @id = params[:id]
+  @name = params[:name]
+  @title = params[:title]
+  sql = "update people set (name,title) = ('#{@name}', '#{@title}') where id = #{@id}"
+  run_sql(sql)
+  redirect to "/"
 end
 
 #shows the form to add a new task
@@ -78,6 +122,32 @@ post '/tasks/new' do
   @tasks = run_sql(sql)
   redirect to '/'
 end
+
+#shows form to edit task
+get '/tasks/:id/edit' do
+  @id = params[:id]
+  @name = params[:name]
+  @description = params[:description]
+  @person_id = params[:person_id]
+  @movie_id = params[:movie_id]
+  sql = "select * from tasks where id = #{@id}"
+  @task = run_sql(sql).first
+  erb :task_edit
+end
+
+#this edits the task
+post '/tasks/:id/edit' do
+  @id = params[:id]
+  @name = params[:name]
+  @description = params[:description]
+  @person_id = params[:person_id]
+  @movie_id = params[:movie_id]
+  sql = "update tasks set (name,description,person_id,movie_id) = ('#{@name}', '#{@description}','#{@person_id}','#{@movie_id}') where id = #{@id}"
+  run_sql(sql)
+  redirect to "/"
+end
+
+
 
 #displays all tasks
 get '/tasks' do
