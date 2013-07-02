@@ -25,8 +25,10 @@ get '/todos' do
 end
 
 get '/todo/new' do
-  sql = "SELECT * FROM tasks"
-  @tasks = run_sql(sql)
+  sql = "SELECT * FROM people"
+  @people = run_sql(sql)
+  sql = "SELECT * FROM movies"
+  @movies = run_sql(sql)
   erb :todo_new
 end
 

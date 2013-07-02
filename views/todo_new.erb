@@ -5,9 +5,18 @@ Description: <input type="description">
 
 Assign to:
 <select name="person_id">
-  <% @tasks.each do |task| %>
-  <option value="<%= task["id"] %>">
-    <%= task["person_name"] %>
+  <% @people.each do |people| %>
+  <option value="<%= people["id"] %>">
+    <%= people["person_name"] %>
+</option>
+<% end %>
+</select>
+
+For Movie:
+<select name="movie_id">
+  <% @movies.each do |movie| %>
+  <option value="<%= movie["id"] %>">
+    <%= movie["title"] %>
 </option>
 <% end %>
 </select></br>
