@@ -6,7 +6,7 @@ require 'sinatra/activerecord'
 #need to fix movies to reflect table change
 
 set :database, {adapter: "postgresql",
-                database: "guitar_development_new",
+                database: "Homework",
                 host: 'localhost',
                 username: 'postgres',
                 password: 'postgres'}
