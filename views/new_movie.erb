@@ -4,8 +4,13 @@
   Release Date: <input type="text" name="release_date"></input><br/>
   Director: <select name="director">
     <% @people.each do |person| %>
+      <% if person['id'] == @director.first['id'] %>
+        <option value="<%= person['id'] %>" selected>
+          <%= person['name'] %>
+        </option>
+      <% else %>
       <option value="<%= person['id'] %>">
-        <%= person['name'] %>
+          <%= person['name'] %>
       </option>
       <% end %>
     </select><br/><br/>
