@@ -176,6 +176,7 @@ get '/tasks/:id' do
   erb :todo
 end
 
+# page for adding a new task to the database
 get '/add_task' do
   sql_movies = 'select * from movies'
   @movies = run_sql(sql_movies)
@@ -184,6 +185,7 @@ get '/add_task' do
   erb :add_task
 end
 
+# adds a new task to the database once form is filled out
 post '/add_task' do
   name = params[:name]
   description = params[:description]
@@ -195,20 +197,32 @@ post '/add_task' do
   redirect to '/tasks'
 end
 
+# page for editing a specific task
 get '/tasks/:id/edit' do
-  id = params[:id]
-  sql_task = "select * from tasks where id = #{id}"
+  @id = params[:id]
+  sql_task = "select * from tasks where id = #{@id}"
   @task = run_sql(sql_task).first
-  sql_person = "select * from people where id = #{@task['person']}"
-  @person = run_sql(sql_person).first['name']
-  sql_movie = "select * from movies where id = #{@task['movie']}"
-  @movie = run_sql(sql_movie).first['name']
+  sql_movies = 'select * from movies'
+  @movies = run_sql(sql_movies)
+  sql_people = 'select * from people'
+  @people = run_sql(sql_people)
   erb :edit_task
 end
 
+# edits specific task once form is filled out
 post '/tasks/:id/edit' do
+  name = params[:name]
+  description = params[:description]
+  done = params[:done]
+  movie = params[:movie]
+  person = params[:person]
+  id = params[:id]
+  sql = "update tasks set name='#{name}', description='#{description}', done=#{done}, movie=#{movie}, person=#{person} where id = #{id}"
+  run_sql(sql)
+  redirect to "/tasks/#{id}"
 end
 
+# page for deleting a specific person
 get '/tasks/:id/delete' do
   id = params[:id]
   sql_task = "select * from tasks where id = #{id}"
@@ -220,6 +234,7 @@ get '/tasks/:id/delete' do
   erb :delete_task
 end
 
+# deletes specific person once form is filled out
 post '/tasks/:id/delete' do
   id = params[:id]
   sql = "delete from tasks where id = #{id}"

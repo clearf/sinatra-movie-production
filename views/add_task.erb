@@ -9,6 +9,7 @@
   <label for="done">Done?</label><br>
   <input type="radio" name="done" value="false" checked> No
   <input type="radio" name="done" value="true"> Yes<br>
+<! Creates dropdown menu for movie >
   <select name="movie">
     <% @movies.each do |movie| %>
       <option value="<%= movie["id"] %>">
@@ -16,6 +17,7 @@
       </option>
     <% end %>
   </select><br>
+<! Creates dropdown menu for person >
   <select name="person">
     <% @people.each do |person| %>
       <option value="<%= person["id"] %>">
