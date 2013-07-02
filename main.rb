@@ -1,17 +1,29 @@
 require 'pg'
-require 'pry'
 require 'sinatra'
 require 'sinatra/reloader' if development?
+require 'pry' if development?
+require 'sinatra/activerecord'
 
-helpers do
-  # This helps us run SQL commands
-  def run_sql(sql)
-    db = PG.connect(dbname: 'movie_production', host: 'localhost')
-    result = db.exec(sql)
-    db.close
-    result
-  end
+set :database, {
+  adapter: 'postgresql',
+  database: 'movie_production',
+  host: 'localhost'
+}
+
+class Movies < ActiveRecord::Base
+  has_many :tasks
+  has_many :people
 end
+
+class Tasks < ActiveRecord::Base
+  belongs_to :movies
+end
+
+class People < ActiveRecord::Base
+  belongs_to :movies
+end
+
+
 
 get '/' do
   erb :movies
