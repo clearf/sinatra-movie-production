@@ -1,0 +1,13 @@
+
+<form action='/new_todo' method='post'>
+	<input type='text' name='Name'/>
+	<select name='my_choice'>
+		<% @people.each do |person| %>
+		<option value='<%= 
+		person[:id] %>'>
+			<%= person[:name] %>
+		</option>
+		<% end %> 
+	</select>
+	<button>Submit</button>
+</form>
