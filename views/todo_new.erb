@@ -1,0 +1,16 @@
+<h1>Add Task</h1>
+<form action="/todo/new" method="POST">
+Task: <input type="text" name="task">
+Description: <input type="description">
+
+Assign to:
+<select name="person_id">
+  <% @tasks.each do |task| %>
+  <option value="<%= task["id"] %>">
+    <%= task["person_name"] %>
+</option>
+<% end %>
+</select></br>
+
+<button>Add Task</button></br>
+</form>
