@@ -5,7 +5,7 @@
     Release Date: <input type="text" name="release_date" value="<%= movie['release_date'] %>"><br/>
     Director: <br/><select name="director">
     <% @people.each do |person| %>
-      <option value="<%= @director['name'] %>">
+      <option value="<%= @director['id'] %>">
         <%= person['name'] %>
       </option>
       <% end %>
