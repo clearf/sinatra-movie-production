@@ -116,6 +116,13 @@ post '/todos/:id' do
   redirect to '/todos'
 end
 
+post '/todos/:id/delete' do
+  id = params[:id]
+  sql = "DELETE FROM tasks WHERE id = #{id}"
+  @todo = run_sql(sql).first
+  redirect to "/todos"
+end
+
 get '/people' do
   sql = "SELECT * FROM people"
   @people = run_sql(sql)
@@ -140,7 +147,6 @@ post '/people/new' do
   redirect to '/people'
 end
 
-
 get '/people/:id/edit' do
   sql = "SELECT id, movie_name FROM movies"
   @movies = run_sql(sql)
@@ -162,3 +168,9 @@ post '/people/:id' do
   redirect to '/people'
 end
 
+post '/people/:id/delete' do
+  id = params[:id]
+  sql = "DELETE FROM people WHERE id = #{id}"
+  @person = run_sql(sql).first
+  redirect to "/people"
+end
