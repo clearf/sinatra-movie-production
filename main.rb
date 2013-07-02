@@ -15,7 +15,8 @@ helpers do
 end
 
 get '/' do
-  "Hello"
+
+  erb :home
 end
 
 #list people
@@ -45,6 +46,8 @@ sql = "SELECT * FROM people WHERE id ='#{@person}'"
 @person_details = run_sql(sql).first
 sql = "SELECT * FROM tasks where person_id ='#{@person}'"
 @tasks = run_sql(sql).first
+sql = "SELECT * FROM movies where person_id ='#{@person}'"
+@movies = run_sql(sql).first
 erb :person
 end
 
@@ -58,6 +61,22 @@ post '/people/:id/delete' do
   run_sql(sql)
 
   redirect to ('/people')
+end
+
+#Edit People
+get '/people/:id/edit' do
+  @person_id = params[:id]
+  sql = "SELECT * FROM people WHERE id='#{@person_id}'"
+  @person_details = run_sql(sql).first
+  erb :edit_person
+end
+
+post '/people/:id' do
+  person_id = params[:id]
+  name = params[:name]
+  sql = "UPDATE people SET (name) = ('#{name}') WHERE id =#{person_id}"
+  run_sql(sql)
+  redirect to('/people')
 end
 
 #list movies
