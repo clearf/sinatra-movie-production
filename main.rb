@@ -25,7 +25,10 @@ get '/movies' do
 end
 
 # individual movie page
-get '/movies/:id' do
+get '/movie/:id' do
+  id = params[:id]
+  sql = "select * from movies where id = #{id}"
+  @movie = run_sql(sql).first
   erb :movie
 end
 
@@ -37,7 +40,10 @@ get '/people' do
 end
 
 # individual person page
-get 'people/:id' do
+get '/person/:id' do
+  id = params[:id]
+  sql = "select * from people where id = #{id}"
+  @person = run_sql(sql).first
   erb :person
 end
 
