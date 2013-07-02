@@ -30,8 +30,7 @@ get '/' do
 end
 
 get '/movies' do
-  sql = "SELECT * FROM movies"
-  @movies = run_sql(sql)
+  @movies = Movies.all
   erb :movies
 end
 
@@ -40,46 +39,31 @@ get '/movies/new' do
 end
 
 post '/movies/new' do
-  id = params[:id]
-  movie_name = params[:movie_name]
-  release = params[:release]
-  director = params[:director]
-  sql = "INSERT INTO movies (movie_name, release, director) VALUES ('#{movie_name}',#{release},'#{director}')"
-  run_sql(sql)
-  redirect to '/movies'
+  movie = Movies.create(params)
+  redirect to "/movies/#{movie.id}"
 end
 
 get '/movies/:id' do
-  id = params[:id]
-  movie_name = params[:movie_name]
-  release = params[:release]
-  director = params[:director]
-  sql = "SELECT * FROM movies WHERE id = #{id}"
-  @movie = run_sql(sql).first
+  @movie = Movies.find(params[:id])
   erb :movie
 end
 
 get '/movies/:id/edit' do
-  id = params[:id]
-  sql = "SELECT * FROM movies WHERE id = #{id}"
-  @movie = run_sql(sql).first
+   @movie = Movies.find(params[:id])
   erb :edit_movie
 end
 
 post '/movies/:id' do
-  id = params[:id]
-  movie_name = params[:movie_name]
-  release = params[:release]
-  director = params[:director]
-  sql = "UPDATE movies SET (movie_name, release, director) = ('#{movie_name}',#{release},'#{director}')  WHERE id = #{id}"
-  @movie = run_sql(sql).first
+  movie = Movies.find(params[:id])
+  movie.movie_name = params[:movie_name]
+  movie.release = params[:release]
+  movie.director = params[:director]
   redirect to '/movies'
 end
 
 
 get '/todos' do
-  sql = "SELECT * FROM tasks"
-  @tasks = run_sql(sql)
+  @tasks = Tasks.all
   erb :todos
 end
 
@@ -136,8 +120,7 @@ post '/todos/:id/delete' do
 end
 
 get '/people' do
-  sql = "SELECT * FROM people"
-  @people = run_sql(sql)
+  @people = People.all
   erb :people
 end
 
