@@ -21,6 +21,7 @@ get '/home' do
   redirect to('/')
 end
 
+
 #Tasks - People - Movies
 
 #ToDo's take priority. People and movies can be assigned to them.
@@ -52,7 +53,6 @@ post '/todos' do
   person_id = params[:person_id]
   movie_id = params[:movie_id]
 
-#inserting parameters
   sql = "INSERT INTO tasks (task, details, due, person_id, movie_id) VALUES ('#{task}', '#{details}', '#{due}', #{person_id}, #{movie_id})"
   run_sql(sql)
 
@@ -89,3 +89,24 @@ get '/todos/:id/delete' do
 
   redirect to('/todos')
 end
+
+#Edit todo's
+get '/todos/:id/edit' do
+
+  id = params[:id]
+
+  sql = "SELECT * from todos WHERE id = #{id}"
+  people_sql = "SELECT * FROM people"
+  movies_sql = "SELECT * FROM movies"
+  run_sql(sql)
+
+  @todo = db.exec(sql)[0]
+  @people = db.excec(sql)[0]
+  @movies = db.exec(sql)[0]
+
+  erb :edit_todo
+end
+  # current_person_sql = "SELECT * from people WHERE id = #{@todo['person_id']}"
+  # current_movie_sql = "SELECT * FROM people WHERE id = #{@todo['movie_id']}"
+  # @current_person = run_sql(current_person_sql).first
+  # @current_movie = run_sql(current_movie_sql).first
