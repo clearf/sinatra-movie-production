@@ -56,6 +56,11 @@ post '/create_todo' do
   erb :todos
 end
 
+# gives you the person information to edit
+get '/person/:id/edit/' do
+  sql = "select * from todo where id = #{id}"
+  @todo = run_sql(sql).first
+end
 
 #         #
 # People  #
@@ -93,7 +98,7 @@ post '/create_person' do
   erb :people
 end
 
-# gives you the person information
+# gives you the person information to edit
 get '/person/:id/edit/' do
   sql = "select * from people where id = #{id}"
   @person = run_sql(sql).first
