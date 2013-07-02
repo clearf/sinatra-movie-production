@@ -37,20 +37,14 @@ end
 #Add new tasks
 post '/todos' do
 
-  urgent = params[:urgent]
-  unless urgent.nil
-    urgent = true
-  end
-
   task = params[:task]
   details = params[:details]
   due = params[:due]
-  urgent = params[:urgent]
   person_id = params[:person_id]
   movie_id = params[:movie_id]
 
 #pulling todos
-  sql = "INSERT INTO tasks (task, details, due, urgent, person_id, movie_id) VALUES ('#{task}', '#{due}', '#{details}', #{urgent}, #{person_id}, #{movie_id})"
+  sql = "INSERT INTO tasks (task, details, due, urgent, person_id, movie_id) VALUES ('#{task}', '#{due}', '#{details}', #{person_id}, #{movie_id})"
   run_sql(sql)
 
   redirect to('todos')
