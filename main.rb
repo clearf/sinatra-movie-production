@@ -38,6 +38,19 @@ get '/todo/:id' do
 erb :todo
 end
 
+# # goes to the edit task
+# get '/edit_todo/:id/' do
+
+# erb :edit_todo
+# end
+
+# # posts the update back
+# post '/edit_todo/:id/' do
+
+
+# end
+
+
 # create and assign new todo
 get '/create_todo' do
   sql = "select id, name from people"
@@ -53,6 +66,7 @@ post '/create_todo' do
   task_description = params[:task_description]
   sql = "INSERT INTO todo (task, task_description, person_id, movie_id) VALUES ('#{task}','#{task_description}', #{person_id}, #{movie_id});"
   @todos = run_sql(sql)
+  redirect to '/'
   erb :todos
 end
 
@@ -98,11 +112,17 @@ post '/create_person' do
   erb :people
 end
 
-# gives you the person information to edit
-get '/person/:id/edit/' do
-  sql = "select * from people where id = #{id}"
-  @person = run_sql(sql).first
-end
+# # gives you the person information to edit
+# get '/person/:id/edit/' do
+#   sql = "select * from people where id = #{id}"
+#   @person = run_sql(sql).first
+# end
+
+# # posts the edits back to person
+# post '/person/:id/edit/' do
+#   sql = "update * from people where id = #{id}"
+#   @person = run_sql(sql).first
+# end
 
 
 #        #
@@ -128,6 +148,19 @@ get '/movies/:id' do
   erb :movie
 end
 
+# creates an new person and assigns
+get '/create_movie' do
+  erb :create_movie
+end
+
+# posts the person back to people
+post '/create_movie' do
+  id = params[:id]
+  movie_name = params[:movie_name]
+  release_date = params[:release_date]
+  director = params[:director]
+  sql = "insert into person (movie_name, release_date, director) values ('#{movie_name}', #{release_date}, '#{director}')"
+end
 
 
 
