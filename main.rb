@@ -92,6 +92,33 @@ get '/movies/:id' do
 end
 
 
+#Delete Movie Page
+post '/movies/:id/delete' do
+  @movie_id = params[:id]
+  sql = "DELETE FROM movies where id = '#{@movie_id}'"
+  run_sql(sql)
+  redirect to ('/movies')
+end
+
+#Edit Movies
+get '/movies/:id/edit' do
+  @movie_id = params[:id]
+  sql = "SELECT * FROM movies WHERE id='#{@movie_id}'"
+  @movie_details = run_sql(sql).first
+  sql = "SELECT * FROM people"
+  @people = run_sql(sql)
+  erb :edit_movie
+end
+
+post '/movies/:id' do
+  movie_id = params[:id]
+  name = params[:name]
+  person_id = params[:person_id]
+  sql = "UPDATE movies SET (name, person_id) = ('#{name}', #{person_id}) WHERE id =#{movie_id}"
+  run_sql(sql)
+  redirect to('/movies')
+end
+
 #list tasks
 get '/tasks' do
   sql = "SELECT * FROM tasks"
@@ -136,6 +163,7 @@ post '/tasks/:id/delete' do
 redirect to ('/tasks')
 end
 
+#Edit Tasks
 get '/tasks/:id/edit' do
   @task_id = params[:id]
   sql = "SELECT * FROM tasks WHERE id='#{@task_id}'"
