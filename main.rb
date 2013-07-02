@@ -2,15 +2,9 @@ require 'pg'
 require 'sinatra'
 require 'sinatra/reloader' if development?
 require 'pry'
+require 'sinatra/activerecord'
 
-helpers do
-  def run_sql(sql)
-    db = PG.connect(dbname: 'production', host:'localhost')
-    result = db.exec(sql)
-    db.close
-    result
-  end
-end
+set :database, {adapter: 'postgresql', database: 'production', host: 'localhost'}
 
 #Launch page
 get '/' do
