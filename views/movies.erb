@@ -1,3 +1,25 @@
-<p>This is where I show movies</p>
+<h1>Manage Your Movie Production</h1>
 
+<h2>Your Current Movies in Produciton (Total of <%= @got_movies.count %>)</h2>
+<p>Here's a list of movies that are in production. You can click on the individual movie to view and edit the details or delete the movie.</p>
 
+<% if @got_movies.count == 0 %>
+    <ul class = "bullet_message">
+      <li>You currently do not have anyone working on your movies.</li>
+    </ul>
+<% else %>
+    <% @got_movies.each do |movie| %>
+      <ul>
+        <li><a href='/movie/<%= movie['id'] %>'><button>View details</button></a>
+           <%= movie['name'] %>: XX tasks remaining</li>
+      </ul>
+    <% end %>
+<% end %>
+
+<br/>
+<h2>Add More Movies</h2>
+<p>Click the button below to add more movies to create!</p>
+<p><a href='/movies/new'><button>Add More Movies</button></a></p>
+
+<br>
+STYLIZE THE Movie NAME

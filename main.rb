@@ -46,6 +46,8 @@ end
 
 #################### MOVIE SECTION ####################
 get '/movies' do
+  sql_get_movies = "SELECT * FROM movies"
+  @got_movies = run_sql(sql_get_movies)
   erb :movies
 end
 
