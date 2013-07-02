@@ -2,15 +2,15 @@ require 'pg'
 require 'imdb'
 require 'sinatra'
 require 'sinatra/reloader' if development?
+require 'sinatra/activerecord'
 
 #Begin Homework
-# This helps us run SQL commands
- def run_sql(sql)
-  db = PG.connect(:dbname => 'movies', :host => 'localhost')
-  result = db.exec(sql)
-  db.close
-  result
-  end
+#db connection
+set :database, {
+              :adapter => 'postgresql',
+              :database => 'movies',
+              :host => 'localhost'
+}
 
 #Routing
 get '/' do
