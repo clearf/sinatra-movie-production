@@ -172,6 +172,8 @@ get '/tasks/:id' do
   @task_details = run_sql(sql).first
   sql = "Select * FROM movies"
   @movie_details = run_sql(sql)
+    sql = "Select * FROM people"
+  @people_details = run_sql(sql)
   erb :todo
 end
 
