@@ -38,6 +38,10 @@ footer {
   padding-top: 30px;
 }
 
+.headtitle {
+  color: #d9474c;
+}
+
 .people_page_title {
   margin-left: 16px;
 }
@@ -84,5 +88,5 @@ footer {
 .movie_title {
   font-size: 1.2em;
   color: #d9474c;
-  margin: 0;
+  line-height: 1.2em;
 }
