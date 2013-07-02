@@ -2,6 +2,21 @@
 <input type="text" name="task"><br>
 <input type="text" name="task_description"><br>
 <button>Edit Task</button>
+   <% @people.each do |person| %>
+        <option value="<%= person['id'] %>">
+          <%= person['name'] %>
+        </option>
+    <% end %>
+  </select><br/>
+  Select A Movie:<br />
+  <select name="movie_id">
+    <% @movies.each do |movie| %>
+        <option value="<%= movie['id'] %>">
+          <%= movie['movie_name'] %>
+        </option>
+    <% end %>
+  </select>
+<br />
+<button>Add Task</button>
+</form>
 
-
-<!-- This is where I'll edit the options menus -->

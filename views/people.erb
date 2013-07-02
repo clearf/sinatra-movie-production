@@ -1,7 +1,7 @@
-
+<h1>Lackeys</h1>
 <% @people.each do |person| %>
   <li>
-    <a href="/person/<%= people['id'] %>"><%= people['name'] %></a>
+    <a href="/person/<%= person['id'] %>"><%= person['name'] %></a>
   </li>
 <%end%>
 </ul>

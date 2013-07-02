@@ -1,8 +1,8 @@
 <h1>Meta Movie Task List</h1>
 <ul>
-<% @todos.each do |item| %>
+<% @todos.each do |todo| %>
   <li>
-    <a href="/todo/<%= item['id'] %>"><%= item['task'] %></a>
+    <a href="/todo/<%= todo['id'] %>"><%= todo['task'] %></a>
   </li>
 <%end%>
 </ul>
