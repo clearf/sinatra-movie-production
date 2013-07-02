@@ -34,10 +34,12 @@ get '/movies/:id' do
   erb :movie
 end
 
+# page for adding a new person to the database
 get '/add_movie' do
   erb :add_movie
 end
 
+# adds a new movie to the database once form is filled out
 post '/add_movie' do
   name = params[:name]
   director = params[:director]
@@ -45,6 +47,25 @@ post '/add_movie' do
   sql = "insert into movies (name, director, release_date) values ('#{name}', '#{director}', #{release_date})"
   run_sql(sql)
   redirect to '/movies'
+end
+
+# page for editing a specific movie
+get '/movies/:id/edit' do
+  @id = params[:id]
+  sql = "select * from movies where id = #{@id}"
+  @movie = run_sql(sql).first
+  erb :edit_movie
+end
+
+# edits specific movie once form is filled out
+post '/movies/:id/edit' do
+  name = params[:name]
+  director = params[:director]
+  release_date = params[:release_date]
+  id = params[:id]
+  sql = "update movies set name='#{name}', director='#{director}', release_date=#{release_date} where id = #{id}"
+  run_sql(sql)
+  redirect to "/movies/#{id}"
 end
 
 # page with list of people
@@ -64,15 +85,34 @@ get '/people/:id' do
   erb :person
 end
 
+# page for adding a new person to the database
 get '/add_person' do
   erb :add_person
 end
 
+# adds a new person to the database once form is filled out
 post '/add_person' do
   name = params[:name]
   sql = "insert into people (name) values ('#{name}')"
   run_sql(sql)
   redirect to '/people'
+end
+
+# page for editing a specific person
+get '/people/:id/edit' do
+  @id = params[:id]
+  sql = "select * from people where id = #{@id}"
+  @person = run_sql(sql).first
+  erb :edit_person
+end
+
+# edits specific person once form is filled out
+post '/people/:id/edit' do
+  name = params[:name]
+  id = params[:id]
+  sql = "update people set name='#{name}' where id = #{id}"
+  run_sql(sql)
+  redirect to "/people/#{id}"
 end
 
 # page with all tasks - may be changed once flow is determined
