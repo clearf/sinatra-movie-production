@@ -80,3 +80,12 @@ get '/todos/:id' do
 
   erb :todo
 end
+#Deleting tasks with their ID's
+get '/todos/:id/delete' do
+  id = params[:id]
+
+  sql = "DELETE FROM tasks WHERE id = #{id}"
+  run_sql(sql)
+
+  redirect to('/todos')
+end
