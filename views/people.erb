@@ -1,0 +1,8 @@
+
+<% @people.each do |person| %>
+  <li>
+    <a href="/person/<%= people['id'] %>"><%= people['name'] %></a>
+  </li>
+<%end%>
+</ul>
+<a href="/create_todo">Add a new item to do!</a>

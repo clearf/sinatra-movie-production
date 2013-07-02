@@ -108,7 +108,10 @@ get'/movies/' do
 end
 
 get '/movies/:id' do
-
+  name = params[:name]
+  occupation = params[:occupation]
+  sql = "insert into movies (movie_name, ) values ('#{name}', '#{occupation}')"
+  erb :people
 end
 
 

@@ -35,8 +35,8 @@ insert into people (name, occupation) values ('Suzy', 'Key Grip')
 
 --insert into movie
 
-insert into movie (movie_name, person_id) values ('Dumb and Dumber', 1996, "Farley Brothers")
-insert into movie (movie_name, person_id) values ('Hunt for Red October', "No idea", 1991)
+insert into movie (movie_name, release_date, director) values ('Dumb and Dumber', 1996, "Farley Brothers")
+insert into movie (movie_name, release_date, director) values ('Hunt for Red October', 1991, "No idea")
 
 --insert into todo
 
