@@ -32,7 +32,7 @@ post '/movies/new' do
   movie_name = params[:movie_name]
   release = params[:release]
   director = params[:director]
-  sql = "INSERT INTO movies (movie_name, release, director) VALUES ('#{movie_name}',#{release},'#{director}');"
+  sql = "INSERT INTO movies (movie_name, release, director) VALUES ('#{movie_name}',#{release},'#{director}')"
   run_sql(sql)
   redirect to '/movies'
 end

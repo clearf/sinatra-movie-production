@@ -10,10 +10,16 @@ html {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+
   font-family: helvetica;}
 
 footer {text-align: center;
-  color: white;
+}
+
+.nav {
+  font-weight: 900;
+  text-align: center;
+  font-size: 30px;
 }
 
 h1 {
@@ -24,6 +30,7 @@ h1 {
   margin: 20px auto;
   background: #DEDEDE;
   width: 50%;
+  border: 1px solid white;
   padding: 15px;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
