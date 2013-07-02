@@ -1,0 +1,8 @@
+<p>Task: <%= @task["name"] %></p>
+<p>Description: <%= @task["description"] %><p>
+<p>Person: <%= @task["person"] %></p>
+<p>Movie: <%= @task["movie"] %></p>
+
+<form action="/delete_task/<%= @task["id"] %>" method="post">
+  <button>Delete Task</button>
+</form><br>
