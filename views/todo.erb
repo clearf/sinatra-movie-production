@@ -9,4 +9,20 @@
   <p> Movie:</br>
     <%=@movie["title"] %>
   </p>
+  <p span style="color:#FFB240">Due:</span>
+  </br>
+    <%= @todo['due'] %>
+  </p>
+
+</br>
+</br>
+  <a class="pure-button" href="/todos/<%=@todo["id"]%>/edit">
+    Edit
+  </a>
+</button>
+
+  <a class="pure-button" href="/todos/<%=@todo["id"]%>/delete">
+    Delete
+  </a>
+</button>
 </div>

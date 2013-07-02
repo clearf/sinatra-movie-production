@@ -31,6 +31,18 @@ get '/todos' do
   erb :todos
 end
 
+#form for new tasks (todo)
+get '/todos/new' do
+
+  people_sql = "SELECT * FROM people"
+  movies_sql = "SELECT * FROM movies"
+
+  @movies = run_sql(movies_sql)
+  @people = run_sql(people_sql)
+
+  erb :new_todo
+end
+
 #Add new tasks
 post '/todos' do
 
@@ -47,22 +59,22 @@ post '/todos' do
   redirect to('todos')
 end
 
-#GETting individual info on todos
+#GET individual info on todos
 get '/todos/:id' do
 
   id = params[:id]
   person_id = [:person_id]
   movie_id = [:movie_id]
 
-  #GETting todo info from db
+  #GET todo info from db
   sql = "SELECT * FROM tasks WHERE id = #{id}"
   @todo = run_sql(sql)[0]
 
-  #GETting person for assigned todo
+  #GET person for assigned todo
   person_sql = "SELECT * FROM people WHERE id = #{@todo['person_id']}"
   @person = run_sql(person_sql)[0]
 
-  #GETting movie for assigned todo
+  #GET movie for assigned todo
   movie_sql = "SELECT * FROM movies WHERE id = #{@todo['movie_id']}"
   @movie = run_sql(movie_sql)[0]
 
