@@ -20,3 +20,9 @@ body {
 button {
   color: red;
 }
+
+#change {
+  text-align: center;
+  font-size: 20px;
+  background-color: white;
+}
