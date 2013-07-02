@@ -1,0 +1,12 @@
+<h1>Task: <%= @task['name'] %></h1>
+<h3>Movie: <%= @movie %></h3>
+<h3>Contact person: <%= @person %></h3>
+
+<ul>
+  <li>Description: <%= @task['description'] %></li>
+  <li>Done? <% if @task['done'] == 'true' %>
+    <%= 'Yes' %>
+    <% else %>
+    <%= 'No' %>
+  <% end %></li>
+</ul>

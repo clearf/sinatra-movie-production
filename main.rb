@@ -167,5 +167,30 @@ end
 # individual task page - may be changed once flow is determined
 get '/tasks/:id' do
   id = params[:id]
+  sql_task = "select * from tasks where id = #{id}"
+  @task = run_sql(sql_task).first
+  sql_person = "select * from people where id = #{@task['person']}"
+  @person = run_sql(sql_person).first['name']
+  sql_movie = "select * from movies where id = #{@task['movie']}"
+  @movie = run_sql(sql_movie).first['name']
   erb :todo
+end
+
+get 'add_task' do
+  erb :add_task
+end
+
+post 'add_task' do
+end
+
+get 'tasks/:id/edit' do
+end
+
+post 'tasks/:id/edit' do
+end
+
+get 'tasks/:id/delete' do
+end
+
+post 'tasks/:id/delete' do
 end
