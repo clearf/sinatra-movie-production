@@ -1,19 +1,21 @@
-<form action="/new_todo" method="post">
-  <input type="text" name="errand" placeholder="Errand" autofocus>
-  <input type="text" name="description" placeholder="Description">
-  <select name="movie">
-    <% @movies.each do |movie| %>
-      <option value="<%= movie['id'] %>">
-        <%= movie['name'] %>
-      </option>
-    <% end %>
-  </select>
-  <select name="person">
-    <% @people.each do |person| %>
-      <option value="<%= person['id'] %>">
-        <%= person['name'] %>
-      </option>
-    <% end %>
-  </select>
-  <button>Create New Task</button>
-</form>
+<div class="wrapper well form">
+  <form action="/new_todo" method="post">
+    <p>Errand:</p> <input type="text" name="errand" placeholder="What is it?" autofocus><br>
+    <p>Description:</p> <input type="text" name="description" placeholder="Describe the details ..."><br>
+    <p>For Movie:</p> <select name="movie">
+      <% @movies.each do |movie| %>
+        <option value="<%= movie['id'] %>">
+          <%= movie['name'] %>
+        </option>
+      <% end %>
+    </select><br>
+    <p>Responsible Person:</p> <select name="person">
+      <% @people.each do |person| %>
+        <option value="<%= person['id'] %>">
+          <%= person['name'] %>
+        </option>
+      <% end %>
+    </select><br>
+    <button class="btn btn-primary">Add New Task</button>
+  </form>
+</div>

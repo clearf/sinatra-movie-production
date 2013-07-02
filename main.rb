@@ -1,6 +1,7 @@
 require 'pg'
 require 'sinatra'
 require 'sinatra/reloader' if development?
+require 'imdb'
 
 helpers do
   def run_sql(sql)
@@ -98,9 +99,11 @@ end
 
 post '/new_movie' do
   name = params[:name]
-  release_date = params[:releasedate]
-  director = params[:director]
-  image = params[:image]
+
+  new_movie = Imdb::Search.new(name).movies.first
+  release_date = new_movie.release_date
+  director = new_movie.director[0]
+  image = new_movie.poster
 
   sql = "INSERT INTO movies (name, releasedate, director, image)
           VALUES ('#{name}', '#{release_date}', '#{director}', '#{image}');"

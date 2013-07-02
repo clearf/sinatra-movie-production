@@ -41,11 +41,26 @@ footer {
 }
 
 .headtitle {
-  color: #d9474c;
+  color: #b00c3d;
+}
+
+.form p {
+  font-size: 1.6em;
+  margin-top: 16px;
+}
+
+.form button {
+  margin-top: 20px;
 }
 
 .edit {
   float: right;
+}
+
+/* Form */
+input[type=text] {
+  height: 40px;
+  width: 300px;
 }
 
 /* People */

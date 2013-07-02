@@ -3,6 +3,9 @@ GEM
   specs:
     backports (3.3.3)
     eventmachine (1.0.3)
+    hpricot (0.8.6)
+    imdb (0.7.0)
+      hpricot (~> 0.8.6)
     pg (0.15.1)
     rack (1.5.2)
     rack-protection (1.5.0)
@@ -28,6 +31,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  imdb
   pg
   sinatra
   sinatra-reloader
