@@ -69,6 +69,15 @@ post '/movies/:id/edit' do
   redirect to "/"
 end
 
+#this deletes the movie
+#problem deleting movie that is associated in the task table
+post '/movies/:id/delete' do
+  @id = params[:id]
+   sql = "delete from movies where id = #{@id}"
+  run_sql(sql)
+  redirect to "/"
+end
+
 #shows form to add a new person
 get '/people/new' do
   erb :new_person
@@ -99,6 +108,15 @@ post '/people/:id/edit' do
   @name = params[:name]
   @title = params[:title]
   sql = "update people set (name,title) = ('#{@name}', '#{@title}') where id = #{@id}"
+  run_sql(sql)
+  redirect to "/"
+end
+
+#this deletes the person
+#problem deleting person who is referenced in the tasks table XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+post '/people/:id/delete' do
+  @id = params[:id]
+  sql = "delete from people where id = #{@id}"
   run_sql(sql)
   redirect to "/"
 end
@@ -149,6 +167,14 @@ post '/tasks/:id/edit' do
   @person_id = params[:person_id]
   @movie_id = params[:movie_id]
   sql = "update tasks set (name,description,person_id,movie_id) = ('#{@name}', '#{@description}','#{@person_id}','#{@movie_id}') where id = #{@id}"
+  run_sql(sql)
+  redirect to "/"
+end
+
+#this deletes the task
+post '/tasks/:id/delete' do
+  @id = params[:id]
+  sql = "delete from tasks where id = #{@id}"
   run_sql(sql)
   redirect to "/"
 end

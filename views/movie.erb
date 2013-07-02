@@ -8,3 +8,7 @@
 <p>
   <a href="/movies/<%= @movie['id'] %>/edit">Edit This Movie</a>
 </p>
+
+<form action="/movies/<%= @movie['id'] %>/delete" method="post">
+  <button>Delete This Movie</button>
+</form>

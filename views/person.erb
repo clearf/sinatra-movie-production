@@ -7,3 +7,7 @@
 <p>
   <a href="/people/<%= @person['id'] %>/edit">Edit This Person</a>
 </p>
+
+<form action="/people/<%= @person['id'] %>/delete" method="post">
+  <button>Delete This Person</button>
+</form>

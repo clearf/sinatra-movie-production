@@ -10,3 +10,7 @@
 <p>
   <a href="/tasks/<%= @task['id'] %>/edit">Edit This Task</a>
 </p>
+
+<form action="/tasks/<%= @task['id'] %>/delete" method="post">
+  <button>Delete This Task</button>
+</form>
