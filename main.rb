@@ -23,7 +23,15 @@ get '/tasks' do
 end
 
 get '/new_task' do
+  sql = "SELECT id, name FROM people"
+  @people = sql_query(sql)
+  sql_1 = "SELECT id, name FROM movies"
+  @movies = sql_query(sql_1)
   erb :new_task
+end
+
+post '/new_task' do
+  redirect to '/'
 end
 
 get '/new_person' do
