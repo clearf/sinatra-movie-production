@@ -1,12 +1,8 @@
 <h1>Name: <%= @person_details['name'].capitalize %></h1>
 <h2>Tasks:</h2>
-<ul>
-  <li><a href="/tasks/<%= @tasks['id'] %>"><%= @tasks['name'].capitalize %></a></li>
-    <ul>
-      <li><%= @tasks['description'] %></li>
-    </ul>
-</ul>
-
+<a href="/people/<%= @person_details['id'] %>"><%= @person_details['name'].capitalize %></a>
+<p>
 <form action="/people/<%= @person_details['id'] %>/delete" method="post">
 <button>DELETE CONTACT</button>
 </form>
+</p>
