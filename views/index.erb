@@ -1,6 +1,23 @@
-nav bar situation up top (will go into layout)   <br />
+<div class = "tasks">
+  <h1>Tasks</h1>
+  <% @tasks.each do |task| %>
+      <li><a href="tasks/<%= task['id'] %>"><%= task['name'] %></a></li>
+  <% end %>
+</div>
 
-goal :displays all tasks, people, and movies - and links to each
+<div class = "movies">
+  <h1>Movies</h1>
+  <% @movies.each do |movie| %>
+      <li><a href="movies/<%= movie['id'] %>"><%= movie['name'] %></a></li>
+  <% end %>
+</div>
 
-<p>with links to add each
+<div class = "people">
+  <h1>People</h1>
+  <% @people.each do |person| %>
+      <li><a href="people/<%= person['id'] %>"><%= person['name'] %></a></li>
+  <% end %>
+
+
+</div>
 

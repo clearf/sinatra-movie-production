@@ -22,11 +22,10 @@ get '/' do
   sql = "select * from movies"
   @movies = run_sql(sql)
 
-
   sql = "select * from people"
   @people = run_sql(sql)
 
-  erb :tasks
+  erb :index
 end
 
 #shows form to add a new movie
@@ -179,16 +178,6 @@ post '/tasks/:id/delete' do
   redirect to "/"
 end
 
-
-
-#displays all tasks
-get '/tasks' do
-  sql = "select * from tasks"
-  @tasks = run_sql(sql)
-
-  erb :tasks
-end
-
 #shows individual task
 get '/tasks/:id' do
   @id = params[:id]
@@ -197,12 +186,6 @@ get '/tasks/:id' do
   erb :task
 end
 
-#shows all the movies
-get '/movies' do
-  sql = "select * from movies"
-  @movies = run_sql(sql)
-  erb :movies
-end
 
 #shows individual movie
 get '/movies/:id' do
@@ -210,13 +193,6 @@ get '/movies/:id' do
   sql = "select * from movies where id = '#{@id}'"
   @movie = run_sql(sql).first
   erb :movie
-end
-
-#shows all the peoples
-get '/people' do
-  sql = "select * from people"
-  @people = run_sql(sql)
-   erb :people
 end
 
 #shows individual person
