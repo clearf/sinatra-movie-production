@@ -61,6 +61,8 @@ post '/edit_movie/:id' do
   director = params[:director]
   sql1= "SELECT * FROM people where id = #{director};"
   @people = run_sql(sql1)
+  sql2 = "SELECT * FROM people WHERE id = #{@movie.first['director']};"
+  @director = run_sql(sql2).first
   sql = "UPDATE movies SET (title, release_date, director) = ('#{title}', #{release_date}, '#{director}') WHERE id = #{id};"
   run_sql(sql)
   redirect to('/movies')

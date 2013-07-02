@@ -5,10 +5,16 @@
     Release Date: <input type="text" name="release_date" value="<%= movie['release_date'] %>"><br/>
     Director: <br/><select name="director">
     <% @people.each do |person| %>
-      <option value="<%= @director['id'] %>">
-        <%= person['name'] %>
+      <% if person['id'] == @director['id'] %>
+        <option value="<%= person['id'] %>" selected>
+          <%= person['name'] %>
+        </option>
+      <% else %>
+      <option value="<%= person['id'] %>">
+          <%= person['name'] %>
       </option>
       <% end %>
+    <% end %>
     </select>
     <br/><br/>
 
