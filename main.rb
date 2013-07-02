@@ -95,18 +95,13 @@ get '/todos/:id/edit' do
 
   id = params[:id]
 
-  sql = "SELECT * from todos WHERE id = #{id}"
+  sql = "SELECT * from tasks WHERE id = #{id}"
   people_sql = "SELECT * FROM people"
   movies_sql = "SELECT * FROM movies"
-  run_sql(sql)
 
-  @todo = db.exec(sql)[0]
-  @people = db.excec(sql)[0]
-  @movies = db.exec(sql)[0]
+  @todo = run_sql(sql)[0]
+  @people = run_sql(sql)[0]
+  @movies = run_sql(sql)[0]
 
   erb :edit_todo
 end
-  # current_person_sql = "SELECT * from people WHERE id = #{@todo['person_id']}"
-  # current_movie_sql = "SELECT * FROM people WHERE id = #{@todo['movie_id']}"
-  # @current_person = run_sql(current_person_sql).first
-  # @current_movie = run_sql(current_movie_sql).first
