@@ -38,10 +38,25 @@ post '/new_task' do
 end
 
 get '/movies' do
+  sql = "SELECT id, name FROM people"
+  @people = run_sql(sql)
+
   sql = "SELECT * FROM movies"
   @movies = run_sql(sql)
 
   erb :movies
+end
+
+post '/new_movie' do
+  title = params[:title]
+  director_id = params[:director_id]
+  year = params[:year]
+  image = params[:image]
+
+  sql = "INSERT INTO movies (title, director_id, year, image) VALUES ('#{title}', '#{director_id}', '#{year}', '#{image}')"
+  run_sql(sql)
+
+  redirect to('/movies')
 end
 
 get '/people' do

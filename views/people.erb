@@ -1,7 +1,7 @@
 <h3>Your Contacts</h3>
-  <% @people.each do |person| %>
-    <%= person %><br>
-  <% end %>
+<% @people.each do |person| %>
+  <%= person %><br>
+<% end %>
 
 <h3>Add a person</h3>
 <form action="/new_person" method="post">
@@ -12,3 +12,5 @@
     <button>Add</button>
   </ul>
 </form>
+
+<a href="/">Back to home page</a>

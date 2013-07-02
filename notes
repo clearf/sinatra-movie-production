@@ -1,0 +1,5 @@
+Extra things to do if time allows:
+
+-Allow the user to type in any name for a film's director, check the database for that name, and if the name is absent, ask user if he wants to add to contacts
+
+-Comment code and check for consistent indenting and quotation marks (double v. single)
