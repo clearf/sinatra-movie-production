@@ -4,6 +4,7 @@ require 'pg'
 require 'imdb'
 
 #################### DEFINE METHODS ####################
+# METHOD TO ACCESS PSQL DATABASE WITH A GIVEN COMMAND
 def run_sql(sql)
   db = PG.connect(:dbname => 'movie_todo_hw', :host => 'localhost')
   result = db.exec(sql)
@@ -21,7 +22,7 @@ def download_movie(title)
   company = movie_data.company
   genres = movie_data.genres.join(", ").to_s
   length = movie_data.length
-  director = movie_data.director
+  director = movie_data.director.join
   mpaa_rating = movie_data.mpaa_rating
   poster = movie_data.poster
 
@@ -71,6 +72,52 @@ post '/movies/new' do
   redirect to("/movies/#{added_movie_id}")
 end
 
+# HERE USER CAN EDIT THE MOVIE INFO
+get '/movies/edit/:id' do
+  id = params[:id]
+  sql_get_movie = "SELECT * FROM movies WHERE id = #{id}"
+  @got_movie = run_sql(sql_get_movie)
+
+  erb :edit_movie
+end
+
+# EDIT THE DATABASE AND REDIRECT
+post '/movies/edit/:id' do
+  id = params[:id]
+  title = params[:title]
+  year = params[:year]
+  company = params[:company]
+  genres = params[:genres]
+  length = params[:length]
+  director = params[:director]
+  mpaa_rating = params[:mpaa_rating]
+  poster = params[:poster]
+
+  sql_edit_movie = "UPDATE movies SET (title, year, company, genres, length, director, mpaa_rating, poster) =
+    ('#{title}', '#{year}', '#{company}', '#{genres}', '#{length}', '#{director}', '#{mpaa_rating}', '#{poster}')
+    WHERE id = #{id}"
+  run_sql(sql_edit_movie)
+
+  redirect to("/movies/#{id}")
+end
+
+# HERE USER CAN DELETE A PERSON
+post '/movies/delete/:id' do
+  id = params[:id]
+
+  sql_delete_movie = "DELETE FROM movies WHERE id = #{id}"
+  run_sql(sql_delete_movie)
+
+  redirect to('/movies')
+end
+
+# SHOW DETAILS OF EACH MOVIE
+get '/movies/:id' do
+  id = params[:id]
+  sql_get_movie = "SELECT * FROM movies WHERE id = #{id}"
+  @got_movie = run_sql(sql_get_movie)
+  erb :movie
+end
 
 
 #################### PEOPLE SECTION ####################

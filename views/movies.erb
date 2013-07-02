@@ -10,7 +10,7 @@
 <% else %>
     <% @got_movies.each do |movie| %>
       <ul>
-        <li><a href='/movie/<%= movie['id'] %>'><button>View details</button></a>
+        <li><a href='/movies/<%= movie['id'] %>'><button>View details</button></a>
            <%= movie['title'] %>: XX tasks remaining</li>
       </ul>
     <% end %>

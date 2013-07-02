@@ -1,0 +1,17 @@
+<h1>Edit The Details of Your Movie Here</h1>
+<p>Edit the information of your movie below as needed.</p>
+
+<form action='/movies/edit/<%= @got_movie.first['id'] %>' method='post'>
+  <input type="text" name="title" value="<%= @got_movie.first['title'] %>" size="30px"><br/>
+  <input type="text" name="year" value="<%= @got_movie.first['year'] %>" size="30px"><br/>
+  <input type="text" name="genres" value="<%= @got_movie.first['genres'] %>" size="30px"><br/>
+  <input type="text" name="length" value="<%= @got_movie.first['length'] %>" size="30px"><br/>
+  <input type="text" name="director" value="<%= @got_movie.first['director'] %>" size="30px"><br/>
+  <input type="text" name="mpaa_rating" value="<%= @got_movie.first['mpaa_rating'] %>" size="30px"><br/>
+  <input type="text" name="poster" value="<%= @got_movie.first['poster'] %>" size="30px"><br/>
+  <button>Submit</button>
+</form>
+
+
+
+
