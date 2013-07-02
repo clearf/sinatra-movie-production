@@ -13,12 +13,16 @@ set :database, {
 }
 
 class Movie < ActiveRecord::Base
+  belongs_to :tasks
 end
 
 class Person < ActiveRecord::Base
+  belongs_to :tasks
 end
 
 class Task < ActiveRecord::Base
+  has_one :movie
+  has_one :person
 end
 
 # Tasks Section
@@ -100,9 +104,7 @@ post '/todo/:id' do
 end
 
 post '/todo/:id/delete' do
-  id = params[:id]
-  sql = "DELETE FROM tasks WHERE id = #{id};"
-  run_sql(sql)
+  task = Task.find(params[:id]).destroy
 
   redirect to('/')
 end
@@ -114,23 +116,21 @@ get '/new_movie' do
 end
 
 post '/new_movie' do
-  name = params[:name].capitalize
+  $name = params[:name].capitalize
 
-  new_movie = Imdb::Search.new(name).movies.first
-  release_date = new_movie.release_date
-  director = new_movie.director[0]
-  image = new_movie.poster
+  new_movie = Imdb::Search.new($name).movies.first
+  $release_date = new_movie.release_date
+  $director = new_movie.director[0]
+  $image = new_movie.poster
 
-  sql = "INSERT INTO movies (name, releasedate, director, image)
-          VALUES ('#{name}', '#{release_date}', '#{director}', '#{image}');"
-  run_sql(sql)
+  movie = Movie.create(name: '$name', director: '$director',
+                       releasedate: '$release_date', image: '$image')
 
   redirect to('/movies')
 end
 
 get '/movies' do
-  sql = "SELECT * from movies;"
-  @movies = run_sql(sql)
+  @movies = Movie.all
 
   erb :movies
 end
@@ -169,9 +169,7 @@ post '/movie/:id' do
 end
 
 post '/movie/:id/delete' do
-  id = params[:id]
-  sql = "DELETE from movies WHERE id = #{id};"
-  run_sql(sql)
+  movie = Movie.find(params[:id]).destroy
 
   redirect to('/movies')
 end
@@ -179,8 +177,7 @@ end
 # People Section
 
 get '/people' do
-  sql = "SELECT * from people;"
-  @people = run_sql(sql)
+  @people = Person.all
 
   erb :people
 end
