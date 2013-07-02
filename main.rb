@@ -29,13 +29,16 @@ get '/movies/:id' do
 end
 
 get '/new_movie' do
+  sql = "SELECT id, name FROM people"
+  @people = run_sql(sql)
   erb :new_movie
 end
 
 post '/new_movie' do
   title = params[:title]
   release_date = params[:release_date]
-  sql = "INSERT INTO movies (title, release_date) VALUES ('#{title}', #{release_date});"
+  director = params[:director]
+  sql = "INSERT INTO movies (title, release_date, director) VALUES ('#{title}', #{release_date}, '#{director}');"
   run_sql(sql)
   redirect to('/movies')
 end
@@ -52,7 +55,9 @@ post '/edit_movie/:id' do
   title = params[:title]
   release_date = params[:release_date]
   director = params[:director]
-  sql = "UPDATE movies SET (title, release_date, director) = ('#{title}', #{release_date}, '#{director}') WHERE id = #{id}"
+  sql1= "SELECT * FROM people where id = #{director};"
+  @people = run_sql(sql1)
+  sql = "UPDATE movies SET (title, release_date, director) = ('#{title}', #{release_date}, '#{director}') WHERE id = #{id};"
   run_sql(sql)
   redirect to('/movies')
 end
@@ -113,13 +118,19 @@ get '/todos/:id' do
 end
 
 get '/new_todo' do
+  sql1 = "SELECT id, name FROM people"
+  @people = run_sql(sql1)
+  sql2 = "SELECT id, title FROM movies"
+  @movies = run_sql(sql2)
   erb :new_todo
 end
 
 post '/new_todo' do
   name = params[:name]
   description = params[:description]
-  sql = "INSERT INTO tasks (name, description) VALUES ('#{name}', '#{description}');"
+  person_id = params[:person_id]
+  movie_id = params[:movie_id]
+  sql = "INSERT INTO tasks (name, description, person_id, movie_id) VALUES ('#{name}', '#{description}', #{person_id}, #{movie_id});"
   run_sql(sql)
   redirect to('/todos')
 end
