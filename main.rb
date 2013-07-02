@@ -132,10 +132,16 @@ get '/tasks/:id/edit' do
   @movie_id = params[:movie_id]
   sql = "select * from tasks where id = #{@id}"
   @task = run_sql(sql).first
+  sql = "select * from movies"
+  @movies = run_sql(sql)
+  sql = "select * from people"
+  @people = run_sql(sql)
+
   erb :task_edit
 end
 
 #this edits the task
+###########It changes everythign in the database except people and movie id!!!!!!!!!XXXXXXXXXXXXXXXXXX
 post '/tasks/:id/edit' do
   @id = params[:id]
   @name = params[:name]
