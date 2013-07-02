@@ -1,20 +1,18 @@
 require 'sinatra'
 require 'sinatra/reloader'
 require 'pg'
+require 'sinatra/activerecord'
 
-helpers do
-  def run_sql(sql)
-    db = PG.connect(:dbname => 'Homework',
-                    :host => 'localhost',
-                    :user => 'postgres',
-                    :password => 'postgres')
-    result = db.exec(sql)
-    db.close
-    result
-  end
-end
+#need to fix movies to reflect table change
+
+set :database, {adapter: "postgresql",
+                database: "guitar_development_new",
+                host: 'localhost',
+                username: 'postgres',
+                password: 'postgres'}
 
 #shows root page
+
 get '/' do
   sql = "select * from tasks"
   @tasks = run_sql(sql)
@@ -63,11 +61,9 @@ end
 post '/movies/:id/edit' do
   @id = params[:id]
   @name = params[:name]
-  @title = params[:title]
   @release_date = params[:release_date]
-  @director = params[:director]
   @person_id = params[:director]
-  sql = "update movies set (name,title,release_date,director) = ('#{@name}', '#{@title}', '#{@release_date}', '#{@director}') where id = #{@id}"
+  sql = "update movies set (name,release_date) = ('#{@name}', '#{@release_date}') where id = #{@id}"
   run_sql(sql)
   redirect to "/"
 end
@@ -76,7 +72,7 @@ end
 #problem deleting movie that is associated in the task table
 post '/movies/:id/delete' do
   @id = params[:id]
-   sql = "delete from movies where id = #{@id}"
+  sql = "delete from movies where id = #{@id}"
   run_sql(sql)
   redirect to "/"
 end
@@ -185,11 +181,13 @@ end
 #shows individual task
 get '/tasks/:id' do
   @id = params[:id]
+  @movie_id = params[:movie_id]
+  @person_id = params[:person_id]
   sql = "select * from tasks where id = '#{@id}'"
   @task = run_sql(sql).first
-  sql = "select * from movies where id = #{@id}"
+  sql = "select * from movies where id = '#{@movie_id}'"
   @movie = run_sql(sql).first
-  sql = "select * from people where id = #{@id}"
+  sql = "select * from people where id = '#{@person_id}'"
   @person = run_sql(sql).first
 
   erb :task

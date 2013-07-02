@@ -2,8 +2,12 @@
 
 <ul>
   <li><%= @task['description'] %>  </li>
-  <li><%= @person['name'] %></li>
-  <li><%= @movie['name'] %></li>
+ <% @person.each do |person| %>
+  <li><%= @task['id'] %></li>
+      <% end %>
+  <% @person.each do |person| %>
+      <li><%= @task['movie_id'] %></li>
+  <% end %>
 
 </ul>
 
