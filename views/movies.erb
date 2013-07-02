@@ -1,0 +1,14 @@
+<div class="row-fluid wrapper well">
+  <% @movies.each do |movie| %>
+      <div class="movielist">
+        <div class="movie_image">
+          <img src="<%= movie['image'] %>" />
+        </div>
+        <div class="movie_name">
+          <p class="movie_title"><%= movie['name'] %></p>
+          <p><%= movie['director'] %></p>
+          <p><%= movie['releasedate'] %></p>
+        </div>
+      </div>
+  <% end %>
+</div>

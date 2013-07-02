@@ -1,0 +1,31 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <link href='http://fonts.googleapis.com/css?family=Advent+Pro' rel='stylesheet' type='text/css'>
+    <link href="/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="/css/style.css">
+    <title>Movie Production Management</title>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="span8 offset2">
+        <header>
+          <a href="/"><h2>Movie Production Management</h2></a>
+        </header>
+        <ul class="breadcrumb">
+          <li><a href="/">Tasks</a> <span class="divider">/</span></li>
+          <li><a href="/movies">Movies</a> <span class="divider">/</span></li>
+          <li><a href="/people">People</a></li>
+          <li class="pull-right"><a href="/new_todo" class="btn btn-info btn-mini">Add Task</a></li>
+          <li class="pull-right"><a href="/new_movie" class="btn btn-info btn-mini">Add Movie</a><span class="divider"> </span></li>
+
+        </ul>
+        <%= yield %>
+      </div>
+    </div>
+    <footer>
+      Movie Production Management App by Kevon C
+    </footer>
+  </body>
+</html>

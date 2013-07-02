@@ -1,0 +1,12 @@
+<div class="row-fluid wrapper well">
+  <% @people.each do |person| %>
+    <div class="avatar">
+      <div class="person_image">
+        <img src="<%= person['image'] %>" />
+      </div>
+      <div class="person_name">
+        <%= person['name'] %>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,19 @@
+<form action="/new_todo" method="post">
+  <input type="text" name="errand" placeholder="Errand" autofocus>
+  <input type="text" name="description" placeholder="Description">
+  <select name="movie">
+    <% @movies.each do |movie| %>
+      <option value="<%= movie['id'] %>">
+        <%= movie['name'] %>
+      </option>
+    <% end %>
+  </select>
+  <select name="person">
+    <% @people.each do |person| %>
+      <option value="<%= person['id'] %>">
+        <%= person['name'] %>
+      </option>
+    <% end %>
+  </select>
+  <button>Create New Task</button>
+</form>
