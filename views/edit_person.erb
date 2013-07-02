@@ -3,10 +3,25 @@
 <form action="/people/<%= @person['id'] %>" method="post">
   <label for="person">Person</label><br>
   <input type="text" name="person" value="<%= @person['person'] %>"><br>
-  <label for="movie_id">Movie ID</label><br>
-  <input type="text" name="movie_id" value="<%= @person['movie_id'] %>"><br>
-  <label for="task_id">Task ID</label><br>
-  <input type="text" name="task_id" value="<%= @person['task_id'] %>"><br>
+
+ Movie:
+  <select name="movie_id">
+    <% @movies.each do |movie| %>
+      <option value="<%= movie["id"] %>">
+        <%= movie["movie_name"] %>
+      </option>
+    <% end %>
+  </select><br>
+
+ Task:
+  <select name="task_id">
+    <% @todos.each do |task| %>
+      <option value="<%= task["id"] %>">
+        <%= task["task_name"] %>
+      </option>
+    <% end %>
+  </select><br>
+
   <button>Save Changes</button>
 </form>
 

@@ -1,5 +1,14 @@
 <h1>People</h1>
 
 <% @people.each do |person| %>
-<%= person %>
+  <li>
+    <a href="/people/<%= person['id'] %>/edit">
+      <%= person['person'] %>
+    </a>
+  </li>
 <% end %>
+
+<br>
+<form action="/people/new">
+  <button>Add New</button>
+</form>
