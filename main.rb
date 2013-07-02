@@ -85,6 +85,7 @@ post '/create_person' do
   id = params[:id]
   name = params[:name]
   occupation = params[:occupation]
+  sql = "insert into person (name, occupation) values ('#{name}', '#{occupation}')"
   erb :people
 end
 
@@ -101,7 +102,9 @@ end
 
 
 get'/movies/' do
-
+  sql = "select * from people"
+  @movies = run_sql(sql)
+  erb :movies
 end
 
 get '/movies/:id' do
