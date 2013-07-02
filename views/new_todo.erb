@@ -1,17 +1,29 @@
 <h1>Add a New Task</h1>
-<p>Enter the information of your new task below</p>
+<p>Enter the information of your new task below:</p>
 
 <form action='/todos/new' method='post'>
-  <input type="text" name="todo" placeholder="Enter name here" size="30px"><br/>
-  <input type="text" name="note" placeholder="Enter title here" size="30px"><br/>
-  <input type="text" name="status" placeholder="Enter phone here" size="30px"><br/>
-  <input type="number" name="assigned_to" placeholder="Idiot? True or false" size="30px"><br/>
-  <input type="text" name="related_to" placeholder="Idiot? True or false" size="30px"><br/>
+  <input type="text" name="todo" placeholder="Enter to-do here" size="30px"><br/>
+  <input type="text" name="note" placeholder="Enter description here" size="30px"><br/>
+
+  Who would you like to assign this task to?
+  <select name="assigned_to">
+    <% @got_people.each do |person| %>
+      <option value="<%= person["id"] %>">
+        <%= person["name"] %>
+      </option>
+    <% end %>
+  </select><br>
+
+  Which movie is this for?
+  <select name="related_to">
+    <% @got_movies.each do |movie| %>
+      <option value="<%= movie["id"] %>">
+        <%= movie["title"] %>
+      </option>
+    <% end %>
+  </select><br>
+  <br>
   <button>Submit</button>
+
 </form>
-
-
-FINISH THE FORM, CHECK IF THE ID IS AN NUMBER OR INTEGER IN THE FORM
-
-
 

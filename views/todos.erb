@@ -10,8 +10,8 @@
 <% else %>
     <% @got_todos.each do |todo| %>
       <ul>
-        <li><a href='/todo/<%= todo['id'] %>'><button>View details</button></a>
-           <%= todo['name'] %></li>
+        <li><a href='/todos/<%= todo['id'] %>'><button>View details</button></a>
+           <%= todo['todo'] %></li>
       </ul>
     <% end %>
 <% end %>
@@ -20,6 +20,3 @@
 <h2>Add More Tasks</h2>
 <p>Click the button below to add more tasks to work on your movies!</p>
 <a href='/todos/new'><button>Add More Tasks</button></a>
-
-<br>
-STYLIZE THE PERSON NAME

@@ -1,0 +1,29 @@
+<h1>Details of This Task</h1>
+
+<ul>
+  <li>To-do ID#: <%= @got_todo.first['id'] %></li>
+  <li>Name: <%= @got_todo.first['todo'] %></li>
+  <li>Title: <%= @got_todo.first['note'] %></li>
+  <li>Done? <%= if @got_todo.first['status'] ='t'; "Yes"; else "No"; end %></li>
+  <li>Assigned to: <%= @assignee %></li>
+  <li>Related to: Movie "<%= @for_movie %>"</li>
+</ul>
+
+Actions you can take:<br>
+<a href="/todos/edit/<%= @got_todo.first['id'] %>"><button>Edit This Task</button></a><br>
+
+<form action="/todos/delete/<%= @got_todo.first['id'] %>" method="post">
+  <button>Delete This Todo</button><br>
+</form>
+
+<a href="/todos"><button>Go Back to All Tasks</button></a>
+
+
+
+
+
+
+
+
+
+
