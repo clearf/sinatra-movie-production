@@ -87,8 +87,8 @@ get '/movie/:id' do
   sql = "SELECT * FROM movies WHERE id = #{id};"
   @movie = run_sql(sql).first
 
-  # sql = "SELECT * FROM tasks WHERE movie = #{id};"
-  # @tasks_of_movie = run_sql(sql)
+  sql = "SELECT * FROM tasks WHERE movie = #{id};"
+  @tasks_of_movie = run_sql(sql)
 
   erb :movie
 end
