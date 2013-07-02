@@ -98,6 +98,8 @@ get '/todos/:id' do
 end
 
 get '/todos/:id/edit' do
+  sql = "SELECT id, movie_name FROM movies"
+  @movies = run_sql(sql)
   id = params[:id]
   sql = "SELECT * FROM tasks WHERE id = #{id}"
   @todo = run_sql(sql).first
@@ -121,6 +123,10 @@ get '/people' do
 end
 
 get '/people/new' do
+  sql = "SELECT id, movie_name FROM movies"
+  @movies = run_sql(sql)
+  sql = "SELECT id, task_name FROM tasks"
+  @todos = run_sql(sql)
   erb :new_person
 end
 
@@ -136,6 +142,10 @@ end
 
 
 get '/people/:id/edit' do
+  sql = "SELECT id, movie_name FROM movies"
+  @movies = run_sql(sql)
+  sql = "SELECT id, task_name FROM tasks"
+  @todos = run_sql(sql)
   id = params[:id]
   sql = "SELECT * FROM people WHERE id = #{id}"
   @person = run_sql(sql).first

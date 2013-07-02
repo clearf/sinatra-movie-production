@@ -5,8 +5,16 @@
   <input type="text" name="task_name" value="<%= @todo['task_name'] %>"><br>
   <label for="description">Description</label><br>
   <input type="text" name="description" value="<%= @todo['description'] %>"><br>
-  <label for="movie_id">Movie ID</label><br>
-  <input type="text" name="movie_id" value="<%= @todo['movie_id'] %>"><br>
+
+ Movie:
+  <select name="movie_id">
+    <% @movies.each do |movie| %>
+      <option value="<%= movie["id"] %>">
+        <%= movie["movie_name"] %>
+      </option>
+    <% end %>
+  </select><br>
+
   <button>Save Changes</button>
 </form>
 

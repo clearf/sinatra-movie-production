@@ -1,8 +1,25 @@
 <h1>Add New Person</h1>
 
 <form action="/people/new" method="POST">
-  <input type="text" placeholder="person" name="Person">
-  <input type="text" placeholder="movie id" name="movie_id">
-  <input type="text" placeholder="task_id" name="task_id">
+  <input type="text" placeholder="person" name="Person"><br>
+
+ Movie:
+  <select name="movie_id">
+    <% @movies.each do |movie| %>
+      <option value="<%= movie["id"] %>">
+        <%= movie["movie_name"] %>
+      </option>
+    <% end %>
+  </select><br>
+
+ Task:
+  <select name="task_id">
+    <% @todos.each do |task| %>
+      <option value="<%= task["id"] %>">
+        <%= task["task_name"] %>
+      </option>
+    <% end %>
+  </select><br>
+
   <button>Add New Person</button>
 </form>
