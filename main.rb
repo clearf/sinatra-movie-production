@@ -24,7 +24,9 @@ end
 get '/movies/:id' do
   id = params[:id]
   sql = "SELECT * FROM movies WHERE id = #{id}"
-  @movie = run_sql(sql)
+  @movie = run_sql(sql).first
+  sql2 = "SELECT * FROM people WHERE id = #{@movie['director']};"
+  @director = run_sql(sql2).first
   erb :movie
 end
 
