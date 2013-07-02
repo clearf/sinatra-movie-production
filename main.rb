@@ -82,6 +82,17 @@ get '/movies' do
   erb :movies
 end
 
+get '/movie/:id' do
+  id = params[:id]
+  sql = "SELECT * FROM movies WHERE id = #{id};"
+  @movie = run_sql(sql)
+
+  sql = "SELECT * FROM tasks WHERE id = #{movie};"
+  @tasks_of_movie = run_sql(sql)
+
+  erb :movie
+end
+
 # People Section
 
 get '/people' do
