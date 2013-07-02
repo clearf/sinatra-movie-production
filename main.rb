@@ -3,21 +3,28 @@ require 'sinatra'
 require 'sinatra/reloader' if development?
 require 'imdb'
 require 'sass'
+require 'sinatra/activerecord'
 
-helpers do
-  def run_sql(sql)
-    db = PG.connect(dbname: 'movie_production', host: 'localhost')
-    result = db.exec(sql)
-    db.close
-    result
-  end
+
+set :database, {
+  adapter: 'postgresql',
+  database: 'movie_prod',
+  host: 'localhost'
+}
+
+class Movie < ActiveRecord::Base
+end
+
+class Person < ActiveRecord::Base
+end
+
+class Task < ActiveRecord::Base
 end
 
 # Tasks Section
 
 get '/' do
-  sql = "SELECT * FROM tasks;"
-  @tasks = run_sql(sql)
+  @tasks = Task.all
 
   erb :todos
 end
