@@ -1,13 +1,6 @@
--DROP TABLE tasks;
 -DROP TABLE people;
 -DROP TABLE movies;
-
-CREATE TABLE tasks
-(
-id SERIAL PRIMARY KEY,
-name VARCHAR(255),
-due VARCHAR(255)
-);
+-DROP TABLE tasks;
 
 CREATE TABLE people
 (
@@ -19,11 +12,21 @@ title VARCHAR(255)
 CREATE TABLE movies
 (
 id SERIAL PRIMARY KEY,
-name VARCHAR(255)
+name VARCHAR(255),
+person_id INT REFERENCES people(id)
 );
 
-INSERT INTO tasks (name, due) VALUES ('Script', '6/15/13');
+CREATE TABLE tasks
+(
+id SERIAL PRIMARY KEY,
+name VARCHAR(255),
+due VARCHAR(255),
+person_id INT REFERENCES people(id),
+movie_id INT REFERENCES movies(id)
+);
 
 INSERT INTO people (name, title) VALUES ('Jimmy', 'Screen Writer');
 
-INSERT INTO movies (name) VALUES ('Jaws');
+INSERT INTO movies (name, person_id) VALUES ('Jaws', 1);
+
+INSERT INTO tasks (name, due, movie_id, person_id) VALUES ('Script', '6/15/13', 1, 1);

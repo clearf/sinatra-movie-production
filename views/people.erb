@@ -1,0 +1,9 @@
+<h1>People</h1>
+<ul>
+  <!--Loop through table, array and print hash values -->
+  <% @people.each do |person| %>
+    <li><a href="/people/<%=person['id'] %>"><%= person['name'].capitalize %></a></li>
+  <% end %>
+</ul>
+
+<p><a href="/people/new">Add A New Person</a></p>

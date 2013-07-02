@@ -1,0 +1,14 @@
+<h1>Task: <%= @task_details['name'].capitalize %></h1>
+<% @movie_details.each do |movie| %>
+  <% if movie['id'] == @task_details['movie_id'] %>
+  <p>Movie: <%= movie['name'] %></p>
+  <% else %>
+  <% end %>
+<% end %>
+
+<p><a href="/tasks/<%= @task_details['id'] %>/edit">Edit Task</a></p>
+<p><a href="/tasks">Tasks</a></p>
+
+<form action="/tasks/<%= @task_details['id'] %>/delete" method="post">
+<button>DELETE TASK</button>
+</form>
