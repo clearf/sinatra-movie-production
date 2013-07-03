@@ -38,17 +38,19 @@ get '/todo/:id' do
 erb :todo
 end
 
-# # goes to the edit task
-# get '/edit_todo/:id/' do
+# goes to the edit task
+get '/edit_todo/:id/' do
+sql = "select * from todo where id = #{id}"
+@todos = run_sql(sql).first
+erb :edit_todo
+end
 
-# erb :edit_todo
-# end
-
-# # posts the update back
-# post '/edit_todo/:id/' do
-
-
-# end
+# posts the update back
+post '/edit_todo/:id/' do
+sql = "update people set (task, task_description, person_id, movie_id) = ('#{task}', '#{task_description}', #{person_id}, #{movie_id}) WHERE id = #{id}"
+run_sql(sql)
+@todos
+end
 
 
 # create and assign new todo
@@ -70,11 +72,6 @@ post '/create_todo' do
   erb :todos
 end
 
-# gives you the person information to edit
-get '/person/:id/edit/' do
-  sql = "select * from todo where id = #{id}"
-  @todo = run_sql(sql).first
-end
 
 #         #
 # People  #
@@ -90,13 +87,28 @@ end
 
 # get each individual person
 
-get'/person/:id' do
-  name = params[:name]
-  occupation = params[:occupation]
-  sql = "select * from people where id = #{'id'}"
+
+get '/person/:id' do
+  id = params[:id]
+  sql = "select * from people where id = #{id}"
   @person = run_sql(sql).first
-  erb :person
+erb :person
 end
+
+
+ # gives you the person information to edit
+ get '/edit_person/:id' do
+  sql = "select * from people where id = #{id}"
+  @person = run_sql(sql).first
+ end
+
+# # posts the edits back to person
+post '/edit_person/:id' do
+sql = "update people set (name, occupation) = ('#{name}', '#{occupation}') WHERE id = #{id}"
+@person = run_sql(sql).first
+end
+
+
 
 # creates an new person and assigns
 get '/create_person' do
@@ -105,24 +117,14 @@ end
 
 # posts the person back to people
 post '/create_person' do
-  id = params[:id]
   name = params[:name]
   occupation = params[:occupation]
-  sql = "insert into person (name, occupation) values ('#{name}', '#{occupation}')"
+  sql = "insert into people (name, occupation) values ('#{name}', '#{occupation}')"
+  run_sql(sql)
   erb :people
 end
 
-# # gives you the person information to edit
-# get '/person/:id/edit/' do
-#   sql = "select * from people where id = #{id}"
-#   @person = run_sql(sql).first
-# end
 
-# # posts the edits back to person
-# post '/person/:id/edit/' do
-#   sql = "update * from people where id = #{id}"
-#   @person = run_sql(sql).first
-# end
 
 
 #        #
@@ -139,11 +141,9 @@ end
 
 # gets single movie with information
 
-get '/movies/:id' do
-  movie_name = params[:movie_name]
-  release_date = params[:release_date]
-  director = params[:director]
-  sql =  "select * from movies where id = #{'id'}"
+get '/movie/:id' do
+  id = params[:id]
+  sql =  "select * from movies where id = #{id}"
   @movie = run_sql(sql).first
   erb :movie
 end
@@ -155,13 +155,26 @@ end
 
 # posts the person back to people
 post '/create_movie' do
-  id = params[:id]
   movie_name = params[:movie_name]
   release_date = params[:release_date]
   director = params[:director]
-  sql = "insert into person (movie_name, release_date, director) values ('#{movie_name}', #{release_date}, '#{director}')"
+  sql = "insert into movies (movie_name, release_date, director) values ('#{movie_name}', #{release_date}, '#{director}')"
+  run_sql(sql)
 end
 
+get '/edit_movie/:id' do
+
+erb :edit_movie
+end
+
+post '/edit_movie/:id' do
+@id = params[:id]
+movie_name = params[:movie_name]
+release_date = params[:release_date]
+director = params[:director]
+sql = "update movies set (movie_name, release_date, director) = ('#{movie_name}', #{release_date}, '#{director}') WHERE id = #{id}"
+@person = run_sql(sql).first
+end
 
 
 
