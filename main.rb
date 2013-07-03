@@ -28,140 +28,119 @@ end
 # binding.pry
 # Tasks Section
 
-get '/' do
+get '/' do #done
   @tasks = Task.all
 
   erb :todos
 end
 
-get '/new_todo' do
+get '/new_todo' do #done
   @movies = Movie.select([:id, :name])
   @people = Person.select([:id, :name])
   erb :new_todo
 end
 
-post '/new_todo' do
+post '/new_todo' do #done
   task = Task.create(params)
-  # errand = params[:errand]
-  # description = params[:description]
-  # movie_id = params[:movie_id]
-  # person_id = params[:person_id]
-
-  # task = Task.create(errand: "#{errand}", description: "#{description}", movie_id: movie_id, person_id: person_id)
-
   redirect to('/')
 end
 
-get '/todo/:id' do
+get '/todo/:id' do #done
   @task = Task.find(params[:id])
   @movie_name = Movie.find_by_id(@task['movie_id'])
   @person_name = Person.find_by_id(@task['person_id'])
   erb :todo
 end
 
-get '/todo/:id/edit' do
-  id = params[:id]
-  sql = "SELECT * FROM tasks WHERE id = #{id};"
-  @task = run_sql(sql).first
-
-  sql = "SELECT * FROM movies WHERE id = #{@task['movie']};"
-  @specific_movie = run_sql(sql).first
-
-  sql = "SELECT * FROM people WHERE id = #{@task['person']};"
-  @specific_person = run_sql(sql).first
-
-  sql = "SELECT id, name FROM movies"
-  @movies = run_sql(sql)
-
-  sql = "SELECT id, name FROM people"
-  @people = run_sql(sql)
+get '/todo/:id/edit' do #done
+  @task = Task.find(params[:id])
+  @specific_movie = Movie.find(@task['movie_id'])
+  @specific_person = Person.find(@task['person_id'])
+  @movies = Movie.select([:id, :name])
+  @people = Person.select([:id, :name])
 
   erb :todo_edit
 end
 
 post '/todo/:id' do
-  id = params[:id]
-  errand = params[:errand]
-  description = params[:description]
-  person = params[:person]
-  movie = params[:movie]
 
-  sql = "UPDATE tasks SET (errand, description, person, movie) = ('#{errand}', '#{description}', #{person}, #{movie}) WHERE id = #{id};"
-  run_sql(sql)
+
+  # id = params[:id]
+  # errand = params[:errand]
+  # description = params[:description]
+  # person = params[:person]
+  # movie = params[:movie]
+
+  # sql = "UPDATE tasks SET (errand, description, person, movie) = ('#{errand}', '#{description}', #{person}, #{movie}) WHERE id = #{id};"
+  # run_sql(sql)
 
   redirect to('/')
 end
 
-post '/todo/:id/delete' do
+post '/todo/:id/delete' do #done
   task = Task.find(params[:id]).destroy
-
   redirect to('/')
 end
 
 # Movies Section
 
-get '/new_movie' do
+get '/new_movie' do #done
   erb :new_movie
 end
 
-post '/new_movie' do
-  $name = params[:name].capitalize
+post '/new_movie' do #done
+  name = params[:name].capitalize
+  new_movie = Imdb::Search.new(name).movies.first
+  release_date = new_movie.release_date
+  director = new_movie.director[0]
+  image = new_movie.poster
 
-  new_movie = Imdb::Search.new($name).movies.first
-  $release_date = new_movie.release_date
-  $director = new_movie.director[0]
-  $image = new_movie.poster
-
-  movie = Movie.create(name: '$name', director: '$director',
-                       releasedate: '$release_date', image: '$image')
+  movie = Movie.create(name: "#{name}", director: "#{director}",
+                       releasedate: "#{release_date}", image: "#{image}")
 
   redirect to('/movies')
 end
 
-get '/movies' do
+get '/movies' do #done
   @movies = Movie.all
-
   erb :movies
 end
 
-get '/movie/:id' do
+get '/movie/:id' do #done
   @movie = Movie.find(params[:id])
   @tasks_of_movie = Task.find_all_by_movie_id(params[:id])
   erb :movie
 end
 
-get '/movie/:id/edit' do
-  id = params[:id]
-  sql = "SELECT * FROM movies WHERE id = #{id};"
-  @movie = run_sql(sql).first
-
+get '/movie/:id/edit' do #done
+  @movie = Movie.find(params[:id])
   erb :movie_edit
 end
 
 post '/movie/:id' do
-  id = params[:id]
-  name = params[:name]
-  release_date = params[:releasedate]
-  director = params[:director]
-  image = params[:image]
+  Movie.where("(params[:id])", params)
 
-  sql = "UPDATE movies SET (name, releasedate, director, image)
-  = ('#{name}', '#{release_date}', '#{director}', '#{image}') WHERE id = #{id};"
-  run_sql(sql)
+  # id = params[:id]
+  # name = params[:name]
+  # release_date = params[:releasedate]
+  # director = params[:director]
+  # image = params[:image]
+
+  # sql = "UPDATE movies SET (name, releasedate, director, image)
+  # = ('#{name}', '#{release_date}', '#{director}', '#{image}') WHERE id = #{id};"
+  # run_sql(sql)
 
   redirect to('/movie/#{id}')
 end
 
-post '/movie/:id/delete' do
+post '/movie/:id/delete' do #done
   movie = Movie.find(params[:id]).destroy
-
   redirect to('/movies')
 end
 
 # People Section
 
-get '/people' do
+get '/people' do #done
   @people = Person.all
-
   erb :people
 end
