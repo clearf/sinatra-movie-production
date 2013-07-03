@@ -1,0 +1,20 @@
+<h1>Current Tasks</h1>
+
+<ul>
+  <% @tasks.each do |task| %>
+    <li>
+    <a href="/todo/<%= task['id'] %> ">
+      <%= task['task'].capitalize %> </a>
+    </li>
+  <% end %></br>
+
+  <% @tasks.each do |task| %>
+    <li>
+    <a href="/todo/<%= task['id'] %> ">
+      <%= task['person_id'].capitalize %> </a>
+    </li>
+  <% end %>
+
+</ul>
+
+

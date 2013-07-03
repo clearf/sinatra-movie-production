@@ -1,0 +1,13 @@
+
+<h1>Movies:</h1>
+
+<ul>
+  <% @movies.each do |movie| %>
+  <li>
+    <a href="/movie<%= movie['id'] %>"><%= movie['title'].capitalize %></a>
+  </li>
+   Released:  <%= movie['release_date'] %></br>
+    <%= movie['image'] %></br>
+    Director:  <%= movie['director_name'].capitalize %></br></br>
+<% end %>
+</ul>
