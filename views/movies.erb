@@ -2,13 +2,20 @@
 
 <% @movies.each do |movie| %>
   <li>
-    <a href="/movies/<%= movie['id'] %>/edit">
+    <a href="/movies/<%= movie['id'] %>">
       <%= movie['movie_name'] %>
     </a>
   </li>
 <% end %>
 
-<br>
+<br/>
 <form action="/movies/new">
   <button>Add New</button>
 </form>
+<br/>
+
+
+
+
+
+

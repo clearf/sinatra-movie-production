@@ -1,5 +1,11 @@
-<%= @todo %>
+<h1><%= @todo['task_name'] %></h1>
+
+ <ul>
+    <li><%= @todo['description'] %></li>
+    <li><%= @todo['movie_id'] %></li>
+  </ul>
 
 
-
-
+<form action="/todos/<%= @todo['id'] %>/edit">
+  <button>Edit task</button>
+</form>

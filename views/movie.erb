@@ -1,1 +1,11 @@
-<%= @movie %>
+<h1><%= @movie['movie_name'] %><h1>
+
+  <ul>
+    <li><%= @movie['release'] %></li>
+    <li><%= @movie['director'] %></li>
+  </ul>
+
+
+<form action="/movies/<%= @movie['id'] %>/edit">
+  <button>Edit movie</button>
+</form>
