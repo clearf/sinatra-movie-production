@@ -1,1 +1,5 @@
-<%= @contact %>
+<%= @contact["name"] %><br>
+
+<a href="/contacts/<%= @contact["id"] %>/edit">Edit This Contact</a><br>
+
+<a href="/contacts/<%= @contact["id"] %>/delete">Delete This Contact</a><br>

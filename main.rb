@@ -36,7 +36,7 @@ post '/tasks/new' do ##ABOVE + DOES NOT WORK
   redirect to "/tasks/#{task.id}"
 end
 
-#Show task detail #TEST
+#Show task detail
 get '/tasks/:id' do
   @task = Task.find(params[:id])
   erb :task
@@ -44,13 +44,22 @@ end
 
 #Edit task ##UPDATE ##
 get '/tasks/:id/edit' do
-  id = params[:id]
-  sql = "SELECT * FROM tasks WHERE id = #{id}"
-  @task = run_sql(sql).first
-  erb :edittask #fix this
+  @task = Task.find(params[:id])
+  erb :edittask
 end
 
-#Delete task ##UPDATE##
+post '/tasks/:id/edit' do
+  task = Task.find(params[:id])
+  task.name = params[:name]
+  task.descriptions = params[:descriptions]
+  task.movie_id = params[:movie_id]
+  task.contact_id = params[:contact_id]
+  task.save
+
+  redirect to "/tasks/#{task.id}"
+end
+
+#Delete task #Does not work
 post '/tasks/:id/delete' do
   id = params[:id]
   sql = "DELETE FROM tasks where id = #{id}"
@@ -96,49 +105,52 @@ post '/movies/:id/edit' do
   redirect to "/movies/#{movie.id}"
 end
 
-
 #Delete Movie
 get '/movies/:id/delete' do
   Movie.find(params[:id]).destroy
   redirect to '/movies'
 end
 
-
-#Show list of contacts #NOT WORKING
+#Show list of contacts
 get '/contacts' do
-  sql = "SELECT * from contacts"
-  @contacts = run_sql(sql)
+  @contacts = Contact.all
   erb :contacts
 end
 
-# Add new contact #TEST
+# Add new contact
 get '/contacts/new' do
   erb :new_contact
 end
 
 post '/contacts/new' do
-  name = params[:name]
-  sql = "INSERT INTO contacts (name) VALUES ('#{name}')"
-  run_sql(sql)
-  redirect to '/contacts'
+  contact = Contact.create(params)
+  redirect to "/contacts/#{contact.id}"
 end
 
-# Show contact detail #TEST
+# Show contact detail #Not working
 get '/contacts/:id' do
-  id = params[:id]
-  sql = "SELECT * FROM contacts where id = #{id}"
-  @contact = run_sql(sql).first
+  @contact = Contact.find(params[:id])
   erb :contact
 end
 
-# Delete contacts #TEST
+#Edit contact
+get '/contacts/:id/edit' do
+  @contact = Contact.find(params[:id])
+  erb :edit_contact
+end
+
+post '/contacts/:id/edit' do
+  contact = Contact.find(params[:id])
+  contact.name = params[:name]
+  contact.save
+
+  redirect to "/contacts/#{contact.id}"
+end
+
+# Delete contacts #Not working
 post '/contacts/:id/delete' do
-  id = params[:id]
-  sql = "DELETE FROM contacts where id = #{id}"
-  run_sql(sql)
+  Contact.find(params[:id]).destroy
   redirect to '/contacts'
 end
 
 #Edit task
-#Edit movie
-#Edit contact

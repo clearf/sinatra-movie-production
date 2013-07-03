@@ -1,8 +1,11 @@
 <form action="/tasks/new" method="POST">
   <label for "name">Name: </label>
   <input type="text" name="name"><br>
-  Descriptions: <input type="text" name="descriptions"><br>
-  Movie:
+
+  <label for "descriptions">Description: </label>
+  <input type="text" name="descriptions"><br>
+
+  <label for "movie_id">Movie: </label>
   <select name="movie_id">
     <% @movies.each do |movie| %>
     <option value="<%= movie["id"] %>"><%= movie["name"] %>
