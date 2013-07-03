@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+gem 'pg'
 gem 'sinatra'
 gem 'sinatra-reloader'
-gem 'pg'
+gem 'rake'
+gem 'sinatra-activerecord'
+gem 'pry'

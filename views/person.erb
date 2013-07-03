@@ -1,0 +1,15 @@
+<p>Name: <%= @person["name"] %></p>
+
+<p><a href="/edit_person/<%= @person["id"] %>" method="post">EDIT</a></p>
+
+
+
+<form action="/delete_person/<%= @person["id"] %>" method="post">
+  <button>DELETE</button>
+</form><br>
+
+
+
+
+
+

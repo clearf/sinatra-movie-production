@@ -1,0 +1,6 @@
+<h1>All Tasks</h1>
+<ul>
+<% @tasks.each do |task| %>
+  <li><a href="/task/<%= task["id"] %>"><%= task["name"] %></a></li>
+<% end %>
+</ul>

@@ -1,0 +1,9 @@
+<p>Name: <%= @movie["name"] %></p>
+<p>Release Date: <%= @movie["release_date"] %><p>
+<p>Director: <%= @director %></p>
+
+<p><a href="/edit_movie/<%= @movie["id"] %>">EDIT</a></p>
+
+<form action="/delete_movie/<%= @movie["id"] %>" method="post">
+  <button>Delete Movie</button>
+</form><br>

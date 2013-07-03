@@ -1,0 +1,12 @@
+<p>Task: <%= @task["name"] %></p>
+<p>Description: <%= @task["description"] %><p>
+<p>Person: <%= @person %></p>
+<p>Movie: <%= @movie %></p>
+
+<form action="/edit_task/<%= @task["id"] %>" method="get">
+  <button>Edit Task</button>
+</form><br>
+
+<form action="/delete_task/<%= @task["id"] %>" method="post">
+  <button>Delete Task</button>
+</form><br>

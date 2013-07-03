@@ -1,0 +1,43 @@
+<% if @task %>
+<form action="/new_task" method="POST">
+  Task: <input type="text" name="name" value="<%=@task["name"]%>" autofocus></br></br>
+  Description: <input type="text" name="description" value="<%=@task["description"]%>"></br></br>
+  Person:
+  <select name="people_id">
+    <% @people.each do |person| %>
+      <option value="<%= person["id"] %>">
+        <%= person["name"] %>
+      </option>
+    <% end %>
+  </select></br></br>
+  <select name="movies_id">
+    <% @movie.each do |movie| %>
+      <option value="<%= movie["id"] %>">
+        <%= movie["name"] %>
+      </option>
+    <% end %>
+  </select></br></br>
+  <button>Submit</button>
+</form>
+<% else %>
+<form action="/new_task" method="POST">
+  Task: <input type="text" name="name" autofocus></br></br>
+  Description: <input type="text" name="description"></br></br>
+  Person:
+  <select name="people_id">
+    <% @people.each do |person| %>
+      <option value="<%= person["id"] %>">
+        <%= person["name"] %>
+      </option>
+    <% end %>
+  </select></br></br>
+  <select name="movies_id">
+    <% @movies.each do |movie| %>
+      <option value="<%= movie["id"] %>">
+        <%= movie["name"] %>
+      </option>
+    <% end %>
+  </select></br></br>
+  <button>Create New Task</button>
+</form>
+<% end %>
