@@ -26,8 +26,7 @@ end
 
 #ToDo's take priority. People and movies can be assigned to them.
 get '/todos' do
-  sql = "SELECT * FROM tasks"
-  @todos = run_sql(sql)
+  @todos =
 
   erb :todos
 end
