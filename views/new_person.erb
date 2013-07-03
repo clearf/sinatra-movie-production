@@ -3,23 +3,6 @@
 <form action="/people/new" method="POST">
   <input type="text" placeholder="person" name="person"><br>
 
- Movie:
-  <select name="movie_id">
-    <% @movies.each do |movie| %>
-      <option value="<%= movie["id"] %>">
-        <%= movie["movie_name"] %>
-      </option>
-    <% end %>
-  </select><br>
-
- Task:
-  <select name="task_id">
-    <% @todos.each do |task| %>
-      <option value="<%= task["id"] %>">
-        <%= task["task_name"] %>
-      </option>
-    <% end %>
-  </select><br>
 
   <button>Add New Person</button>
 </form>
