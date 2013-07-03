@@ -91,29 +91,18 @@ end
 
 #PEEPLE
 get '/people' do
-  person_id = params[:person_id]
-
-  sql = "SELECT * FROM people"
-  @people = run_sql(sql)
+  @people = Person.all
 
   erb :people
 end
 
 get '/people/:id' do
-  id = params[:id]
-
-  sql = "SELECT * FROM people WHERE id = #{id}"
-  @person = run_sql(sql)[0]
-
+  @person = Person.find(params[:id])
   erb :person
 end
+
 post '/people' do
-
-  name = params[:name]
-  email = params[:email]
-
-  sql = "INSERT INTO people (name, email) VALUES ('#{'name'}','#{'email'}')"
-  run_sql(sql)
+  Person.create(params)
 
   redirect to('/people')
 end
