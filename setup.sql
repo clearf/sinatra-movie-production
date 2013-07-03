@@ -49,3 +49,21 @@ INSERT INTO people (name, image) VALUES ('Candice Swanepoel', 'http://cdn.rsvlts
 INSERT INTO people (name, image) VALUES ('Jessica Alba', 'http://static.comicvine.com/uploads/scale_small/3/38919/2954389-jessica+alba.jpg');
 
 INSERT INTO tasks (errand, description, person, movie) VALUES ('Order food', 'Get Asian food for entire production crew', 1, 1);
+
+
+
+
+-- Active Record
+
+-- (name: 'Ryan Gosling', image: 'http://cdn.pastemagazine.com/www/blogs/awesome_of_the_day/RyanGosling.jpg?1340108974')
+-- (name: 'Ryan Higa', image: 'http://e27.co/wp-content/uploads/2013/05/RyanHiga.jpg')
+-- (name: 'Emma Stone', image: 'http://www.macsmagazine.com/wp-content/uploads/2013/04/emma_stone-gangster_squad-5.jpg')
+-- (name: 'David Beckham', image: 'http://tendanceus.fr/media/wysiwyg/david-beckham-psg.jpg')
+-- (name: 'Joseph Gordon-Levitt', image: 'https://si0.twimg.com/profile_images/2649571860/910e545d7537be6148b7923aa86d2144.png')
+-- (name: 'Kate Beckinsale', image: 'http://img2.timeinc.net/instyle/images/2010/GalxMonth/08/081910-kate-beckinsale-400.jpg')
+-- (name: 'Ryan Reynolds', image: 'http://www.menshealth.co.uk/cm/menshealthuk/images/mc/ryan-reynolds-full-body-front-2006-mdn.jpg')
+-- (name: 'Emma Watson', image: 'http://images6.fanpop.com/image/photos/33600000/Emma-Icons-x-emma-watson-33646984-788-788.jpg')
+-- (name: 'Bradley Cooper', image: 'http://beards.provocateuse.com/images/photos/bradley_cooper_02.jpg')
+-- (name: 'Robert Downey Jr.', image: 'http://www.cultureblues.com/wp-content/uploads/2010/05/downey-intro.jpg')
+-- (name: 'Candice Swanepoel', image: 'http://cdn.rsvlts.com/wp-content/uploads/2012/12/Candice-Swanepoel-18.jpeg')
+-- (name: 'Jessica Alba', image: 'http://static.comicvine.com/uploads/scale_small/3/38919/2954389-jessica+alba.jpg')

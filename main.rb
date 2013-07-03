@@ -4,6 +4,7 @@ require 'sinatra/reloader' if development?
 require 'imdb'
 require 'sass'
 require 'sinatra/activerecord'
+require 'pry'
 
 
 set :database, {
@@ -24,7 +25,7 @@ class Task < ActiveRecord::Base
   has_one :movie
   has_one :person
 end
-
+# binding.pry
 # Tasks Section
 
 get '/' do
@@ -34,38 +35,27 @@ get '/' do
 end
 
 get '/new_todo' do
-  sql = "SELECT id, name FROM movies"
-  @movies = run_sql(sql)
+  @movies = Movie.select([:id, :name])
 
-  sql = "SELECT id, name FROM people"
-  @people = run_sql(sql)
+  @people = Person.select([:id, :name])
 
   erb :new_todo
 end
 
 post '/new_todo' do
-  errand = params[:errand]
-  description = params[:description]
-  person = params[:person]
-  movie = params[:movie]
-
-  sql = "INSERT INTO tasks (errand, description, person, movie)
-          VALUES ('#{errand}', '#{description}', #{person}, #{movie});"
-  run_sql(sql)
+  task = Task.create(params)
 
   redirect to('/')
 end
 
 get '/todo/:id' do
-  id = params[:id]
-  sql = "SELECT * FROM tasks WHERE id = #{id};"
-  @task = run_sql(sql).first
+  @task = Task.find(params[:id]).first
 
-  sql = "SELECT * FROM movies WHERE id = #{@task['movie']};"
-  @movie_name = run_sql(sql).first
+  # sql = "SELECT * FROM movies WHERE id = #{@task['movie']};"
+  @movie_name = Task.find(params[:id]).movie
 
-  sql = "SELECT * FROM people WHERE id = #{@task['person']};"
-  @person_name = run_sql(sql).first
+  # sql = "SELECT * FROM people WHERE id = #{@task['person']};"
+  @person_name = Task.find(params[:id]).person
 
   erb :todo
 end
@@ -136,13 +126,8 @@ get '/movies' do
 end
 
 get '/movie/:id' do
-  id = params[:id]
-  sql = "SELECT * FROM movies WHERE id = #{id};"
-  @movie = run_sql(sql).first
-
-  sql = "SELECT * FROM tasks WHERE movie = #{id};"
-  @tasks_of_movie = run_sql(sql)
-
+  @movie = Movie.find(params[:id])
+  @tasks_of_movie = Task.find_all_by_movie_id(params[:id])
   erb :movie
 end
 
