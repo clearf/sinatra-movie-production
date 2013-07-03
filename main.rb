@@ -111,47 +111,39 @@ get '/people' do
 end
 
 get '/people/new' do
-  sql = "SELECT id, movie_name FROM movies"
-  @movies = run_sql(sql)
-  sql = "SELECT id, task_name FROM tasks"
-  @todos = run_sql(sql)
+  @movies = Movies.all
+  @todos = Tasks.all
   erb :new_person
 end
 
 post '/people/new' do
-  id = params[:id]
-  person = params[:person]
-  movie_id = params[:movie_id]
-  task_id = params[:task_id]
-  sql = "INSERT INTO people (person, movie_id, task_id) VALUES ('#{person}', '#{movie_id}','#{task_id}');"
-  run_sql(sql)
+  person = People.create(params)
   redirect to '/people'
 end
 
+get '/people/:id' do
+  @person = People.find(params[:id])
+  erb :person
+end
+
 get '/people/:id/edit' do
-  sql = "SELECT id, movie_name FROM movies"
-  @movies = run_sql(sql)
-  sql = "SELECT id, task_name FROM tasks"
-  @todos = run_sql(sql)
-  id = params[:id]
-  sql = "SELECT * FROM people WHERE id = #{id}"
-  @person = run_sql(sql).first
+  @movies = Movies.all
+  @todos = Tasks.all
+  @person = People.find(params[:id])
   erb :edit_person
 end
 
 post '/people/:id' do
-  id = params[:id]
-  person = params[:person]
-  movie_id = params[:movie_id]
-  task_id = params[:task_id]
-  sql = "UPDATE people SET (person, movie_id, task_id) = ('#{person}', '#{movie_id}','#{task_id}')  WHERE id = #{id}"
-  @person = run_sql(sql).first
+  person = People.find(params[:id])
+  person.person = params[:person]
+  person.task_id = params[:task_id]
+  person.movie_id = params[:movie_id]
+  person.save
+
   redirect to '/people'
 end
 
 post '/people/:id/delete' do
-  id = params[:id]
-  sql = "DELETE FROM people WHERE id = #{id}"
-  @person = run_sql(sql).first
+  person = Person.delete(params[:id])
   redirect to "/people"
 end
