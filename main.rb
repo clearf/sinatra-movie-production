@@ -2,6 +2,7 @@ require 'sinatra'
 require 'sinatra/reloader'
 require 'pg'
 require 'sinatra/activerecord'
+require 'pry'
 
 #need to fix movies to reflect table change
 
@@ -18,6 +19,7 @@ end
 
 class Person < ActiveRecord::Base
   belongs_to :task
+  belongs_to :movie
 end
 
 class Task < ActiveRecord::Base
@@ -50,17 +52,17 @@ end
 #shows form to edit movie
 get '/movies/:id/edit' do
   @movie = Movie.find(params[:id])
+  @people = Person.all
   erb :movie_edit
 end
 
 #this edits the movie
 #Bug: doesn't like Movies with ' in the title
 post '/movies/:id/edit' do
-  @id = params[:id]
-  movie = Movie.find(id)
+  movie = Movie.find(params[:id])
   movie.name = params[:name]
   movie.release_date = params[:release_date]
-  movie.director = params[:director]
+  movie.person_id = params[:person_id]
   movie.save
 
   redirect to "/"
@@ -161,6 +163,7 @@ end
 #shows individual movie
 get '/movies/:id' do
   @movie = Movie.find(params[:id])
+  @person = Person.find(@movie.person_id)
   erb :movie
 end
 
