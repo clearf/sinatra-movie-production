@@ -6,7 +6,11 @@
   Assign a person:<br />
   <select name = "person_id">
     <% @people.each do |person| %>
-        <option value="<%= person['id'] %>">
+        <option value="<%= person['id'] %>"
+          <% if person['id'] == @task['person_id'] %>
+            selected=""
+            <% end %>  >
+
           <%= person['name'] %>
         </option>
     <% end %>
@@ -14,7 +18,10 @@
   Assign a movie:<br />
   <select name="movie_id">
     <% @movies.each do |movie| %>
-        <option value="<%= movie['id'] %>">
+        <option value="<%= movie['id'] %>"
+           <% if movie['id'] == @task['movie_id'] %>
+            selected=""
+            <% end %> >
           <%= movie['name'] %>
         </option>
     <% end %>

@@ -12,7 +12,7 @@ set :database, {adapter: "postgresql",
                 password: 'postgres'}
 
 class Movie < ActiveRecord::Base
-  has_many :people
+  has_one :person
   belongs_to :task
 end
 
@@ -21,8 +21,8 @@ class Person < ActiveRecord::Base
 end
 
 class Task < ActiveRecord::Base
-  has_many :people
-  has_many :movies
+  has_one :person
+  has_one :movie
 end
 
 #shows root page
@@ -69,9 +69,7 @@ end
 #this deletes the movie
 #problem deleting movie that is associated in the task table
 post '/movies/:id/delete' do
-  @id = params[:id]
-  sql = "delete from movies where id = #{@id}"
-  run_sql(sql)
+  Movie.destroy(params[:id])
   redirect to "/"
 end
 
@@ -82,76 +80,51 @@ end
 
 #adds a new person
 post '/people/new' do
-  #@name = params[:name]
-  #@title = params[:title]
-  #sql = "insert into people (name,title) values ('#{@name}', '#{@title}')"
-  #run_sql(sql)
   Person.create(params)
   redirect to '/'
 end
 
 #shows form to edit person
 get '/people/:id/edit' do
-  @id = params[:id]
-  @name = params[:name]
-  @title = params[:title]
-  sql = "select * from people where id = #{@id}"
-  @person = run_sql(sql).first
+  @person = Person.find(params[:id])
   erb :person_edit
 end
 
 #this edits the person
 post '/people/:id/edit' do
-  @id = params[:id]
-  @name = params[:name]
-  @title = params[:title]
-  sql = "update people set (name,title) = ('#{@name}', '#{@title}') where id = #{@id}"
-  run_sql(sql)
+  person = Person.find(params[:id])
+  person.name = params[:name]
+  person.role = params[:role]
+  person.save
   redirect to "/"
 end
 
 #this deletes the person
 #problem deleting person who is referenced in the tasks table XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 post '/people/:id/delete' do
-  @id = params[:id]
-  sql = "delete from people where id = #{@id}"
-  run_sql(sql)
+  Person.destroy(params[:id])
   redirect to "/"
 end
 
 #shows the form to add a new task
 get '/tasks/new' do
-  sql = "select id, name from people"
-  @people = run_sql(sql)
-  sql = "select id, name from movies"
-  @movies = run_sql(sql)
+  @people = Person.all
+  @movies = Movie.all
   erb :new_task
 end
 
 #adds a new task
 post '/tasks/new' do
-  @name = params[:name]
-  @description = params[:description]
-  @person_id = params[:person_id]
-  @movie_id = params[:movie_id]
-  sql = "insert into tasks (name,description,person_id,movie_id) values ('#{@name}', '#{@description}','#{@person_id}','#{@movie_id}')"
-  @tasks = run_sql(sql)
+  @tasks = Task.create(params)
   redirect to '/'
 end
 
+#doesn't show table dependencies
 #shows form to edit task
 get '/tasks/:id/edit' do
-  @id = params[:id]
-  @name = params[:name]
-  @description = params[:description]
-  @person_id = params[:person_id]
-  @movie_id = params[:movie_id]
-  sql = "select * from tasks where id = #{@id}"
-  @task = run_sql(sql).first
-  sql = "select * from movies"
-  @movies = run_sql(sql)
-  sql = "select * from people"
-  @people = run_sql(sql)
+  @task = Task.find(params[:id])
+  @movies = Movie.all
+  @people = Person.all
 
   erb :task_edit
 end
@@ -159,35 +132,27 @@ end
 #this edits the task
 ###########It changes everythign in the database except people and movie id!!!!!!!!!XXXXXXXXXXXXXXXXXX
 post '/tasks/:id/edit' do
-  @id = params[:id]
-  @name = params[:name]
-  @description = params[:description]
-  @person_id = params[:person_id]
-  @movie_id = params[:movie_id]
-  sql = "update tasks set (name,description,person_id,movie_id) = ('#{@name}', '#{@description}','#{@person_id}','#{@movie_id}') where id = #{@id}"
-  run_sql(sql)
+  task = Task.find(params[:id])
+  task.name = params[:name]
+  task.description = params[:description]
+  task.person_id = params[:person_id]
+  task.movie_id = params[:movie_id]
+  task.save
   redirect to "/"
 end
 
 #this deletes the task
 post '/tasks/:id/delete' do
-  @id = params[:id]
-  sql = "delete from tasks where id = #{@id}"
-  run_sql(sql)
+  Task.destroy(params[:id])
   redirect to "/"
 end
 
 #shows individual task
 get '/tasks/:id' do
   @id = params[:id]
-  @movie_id = params[:movie_id]
-  @person_id = params[:person_id]
-  sql = "select * from tasks where id = '#{@id}'"
-  @task = run_sql(sql).first
-  sql = "select * from movies where id = '#{@movie_id}'"
-  @movie = run_sql(sql).first
-  sql = "select * from people where id = '#{@person_id}'"
-  @person = run_sql(sql).first
+  @task = Task.find(params[:id])
+  @movie = Movie.find(@task.movie_id)
+  @person = Person.find(@task.person_id)
 
   erb :task
 end
@@ -201,9 +166,7 @@ end
 
 #shows individual person
 get '/people/:id' do
-  @id = params[:id]
-  sql = "select * from people where id = '#{@id}'"
-  @person = run_sql(sql).first
+  @person = Person.find(params[:id])
   erb :person
 end
 
