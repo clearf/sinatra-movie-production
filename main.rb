@@ -12,6 +12,25 @@ helpers do
   end
 end
 
+
+class Todos < ActiveRecord::Base
+  belongs_to :movie
+  belongs_to :people
+end
+
+class Movies < ActiveRecord::Base
+  has_many :people
+  has_many :todos
+end
+
+class People < ActiveRecord::Base
+  belongs_to :movie
+  has_many :todos
+end
+
+
+
+
 # this provides you with the index page that links to each seperate page
 get '/' do
   erb :index
