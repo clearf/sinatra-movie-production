@@ -1,0 +1,24 @@
+<form action="/tasks/new" method="POST">
+  <label for "name">Name: </label>
+  <input type="text" name="name"><br>
+
+  <label for "descriptions">Description: </label>
+  <input type="text" name="descriptions"><br>
+
+  <label for "movie_id">Movie: </label>
+  <select name="movie_id">
+    <% @movies.each do |movie| %>
+    <option value="<%= movie["id"] %>"><%= movie["name"] %>
+    </option>
+    <% end %>
+  </select><br>
+
+  Contact:
+  <select name="contact_id">
+    <% @contacts.each do |contact| %>
+    <option value="<%= contact["id"] %>"><%= contact["name"] %>
+    </option>
+    <% end %>
+  </select><br>
+  <button>Create New Task</button>
+</form>

@@ -1,0 +1,11 @@
+<h1>Details for <%= @movie["name"] %></h1>
+
+<dl>
+  <dt>Name: </dt><dd><%= @movie["name"] %></dd>
+  <dt>Release Date: </dt><dd><%= @movie["release_date"] %></dd>
+  <dt>Director: </dt><dd><%= @movie["director"] %></dd>
+</dl>
+
+<a href="/movies/<%= @movie["id"] %>/edit">Edit This Movie</a><br>
+
+<a href="/movies/<%= @movie["id"] %>/delete">Delete This Movie</a><br>
