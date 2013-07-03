@@ -2,14 +2,14 @@
   <form action="/new_todo" method="post">
     <p>Errand:</p> <input type="text" name="errand" placeholder="What is it?" autofocus><br>
     <p>Description:</p> <input type="text" name="description" placeholder="Describe the details ..."><br>
-    <p>For Movie:</p> <select name="movie">
+    <p>For Movie:</p> <select name="movie_id">
       <% @movies.each do |movie| %>
         <option value="<%= movie['id'] %>">
           <%= movie['name'] %>
         </option>
       <% end %>
     </select><br>
-    <p>Responsible Person:</p> <select name="person">
+    <p>Responsible Person:</p> <select name="person_id">
       <% @people.each do |person| %>
         <option value="<%= person['id'] %>">
           <%= person['name'] %>

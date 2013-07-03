@@ -36,27 +36,26 @@ end
 
 get '/new_todo' do
   @movies = Movie.select([:id, :name])
-
   @people = Person.select([:id, :name])
-
   erb :new_todo
 end
 
 post '/new_todo' do
   task = Task.create(params)
+  # errand = params[:errand]
+  # description = params[:description]
+  # movie_id = params[:movie_id]
+  # person_id = params[:person_id]
+
+  # task = Task.create(errand: "#{errand}", description: "#{description}", movie_id: movie_id, person_id: person_id)
 
   redirect to('/')
 end
 
 get '/todo/:id' do
-  @task = Task.find(params[:id]).first
-
-  # sql = "SELECT * FROM movies WHERE id = #{@task['movie']};"
-  @movie_name = Task.find(params[:id]).movie
-
-  # sql = "SELECT * FROM people WHERE id = #{@task['person']};"
-  @person_name = Task.find(params[:id]).person
-
+  @task = Task.find(params[:id])
+  @movie_name = Movie.find_by_id(@task['movie_id'])
+  @person_name = Person.find_by_id(@task['person_id'])
   erb :todo
 end
 
