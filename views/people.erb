@@ -1,0 +1,25 @@
+<h1>Manage Your Staff</h1>
+
+<h2>Your Current Slaves (Total of <%= @got_people.count %>)</h2>
+<p>Here's a list of people that are currently slaving away for your movies. You can click the individual person to view and edit the details or delete the person.</p>
+
+<% if @got_people.count == 0 %>
+    <ul class = "bullet_message">
+      <li>You currently do not have anyone working on your movies.</li>
+    </ul>
+<% else %>
+    <% @got_people.each do |person| %>
+      <ul>
+        <li><a href='/people/<%= person['id'] %>'><button>View details</button></a>
+           <%= person['name'] %>: # tasks assinged</li>
+      </ul>
+    <% end %>
+<% end %>
+
+<br/>
+<h2>Add More Person</h2>
+<p>Click the button below to add more people to work on your movies!</p>
+<p><a href='/people/new'><button>Add More Person</button></a></p>
+
+<br>
+STYLIZE THE PERSON NAME

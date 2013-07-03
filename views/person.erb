@@ -1,0 +1,31 @@
+<h1>Details of <%= @got_person['name'] %></h1>
+
+<ul>
+  <li>Slave ID#: <%= @got_person['id'] %></li>
+  <li>Name: <%= @got_person['name'] %></li>
+  <li>Title: <%= @got_person['title'] %></li>
+  <li>Phone: <%= @got_person['phone'] %></li>
+  <li>Idiot? <%= if @got_person['idiot'] == 't'; "Yes"; else; "No"; end %></li>
+</ul>
+
+Actions you can take:<br>
+<a href="/people/edit/<%= @got_person['id'] %>"><button>Edit This Person</button></a><br>
+
+<form action="/people/delete/<%= @got_person['id'] %>" method="post">
+  <button>Delete This Person</button><br>
+</form>
+
+<a href="/people"><button>Go Back to All Slaves</button></a>
+
+<br>
+<p> NEED TO SHOW NUMBER OF TASKS ASSIGNED </p>
+<p> ALSO SHOW A PICTURE? </p>
+
+
+
+
+
+
+
+
+

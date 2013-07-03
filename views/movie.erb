@@ -1,0 +1,35 @@
+<h1>Details of the Movie "<%= @got_movie['title'] %>"</h1>
+
+<img src="<%= @got_movie['poster'] %>" height = 300px/>
+
+<ul>
+  <li>Movie ID#: <%= @got_movie['id'] %></li>
+  <li>Title: <%= @got_movie['title'] %></li>
+  <li>Year: <%= @got_movie['year'] %></li>
+  <li>Company: <%= @got_movie['company'] %></li>
+  <li>Genres: <%= @got_movie['genres'] %></li>
+  <li>Length: <%= @got_movie['length'] %></li>
+  <li>Director: <%= @got_movie['director'] %></li>
+  <li>MPAA Rating: <%= @got_movie['mpaa_rating'] %></li>
+</ul>
+
+Actions you can take:<br>
+<a href="/movies/edit/<%= @got_movie['id'] %>"><button>Edit This Movie</button></a><br>
+
+<form action="/movies/delete/<%= @got_movie['id'] %>" method="post">
+  <button>Delete This Movie</button><br>
+</form>
+
+<a href="/movies"><button>Go Back to All Movies</button></a>
+
+<br>
+<p> NEED TO SHOW NUMBER OF TASKS ASSIGNED </p>
+
+
+
+
+
+
+
+
+
