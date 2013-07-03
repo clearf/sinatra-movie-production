@@ -1,7 +1,7 @@
 require 'pg'
 require 'sinatra'
 require 'sinatra/reloader' if development?
-
+require 'pry' if development?
 
 helpers do
   # This helps run sql commands
@@ -59,7 +59,7 @@ get '/people' do
   erb :people
 end
 
-# Tryinf to add a new person.  Form is live, but not submitting to DB
+# Trying to add a new person.  Form is live, but not submitting to DB
 get '/people/new' do
   sql = "SELECT id, person_name FROM people"
   @movies = run_sql(sql)
