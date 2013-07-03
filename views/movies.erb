@@ -1,2 +1,10 @@
 <div class="todos_container">
+    <h2 span style="font-size: 35px; color: #81F79F">Movies</h2>
+    <%@movies.each do |movie|%>
+      <p></br>
+        <a href = '/movies/<%=movie['id']%>'><%=movie['title']%></a>
+      </p>
+    <% end %>
+  </br>
+    <a class="pure-button" href="/todos/new">New Movie</a></button>
 </div>
