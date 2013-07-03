@@ -13,13 +13,11 @@
     <h4><%= @movie['director'] %></h4>
     <h4><%= @movie['releasedate'] %></h4>
     <hr>
-
     <h4>Related Tasks</h4>
     <ul>
       <% @tasks_of_movie.each do |task| %>
         <li><a href="/todo/<%= task['id'] %>"><%= task['errand'] %></a></li>
       <% end %>
     </ul>
-
   </div>
 </div>

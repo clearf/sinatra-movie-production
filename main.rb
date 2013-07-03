@@ -62,18 +62,13 @@ get '/todo/:id/edit' do #done
   erb :todo_edit
 end
 
-post '/todo/:id' do
-
-
-  # id = params[:id]
-  # errand = params[:errand]
-  # description = params[:description]
-  # person = params[:person]
-  # movie = params[:movie]
-
-  # sql = "UPDATE tasks SET (errand, description, person, movie) = ('#{errand}', '#{description}', #{person}, #{movie}) WHERE id = #{id};"
-  # run_sql(sql)
-
+post '/todo/:id' do #done
+  todo = Task.find(params[:id])
+  todo.errand = params[:errand]
+  todo.description = params[:description]
+  todo.person_id = params[:person_id]
+  todo.movie_id = params[:movie_id]
+  todo.save
   redirect to('/')
 end
 
@@ -117,19 +112,13 @@ get '/movie/:id/edit' do #done
   erb :movie_edit
 end
 
-post '/movie/:id' do
-  Movie.where("(params[:id])", params)
-
-  # id = params[:id]
-  # name = params[:name]
-  # release_date = params[:releasedate]
-  # director = params[:director]
-  # image = params[:image]
-
-  # sql = "UPDATE movies SET (name, releasedate, director, image)
-  # = ('#{name}', '#{release_date}', '#{director}', '#{image}') WHERE id = #{id};"
-  # run_sql(sql)
-
+post '/movie/:id' do #done
+  movie = Movie.find(params[:id])
+  movie.name = params[:name]
+  movie.releasedate = params[:releasedate]
+  movie.director = params[:director]
+  movie.image = params[:image]
+  movie.save
   redirect to('/movie/#{id}')
 end
 
