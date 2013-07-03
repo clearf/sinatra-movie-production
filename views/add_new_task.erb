@@ -2,7 +2,7 @@
 <h1>Add A New Task</h1>
 <form action="/tasks/new" method="post">
   <input type="text" placeholder="name" name="name"><br/>
-  <input type="text" placeholder="description" name="description">
+  <input type="text" placeholder="due" name="due">
     <select name="movie_id"><br/>
       <% @movies.each do |movie| %>
       <option value="<%= movie['id'] %>">
