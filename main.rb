@@ -25,44 +25,47 @@ class Task < ActiveRecord::Base
   has_one :movie
   has_one :person
 end
-# binding.pry
-# Tasks Section
 
-get '/' do #done
+# Tasks
+# Find all tasks for index page
+get '/' do
   @tasks = Task.all
-
   erb :todos
 end
 
-get '/new_todo' do #done
+# Select Movie and Person ID and Name for usage in form
+get '/new_todo' do
   @movies = Movie.select([:id, :name])
   @people = Person.select([:id, :name])
   erb :new_todo
 end
 
-post '/new_todo' do #done
+# Send data to db with appropriate params
+post '/new_todo' do
   task = Task.create(params)
   redirect to('/')
 end
 
-get '/todo/:id' do #done
+# Extract Movie Name and Person Name to show on Task Page
+get '/todo/:id' do
   @task = Task.find(params[:id])
   @movie_name = Movie.find_by_id(@task['movie_id'])
   @person_name = Person.find_by_id(@task['person_id'])
   erb :todo
 end
 
-get '/todo/:id/edit' do #done
+# Extract all stored data to fill in the form
+get '/todo/:id/edit' do
   @task = Task.find(params[:id])
   @specific_movie = Movie.find(@task['movie_id'])
   @specific_person = Person.find(@task['person_id'])
   @movies = Movie.select([:id, :name])
   @people = Person.select([:id, :name])
-
   erb :todo_edit
 end
 
-post '/todo/:id' do #done
+# Update db with new data in form by saving it
+post '/todo/:id' do
   todo = Task.find(params[:id])
   todo.errand = params[:errand]
   todo.description = params[:description]
@@ -72,47 +75,51 @@ post '/todo/:id' do #done
   redirect to('/')
 end
 
-post '/todo/:id/delete' do #done
+# Destroy task
+post '/todo/:id/delete' do
   task = Task.find(params[:id]).destroy
   redirect to('/')
 end
 
-# Movies Section
-
-get '/new_movie' do #done
+# Movies
+# Create a movie page
+get '/new_movie' do
   erb :new_movie
 end
 
-post '/new_movie' do #done
+# Grab movie name and use IMDB gem to fill in the rest
+post '/new_movie' do
   name = params[:name].capitalize
   new_movie = Imdb::Search.new(name).movies.first
   release_date = new_movie.release_date
   director = new_movie.director[0]
   image = new_movie.poster
-
   movie = Movie.create(name: "#{name}", director: "#{director}",
                        releasedate: "#{release_date}", image: "#{image}")
-
   redirect to('/movies')
 end
 
-get '/movies' do #done
+# list all movies in db
+get '/movies' do
   @movies = Movie.all
   erb :movies
 end
 
-get '/movie/:id' do #done
+# Extract movie info and tasks related to the movie
+get '/movie/:id' do
   @movie = Movie.find(params[:id])
   @tasks_of_movie = Task.find_all_by_movie_id(params[:id])
   erb :movie
 end
 
-get '/movie/:id/edit' do #done
+# Display existing data in edit form
+get '/movie/:id/edit' do
   @movie = Movie.find(params[:id])
   erb :movie_edit
 end
 
-post '/movie/:id' do #done
+# Update movie with new data in form and save it
+post '/movie/:id' do
   movie = Movie.find(params[:id])
   movie.name = params[:name]
   movie.releasedate = params[:releasedate]
@@ -122,14 +129,15 @@ post '/movie/:id' do #done
   redirect to('/movie/#{id}')
 end
 
-post '/movie/:id/delete' do #done
+# Destroy movie
+post '/movie/:id/delete' do
   movie = Movie.find(params[:id]).destroy
   redirect to('/movies')
 end
 
-# People Section
-
-get '/people' do #done
+# People
+# list all people on staff team
+get '/people' do
   @people = Person.all
   erb :people
 end
