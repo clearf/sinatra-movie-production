@@ -1,0 +1,21 @@
+<form action='/edit_todo/:id' method='post'>
+Task:<input type="text" name="task"><br>
+Specifics:<input type="text" name="task_description"><br>
+   <% @people.each do |person| %>
+        <option value="<%= person['id'] %>">
+          <%= person['name'] %>
+        </option>
+    <% end %>
+  </select><br/>
+  Select A Movie:<br />
+  <select name="movie_id">
+    <% @movies.each do |movie| %>
+        <option value="<%= movie['id'] %>">
+          <%= movie['movie_name'] %>
+        </option>
+    <% end %>
+  </select>
+<br />
+<button>Edit Task</button>
+</form>
+

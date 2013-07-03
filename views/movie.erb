@@ -1,0 +1,8 @@
+<h1><%= @movie['movie_name'] %></h1>
+
+<ul>
+  <li><%= @movie['release_date'] %>  </li>
+  <li><%= @movie['director'] %></li>
+</ul>
+
+<a href="/edit_movie/<%= @movie['id']%>">Edit Movie</a>
