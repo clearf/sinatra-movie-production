@@ -197,43 +197,6 @@ end
 
 
 
-get '/tasks_movie' do
-  sql = "SELECT *
-         FROM movies"
-  @movies = sql_query(sql)
-  erb :movies_tasks
-end
-
-get '/tasks_person' do
-  sql = "SELECT *
-         FROM people"
-  @people = sql_query(sql)
-  erb :people_tasks
-end
-
-get '/movie_tasks/:id' do
-  sql = "SELECT tasks.id AS id, tasks.name AS name
-         FROM (movies
-         INNER JOIN tasks
-         ON movies.id=tasks.movie_id)
-         INNER JOIN people
-         ON people.id=tasks.people_id
-         WHERE tasks.movie_id = #{params[:id]}"
-  @tasks = sql_query(sql)
-  erb :tasks
-end
-
-get '/person_tasks/:id' do
-  sql = "SELECT tasks.id AS id, tasks.name AS name
-         FROM (movies
-         INNER JOIN tasks
-         ON movies.id=tasks.movie_id)
-         INNER JOIN people
-         ON people.id=tasks.people_id
-         WHERE tasks.people_id = #{params[:id]}"
-  @tasks = sql_query(sql)
-  erb :tasks
-end
 
 
 
