@@ -1,7 +1,9 @@
 <h1>Movies</h1>
 <% @movies.each do |movie| %>
-<p>Name: <%= movie["name"] %></p>
-<p>Release Date: <%= movie["release_date"] %></p>
-<p>Director: <%= movie["director"] %></p><br>
+<a href="/movies/<%= movie["id"] %>">
+  <%= movie["name"] %></a>
+  <br>
+  <br>
 <% end %>
-<a href="/movies/new">Add a new movie</a>
+
+<a href="/movies/new">Add a New Movie</a>

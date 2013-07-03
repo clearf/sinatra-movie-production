@@ -31,12 +31,12 @@ get '/tasks/new' do
   erb :new_task
 end
 
-post '/tasks/new' do
+post '/tasks/new' do ##ABOVE + DOES NOT WORK
   task = Task.create(params)
   redirect to "/tasks/#{task.id}"
 end
 
-#Show task detail
+#Show task detail #TEST
 get '/tasks/:id' do
   @task = Task.find(params[:id])
   erb :task
@@ -76,29 +76,42 @@ end
 
 #View movie detail
 get '/movies/:id' do
-  id = params[:id]
-  sql = "SELECT * FROM movies WHERE id = #{id}"
-  @movie = run_sql(sql).first
+  @movie = Movie.find(params[:id])
   erb :movie
 end
 
+#Edit movie
+get '/movies/:id/edit' do
+  @movie = Movie.find(params[:id])
+  erb :edit_movie
+end
+
+post '/movies/:id/edit' do
+  movie = Movie.find(params[:id])
+  movie.name = params[:name]
+  movie.release_date = params[:release_date]
+  movie.director = params[:director]
+  movie.save
+
+  redirect to "/movies/#{movie.id}"
+end
+
+
 #Delete Movie
-post '/movies/:id/delete' do
-  id = params[:id]
-  sql = "DELETE FROM movies WHERE id = #{id}"
-  run_sql(sql)
+get '/movies/:id/delete' do
+  Movie.find(params[:id]).destroy
   redirect to '/movies'
 end
 
 
-#Show list of contacts
+#Show list of contacts #NOT WORKING
 get '/contacts' do
   sql = "SELECT * from contacts"
   @contacts = run_sql(sql)
   erb :contacts
 end
 
-# Add new contact
+# Add new contact #TEST
 get '/contacts/new' do
   erb :new_contact
 end
@@ -110,7 +123,7 @@ post '/contacts/new' do
   redirect to '/contacts'
 end
 
-# Show contact detail
+# Show contact detail #TEST
 get '/contacts/:id' do
   id = params[:id]
   sql = "SELECT * FROM contacts where id = #{id}"
@@ -118,7 +131,7 @@ get '/contacts/:id' do
   erb :contact
 end
 
-# Delete contacts
+# Delete contacts #TEST
 post '/contacts/:id/delete' do
   id = params[:id]
   sql = "DELETE FROM contacts where id = #{id}"
