@@ -2,17 +2,33 @@ require 'sinatra'
 require 'sinatra/reloader' if development?
 require 'pg'
 require 'imdb'
+require 'sinatra/activerecord'
 
-#################### DEFINE METHODS ####################
-# METHOD TO ACCESS PSQL DATABASE WITH A GIVEN COMMAND
-def run_sql(sql)
-  db = PG.connect(:dbname => 'movie_todo_hw', :host => 'localhost')
-  result = db.exec(sql)
-  db.close
-  return result
+
+#################### CONNECT ACTIVERECORD  / SET UP CLASSES ####################
+set :database, {
+  adapter: 'postgresql',
+  database: 'movie_todo_hw',
+  host: 'localhost'
+}
+
+class Movie < ActiveRecord::Base
+  has_many :todos
 end
 
-# METHOD TO FETCH IBMD DATA AND SAVE INTOT HE DATABASE
+class Person < ActiveRecord::Base
+  has_many :todos
+end
+
+class Todo < ActiveRecord::Base
+  belongs_to :movies
+  belongs_to :people
+end
+
+#################### DEFINE METHODS ####################
+# METHOD TO FETCH IBMD DATA AND SAVE INTOT HE DATABASE #
+########################################################
+
 def download_movie(title)
   # DOWNLOAD AND ASSIGN DATA TO VARIABLES
   movie_data = Imdb::Search.new(title).movies.first
@@ -26,33 +42,32 @@ def download_movie(title)
   mpaa_rating = movie_data.mpaa_rating
   poster = movie_data.poster
 
-  # SAVE THE ASSIGNED VARIABLE INTO DATABASE
-  sql_add_movie = "INSERT INTO movies (title, year, company, genres, length, director, mpaa_rating, poster) VALUES
-    ('#{title}', '#{year}', '#{company}', '#{genres}', '#{length}', '#{director}', '#{mpaa_rating}', '#{poster}')"
-  run_sql(sql_add_movie)
+  Movie.create(
+    title: title,
+    year: year,
+    company: company,
+    genres: genres,
+    length: length,
+    director: director,
+    mpaa_rating: mpaa_rating,
+    poster: poster
+  )
 end
+
 
 
 #################### MAIN LANDING PAGE ####################
 get '/' do
-
-  sql_get_movies = "SELECT * FROM movies"
-  @got_movies = run_sql(sql_get_movies)
-
-  sql_get_people = "SELECT * FROM people"
-  @got_people = run_sql(sql_get_people)
-
-  sql_get_todos = "SELECT * FROM tasks"
-  @got_todos = run_sql(sql_get_todos)
-
+  @got_movies = Movie.all
+  @got_people = Person.all
+  @got_todos = Todo.all
   erb :index
 end
 
 
 #################### MOVIE SECTION ####################
 get '/movies' do
-  sql_get_movies = "SELECT * FROM movies"
-  @got_movies = run_sql(sql_get_movies)
+  @got_movies = Movie.all
   erb :movies
 end
 
@@ -62,28 +77,18 @@ get '/movies/new' do
 end
 
 post '/movies/new' do
-  title = params[:title]
-  download_movie(title)
-
-  sql_get_movies = "SELECT * FROM movies"
-  added_movie_index = run_sql(sql_get_movies).count - 1
-  added_movie_id = run_sql(sql_get_movies)[added_movie_index]['id']
-
-  redirect to("/movies/#{added_movie_id}")
+  new_movie = download_movie(params[:title])
+  redirect to("/movies/#{new_movie.id}")
 end
 
 # HERE USER CAN EDIT THE MOVIE INFO
 get '/movies/edit/:id' do
-  id = params[:id]
-  sql_get_movie = "SELECT * FROM movies WHERE id = #{id}"
-  @got_movie = run_sql(sql_get_movie)
-
+  @got_movie = Movie.find(params[:id])
   erb :edit_movie
 end
 
 # EDIT THE DATABASE AND REDIRECT
 post '/movies/edit/:id' do
-  id = params[:id]
   title = params[:title]
   year = params[:year]
   company = params[:company]
@@ -93,29 +98,29 @@ post '/movies/edit/:id' do
   mpaa_rating = params[:mpaa_rating]
   poster = params[:poster]
 
-  sql_edit_movie = "UPDATE movies SET (title, year, company, genres, length, director, mpaa_rating, poster) =
-    ('#{title}', '#{year}', '#{company}', '#{genres}', '#{length}', '#{director}', '#{mpaa_rating}', '#{poster}')
-    WHERE id = #{id}"
-  run_sql(sql_edit_movie)
+  movie_to_edit = Movie.find(params[:id])
+  movie_to_edit.update(title: title)
+  movie_to_edit.update(year: year)
+  movie_to_edit.update(company: company)
+  movie_to_edit.update(genres: genres)
+  movie_to_edit.update(length: length)
+  movie_to_edit.update(director: director)
+  movie_to_edit.update(mpaa_rating: mpaa_rating)
+  movie_to_edit.update(poster: poster)
 
-  redirect to("/movies/#{id}")
+  redirect to("/movies/#{movie_to_edit.id}")
 end
 
-# HERE USER CAN DELETE A PERSON
+# HERE USER CAN DELETE A MOVIE
 post '/movies/delete/:id' do
-  id = params[:id]
-
-  sql_delete_movie = "DELETE FROM movies WHERE id = #{id}"
-  run_sql(sql_delete_movie)
-
+  movie_to_delete = Movie.find(params[:id])
+  movie_to_delete.destroy
   redirect to('/movies')
 end
 
 # SHOW DETAILS OF EACH MOVIE
 get '/movies/:id' do
-  id = params[:id]
-  sql_get_movie = "SELECT * FROM movies WHERE id = #{id}"
-  @got_movie = run_sql(sql_get_movie)
+  @got_movie = Movie.find(params[:id])
   erb :movie
 end
 
@@ -123,8 +128,7 @@ end
 #################### PEOPLE SECTION ####################
 # SHOW ALL PEOPLE WORKING
 get '/people' do
-  sql_get_people = "SELECT * FROM people"
-  @got_people = run_sql(sql_get_people)
+  @got_people = Person.all
   erb :people
 end
 
@@ -135,154 +139,108 @@ end
 
 # ADD A NEW PERSON TO DATABASE AND REDIRECT
 post '/people/new' do
-  name = params[:name]
-  title = params[:title]
-  phone = params[:phone]
-  idiot = params[:idiot]
-
-  sql_add_person = "INSERT INTO people (name, title, phone, idiot) VALUES ('#{name}', '#{title}', '#{phone}', '#{idiot}')"
-  run_sql(sql_add_person)
-
-  redirect to('/people')
+  new_person = Person.create(params)
+  redirect to("/people")
 end
 
 # HERE USER CAN EDIT A NEW PERSON
 get '/people/edit/:id' do
-  id = params[:id]
-  sql_get_person = "SELECT * FROM people WHERE id = #{id}"
-  @got_person = run_sql(sql_get_person)
-
+  @got_person = Person.find(params[:id])
   erb :edit_person
 end
 
 # EDIT THE DATABASE AND REDIRECT
 post '/people/edit/:id' do
-  id = params[:id]
   name = params[:name]
   title = params[:title]
   phone = params[:phone]
   idiot = params[:idiot]
 
-  sql_edit_person = "UPDATE people SET (name, title, phone, idiot) = ('#{name}', '#{title}', '#{phone}', '#{idiot}') WHERE id = #{id}"
-  run_sql(sql_edit_person)
+  person_to_edit = Person.find(params[:id])
+  person_to_edit.update(name: name)
+  person_to_edit.update(title: title)
+  person_to_edit.update(phone: phone)
+  person_to_edit.update(idiot: idiot)
 
-  redirect to("/people/#{id}")
+  redirect to("/people/#{person_to_edit.id}")
 end
 
 # HERE USER CAN DELETE A PERSON
   post '/people/delete/:id' do
-  id = params[:id]
-
-  sql_delete_person = "DELETE FROM people WHERE id = #{id}"
-  run_sql(sql_delete_person)
-
+  person_to_delete = Person.find(params[:id])
+  person_to_delete.destroy
   redirect to('/people')
 end
 
 # SHOW DETAILS OF EACH INDIVIDUAL
 get '/people/:id' do
-  id = params[:id]
-  sql_get_person = "SELECT * FROM people WHERE id = #{id}"
-  @got_person = run_sql(sql_get_person)
+  @got_person = Person.find(params[:id])
   erb :person
 end
 
 #################### TODO SECTION ####################
 # SHOW ALL TASKS
 get '/todos' do
-  sql_get_todos = "SELECT * FROM tasks"
-  @got_todos = run_sql(sql_get_todos)
-
-  #LOAD OTHER TABLES FOR SECONDARY INFO
-  sql_get_people = "SELECT * FROM people"
-  @got_people = run_sql(sql_get_people)
-
-
-  sql_get_todos = "SELECT * FROM tasks"
-  @got_todos = run_sql(sql_get_todos)
-
+  @got_movies = Movie.all
+  @got_people = Person.all
+  @got_todos = Todo.all
   erb :todos
 end
 
 # HERE USER CAN ADD A NEW TASKS
 get '/todos/new' do
-  sql_get_movies = "SELECT * FROM movies"
-  @got_movies = run_sql(sql_get_movies)
-
-  sql_get_people = "SELECT * FROM people"
-  @got_people = run_sql(sql_get_people)
-
+  @got_movies = Movie.all
+  @got_people = Person.all
   erb :new_todo
 end
 
 post '/todos/new' do
-  todo = params[:todo].capitalize
-  note = params[:note].capitalize
-  assigned_to = params[:assigned_to]
-  related_to = params[:related_to]
-
-  sql_add_todo = "INSERT INTO tasks (todo, note, status, assigned_to, related_to)
-    VALUES ('#{todo}', '#{note}', 'false', '#{assigned_to}', '#{related_to}')"
-  run_sql(sql_add_todo)
-
+  new_todo = Todo.create(params)
   redirect to('/todos')
 end
 
 # HERE USER CAN EDIT A NEW TESK
 get '/todos/edit/:id' do
-  id = params[:id]
-  sql_get_todo = "SELECT * FROM tasks WHERE id = #{id}"
-  @got_todo = run_sql(sql_get_todo)
+  @got_todo = Todo.find(params[:id])
 
-  sql_get_movies = "SELECT * FROM movies"
-  @got_movies = run_sql(sql_get_movies)
-
-  sql_get_people = "SELECT * FROM people"
-  @got_people = run_sql(sql_get_people)
-
+  @got_movies = Movie.all
+  @got_people = Person.all
   erb :edit_todo
 end
 
 # EDIT THE DATABASE AND REDIRECT
 post '/todos/edit/:id' do
-  id = params[:id]
   todo = params[:todo].capitalize
   note = params[:note].capitalize
   status = params[:status]
-  assigned_to = params[:assigned_to]
-  related_to = params[:related_to]
+  person_id = params[:person_id]
+  movie_id = params[:movie_id]
 
-  sql_edit_todo = "UPDATE tasks SET (todo, note, status, assigned_to, related_to) = ('#{todo}', '#{note}', '#{status}', '#{assigned_to}', '#{related_to}') WHERE id = #{id}"
-  run_sql(sql_edit_todo)
+  todo_to_edit = Todo.find(params[:id])
+  todo_to_edit.update(todo: todo)
+  todo_to_edit.update(note: note)
+  todo_to_edit.update(status: status)
+  todo_to_edit.update(person_id: person_id)
+  todo_to_edit.update(movie_id: movie_id)
 
-  redirect to("/todos/#{id}")
+  redirect to("/todos/#{todo_to_edit.id}")
 end
 
 # HERE USER CAN DELETE A TASK
   post '/todos/delete/:id' do
-  id = params[:id]
-
-  sql_delete_todo = "DELETE FROM tasks WHERE id = #{id}"
-  run_sql(sql_delete_todo)
-
+  todo_to_delete = Todo.find(params[:id])
+  todo_to_delete.destroy
   redirect to('/todos')
 end
 
 # SHOW DETAILS OF EACH TASK
 get '/todos/:id' do
-  id = params[:id]
-  sql_get_todo = "SELECT * FROM tasks WHERE id = #{id}"
-  @got_todo = run_sql(sql_get_todo)
+  @got_todo = Todo.find(params[:id])
+  got_people = Person.all
+  got_movie = Movie.all
 
-  assignee_id = @got_todo.first['assigned_to']
-  sql_get_person = "SELECT * FROM people WHERE id = #{assignee_id}"
-  got_person = run_sql(sql_get_person)
-  @assignee = got_person.first['name']
-
-  related_movie_id = @got_todo.first['related_to']
-  sql_get_movie = "SELECT * FROM movies WHERE id = #{related_movie_id}"
-  got_movie = run_sql(sql_get_movie)
-  @for_movie = got_movie.first['title']
+  @assignee = got_people.find(@got_todo.person_id)[:name]
+  @for_movie = got_movie.find(@got_todo.movie_id)[:title]
 
   erb :todo
 end

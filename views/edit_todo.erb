@@ -1,13 +1,13 @@
 <h1>Edit The Details of This Task</h1>
 <p>Edit the information for this task below:</p>
 
-<form action='/todos/edit/<%= @got_todo.first['id'] %>' method='post'>
-  <input type="text" name="todo" value="<%= @got_todo.first['todo'] %>" size="30px"><br/>
-  <input type="text" name="note" value="<%= @got_todo.first['note'] %>" size="30px"><br/>
-  <input type="text" name="status" value="<%= @got_todo.first['status'] %>" size="30px"><br/>
+<form action='/todos/edit/<%= @got_todo['id'] %>' method='post'>
+  <input type="text" name="todo" value="<%= @got_todo['todo'] %>" size="30px"><br/>
+  <input type="text" name="note" value="<%= @got_todo['note'] %>" size="30px"><br/>
+  <input type="text" name="status" value="<%= @got_todo['status'] %>" size="30px"><br/>
 
   Who would you like to assign this task to?
-  <select name="assigned_to">
+  <select name="person_id">
     <% @got_people.each do |person| %>
       <option value="<%= person["id"] %>">
         <%= person["name"] %>
@@ -16,7 +16,7 @@
   </select><br>
 
   Which movie is this for?
-  <select name="related_to">
+  <select name="movie_id">
     <% @got_movies.each do |movie| %>
       <option value="<%= movie["id"] %>">
         <%= movie["title"] %>

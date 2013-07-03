@@ -1,17 +1,17 @@
-<h1>Details of <%= @got_person.first['name'] %></h1>
+<h1>Details of <%= @got_person['name'] %></h1>
 
 <ul>
-  <li>Slave ID#: <%= @got_person.first['id'] %></li>
-  <li>Name: <%= @got_person.first['name'] %></li>
-  <li>Title: <%= @got_person.first['title'] %></li>
-  <li>Phone: <%= @got_person.first['phone'] %></li>
-  <li>Idiot? <%= if @got_person.first['idiot'] == 't'; "Yes"; else; "No"; end %></li>
+  <li>Slave ID#: <%= @got_person['id'] %></li>
+  <li>Name: <%= @got_person['name'] %></li>
+  <li>Title: <%= @got_person['title'] %></li>
+  <li>Phone: <%= @got_person['phone'] %></li>
+  <li>Idiot? <%= if @got_person['idiot'] == 't'; "Yes"; else; "No"; end %></li>
 </ul>
 
 Actions you can take:<br>
-<a href="/people/edit/<%= @got_person.first['id'] %>"><button>Edit This Person</button></a><br>
+<a href="/people/edit/<%= @got_person['id'] %>"><button>Edit This Person</button></a><br>
 
-<form action="/people/delete/<%= @got_person.first['id'] %>" method="post">
+<form action="/people/delete/<%= @got_person['id'] %>" method="post">
   <button>Delete This Person</button><br>
 </form>
 
