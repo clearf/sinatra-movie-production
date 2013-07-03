@@ -59,8 +59,8 @@ end
 # posts the update back
 post '/edit_todo/:id/' do
   todo = Todos.find(params[:id])
-  todo.name = params[:task]
-  todo.descriptions = params[:task_description]
+  todo.task = params[:task]
+  todo.task_description = params[:task_description]
   todo.movie_id = params[:movie_id]
   todo.contact_id = params[:contact_id]
   todo.save
@@ -106,13 +106,16 @@ end
 
  # gives you the person information to edit
  get '/edit_person/:id' do
+
   @people = People.find(params[:id])
  end
 
 #  posts the edits back to person
 post '/edit_person/:id' do
-  sql = "update people set (name, occupation) = ('#{name}', '#{occupation}') WHERE id = #{id}"
-  @person = run_sql(sql).first
+  people = People.find(params[:id])
+  people.name = params[:name]
+  people.occupation = params[:occupation]
+  people.save
 end
 
 
@@ -124,11 +127,7 @@ end
 
 # posts the person back to people
 post '/create_person' do
-  name = params[:name]
-  occupation = params[:occupation]
-  sql = "insert into people (name, occupation) values ('#{name}', '#{occupation}')"
-  run_sql(sql)
-  erb :people
+  person = People.create(params)
 end
 
 
@@ -141,17 +140,14 @@ end
 # gets the movie
 
 get '/movies' do
-  sql = "select * from movies"
-  @movies = run_sql(sql)
+  movie = Movies.all
   erb :movies
 end
 
 # gets single movie with information
 
 get '/movie/:id' do
-  id = params[:id]
-  sql =  "select * from movies where id = #{id}"
-  @movie = run_sql(sql).first
+  movie = Movies.find(params[:id])
   erb :movie
 end
 
@@ -162,11 +158,7 @@ end
 
 # posts the person back to people
 post '/create_movie' do
-  movie_name = params[:movie_name]
-  release_date = params[:release_date]
-  director = params[:director]
-  sql = "insert into movies (movie_name, release_date, director) values ('#{movie_name}', #{release_date}, '#{director}')"
-  run_sql(sql)
+  movie = Movies.create(params)
 end
 
 get '/edit_movie/:id' do
@@ -175,12 +167,12 @@ erb :edit_movie
 end
 
 post '/edit_movie/:id' do
-  id = params[:id]
-  @movie_name = params[:movie_name]
-  @release_date = params[:release_date]
-  @director = params[:director]
-  sql = "update movies set (movie_name, release_date, director) values ('#{movie_name}', #{release_date}, '#{director}') WHERE id = #{id}"
-  @person = run_sql(sql).first
+  movie = Movies.find(params[:id])
+  movie.movie_name = params[:movie_name]
+  movie.release_date = params[:release_date]
+  movie.director = params[:director]
+  movie.save
+  redirect to "/movies/#{movie.id}"
 end
 
 
