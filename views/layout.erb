@@ -2,21 +2,16 @@
 <html>
 <head>
   <title>Movie Production Tasks</title>
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
   <%= yield %>
 </br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
-<form action="/new_person" method="get">
-      <button>Add a new person</button>
-  </form></br>
-  <form action="/new_movie" method="get">
-      <button>Add a new movie</button>
-  </form></br>
-  <form action="/new_task" method="get">
-      <button>Add a new task</button>
-  </form></br>
-  <form action="/" method="get">
-      <button>Return to index</button>
-  </form>
+
+<p><a href="/new_person">Add a New Person</a></p>
+<p><a href="/new_movie">Add a New Movie</a></p>
+<p><a href="/new_task">Add a New Task</a></p>
+<p><a href="/">Return to Index</a></p>
+
 </body>
 </html>

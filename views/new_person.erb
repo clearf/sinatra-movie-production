@@ -1,4 +1,11 @@
-<form action="/new_person" method="POST">
+<% if @person %>
+<form action="/edit_person/<%= @person["id"] %>" method="POST">
+  Name: <input type="text" name="name" value= "<%= @person.name%>" autofocus></br></br>
+  <button>Edit Person</button>
+</form>
+<% else %>
+  <form action="/new_person" method="POST">
   Name: <input type="text" name="name" autofocus></br></br>
   <button>Create New Person</button>
 </form>
+<% end %>

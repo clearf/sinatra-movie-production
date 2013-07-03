@@ -1,9 +1,9 @@
 <p>Task: <%= @task["name"] %></p>
 <p>Description: <%= @task["description"] %><p>
-<p>Person: <%= @task["person"] %></p>
-<p>Movie: <%= @task["movie"] %></p>
+<p>Person: <%= @person %></p>
+<p>Movie: <%= @movie %></p>
 
-<form action="/edit_task/<%= @task["id"] %>" method="post">
+<form action="/edit_task/<%= @task["id"] %>" method="get">
   <button>Edit Task</button>
 </form><br>
 
