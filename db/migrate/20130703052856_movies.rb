@@ -5,6 +5,7 @@ class Movies < ActiveRecord::Migration
       t.integer :release_date
       t.string :director
       t.timestamps
+    end
   end
 
   def down

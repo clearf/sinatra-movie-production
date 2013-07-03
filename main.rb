@@ -2,15 +2,12 @@ require 'pry'
 require 'sinatra'
 require 'pg'
 require 'sinatra/reloader' if development?
+require 'sinatra/activerecord'
 
-helpers do
-  def run_sql(sql)
-    db = PG.connect(:dbname => 'movie_production', :host => 'localhost')
-    result = db.exec(sql)
-    db.close
-    result
-  end
-end
+
+set :database, {adapter: "postgresql",
+                database: "movie_production2",
+                host: "localhost"}
 
 
 class Todos < ActiveRecord::Base
@@ -30,7 +27,6 @@ end
 
 
 
-
 # this provides you with the index page that links to each seperate page
 get '/' do
   erb :index
@@ -43,52 +39,49 @@ end
 # gets all the tasks
 
 get '/todos' do
-  sql = "select * from todo"
-  @todos = run_sql(sql)
+  @todos = Todos.all
 erb :todos
 end
 
 # gives each individual task
 
 get '/todo/:id' do
-  id = params[:id]
-  sql = "select * from todo where id = #{id}"
-  @todo = run_sql(sql).first
+  @todo = Todos.find(params[:id])
 erb :todo
 end
 
 # goes to the edit task
 get '/edit_todo/:id/' do
-sql = "select * from todo where id = #{id}"
-@todos = run_sql(sql).first
+  @todo = Todos.find(params[:id])
 erb :edit_todo
 end
 
 # posts the update back
 post '/edit_todo/:id/' do
-  sql = "update people set (task, task_description, person_id, movie_id) = ('#{task}', '#{task_description}', #{person_id}, #{movie_id}) WHERE id = #{id}"
-  @todos =run_sql(sql)
+  todo = Todos.find(params[:id])
+  todo.name = params[:task]
+  todo.descriptions = params[:task_description]
+  todo.movie_id = params[:movie_id]
+  todo.contact_id = params[:contact_id]
+  todo.save
+  redirect to "/todos/#{todo.id}"
 end
 
 
 # create and assign new todo
 get '/create_todo' do
-  sql = "select id, name from people"
-  @people = run_sql(sql)
-  sql = "select id, movie_name from movies"
-  @movies = run_sql(sql)
+  @people = People.find(params[:id])
+  @movies = Movies.find(params[:id])
   erb :create_todo
 end
 
 # posts the task back to
 post '/create_todo' do
-  task = params[:task]
-  task_description = params[:task_description]
-  sql = "INSERT INTO todo (task, task_description, person_id, movie_id) VALUES ('#{task}','#{task_description}', #{person_id}, #{movie_id});"
-  @todos = run_sql(sql)
-  redirect to '/'
+  todo = Todos.create(params)
+  redirect to "/todo/#{guitar.id}"
   erb :todos
 end
+
 
 
 #         #
@@ -98,8 +91,7 @@ end
 # get all the people
 
 get'/people' do
-  sql = "select * from people"
-  @people = run_sql(sql)
+  @people = People.all
   erb :people
 end
 
@@ -107,17 +99,14 @@ end
 
 
 get '/person/:id' do
-  id = params[:id]
-  sql = "select * from people where id = #{id}"
-  @person = run_sql(sql).first
+  @people = People.find(params[:id])
 erb :person
 end
 
 
  # gives you the person information to edit
  get '/edit_person/:id' do
-  sql = "select * from people where id = #{id}"
-  @person = run_sql(sql).first
+  @people = People.find(params[:id])
  end
 
 #  posts the edits back to person

@@ -4,8 +4,8 @@ class People < ActiveRecord::Migration
       t.string :name
       t.string :occupation
       t.timestamps
+    end
   end
-
   def down
     drop_table :people
   end
