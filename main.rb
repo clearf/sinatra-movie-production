@@ -142,3 +142,20 @@ get '/movies' do
   @movies = Movie.all
   erb :movies
 end
+
+get '/movies/:id' do
+  @movie = Movie.find(params[:id])
+  erb :movie
+end
+
+post '/movies' do
+  Movie.create(params)
+
+  redirect to('/movies')
+end
+
+get '/movies/new' do
+  erb :new_movie
+end
+
+
