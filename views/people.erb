@@ -1,5 +1,6 @@
 <h1>People</h1>
 
+<ul>
 <% @people.each do |person| %>
   <li>
     <a href="/people/<%= person['id'] %>/edit">
@@ -7,6 +8,7 @@
     </a>
   </li>
 <% end %>
+</ul>
 
 <br>
 <form action="/people/new">

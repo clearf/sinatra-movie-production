@@ -17,10 +17,12 @@ end
 
 class Tasks < ActiveRecord::Base
   belongs_to :movies
+  has_many :tasks
 end
 
 class People < ActiveRecord::Base
   belongs_to :movies
+  belongs_to :tasks
 end
 
 

@@ -1,5 +1,6 @@
 <h1>Tasks</h1>
 
+<ul>
 <% @todos.each do |task| %>
   <li>
     <a href="/todos/<%= task['id'] %>/edit">
@@ -7,6 +8,7 @@
     </a>
   </li>
 <% end %>
+</ul>
 
 <br>
 <form action="/todos/new">
