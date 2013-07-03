@@ -26,7 +26,9 @@ class Task < ActiveRecord::Base
   has_one :person
 end
 
-# Tasks
+#########################
+## Tasks
+#########################
 # Find all tasks for index page
 get '/' do
   @tasks = Task.all
@@ -81,7 +83,9 @@ post '/todo/:id/delete' do
   redirect to('/')
 end
 
-# Movies
+#########################
+## Movies
+#########################
 # Create a movie page
 get '/new_movie' do
   erb :new_movie
@@ -135,7 +139,9 @@ post '/movie/:id/delete' do
   redirect to('/movies')
 end
 
-# People
+#########################
+## People
+#########################
 # list all people on staff team
 get '/people' do
   @people = Person.all
