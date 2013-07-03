@@ -47,9 +47,8 @@ end
 
 # posts the update back
 post '/edit_todo/:id/' do
-sql = "update people set (task, task_description, person_id, movie_id) = ('#{task}', '#{task_description}', #{person_id}, #{movie_id}) WHERE id = #{id}"
-run_sql(sql)
-@todos
+  sql = "update people set (task, task_description, person_id, movie_id) = ('#{task}', '#{task_description}', #{person_id}, #{movie_id}) WHERE id = #{id}"
+  @todos =run_sql(sql)
 end
 
 
@@ -102,10 +101,10 @@ end
   @person = run_sql(sql).first
  end
 
-# # posts the edits back to person
+#  posts the edits back to person
 post '/edit_person/:id' do
-sql = "update people set (name, occupation) = ('#{name}', '#{occupation}') WHERE id = #{id}"
-@person = run_sql(sql).first
+  sql = "update people set (name, occupation) = ('#{name}', '#{occupation}') WHERE id = #{id}"
+  @person = run_sql(sql).first
 end
 
 
@@ -168,12 +167,12 @@ erb :edit_movie
 end
 
 post '/edit_movie/:id' do
-@id = params[:id]
-movie_name = params[:movie_name]
-release_date = params[:release_date]
-director = params[:director]
-sql = "update movies set (movie_name, release_date, director) = ('#{movie_name}', #{release_date}, '#{director}') WHERE id = #{id}"
-@person = run_sql(sql).first
+  id = params[:id]
+  @movie_name = params[:movie_name]
+  @release_date = params[:release_date]
+  @director = params[:director]
+  sql = "update movies set (movie_name, release_date, director) values ('#{movie_name}', #{release_date}, '#{director}') WHERE id = #{id}"
+  @person = run_sql(sql).first
 end
 
 
