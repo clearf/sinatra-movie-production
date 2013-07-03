@@ -73,10 +73,8 @@ get '/todos/:id' do
 end
 #Deleting tasks with their ID's. Stays the same.
 get '/todos/:id/delete' do
-  id = params[:id]
-
-  sql = "DELETE FROM tasks WHERE id = #{id}"
-  run_sql(sql)
+  task = Task.find(params[:id])
+  task.destroy
 
   redirect to('/todos')
 end
@@ -140,3 +138,7 @@ post '/people/:id/edit' do
 end
 
 #MOVIES
+get '/movies' do
+  @movies = Movie.all
+  erb :movies
+end
