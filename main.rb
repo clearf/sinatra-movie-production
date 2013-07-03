@@ -12,6 +12,22 @@ set :database, {
               :host => 'localhost'
 }
 
+#Setting up individual classes and relationships
+class Movie < ActiveRecord::Base
+  belongs_to :person
+  has_many :tasks
+end
+
+class Task < ActiveRecord::Base
+  belongs_to :person
+  belongs_to :movie
+end
+
+class Person < ActiveRecord::Base
+  belongs_to :movies
+  has_many :tasks
+end
+
 #Routing
 get '/' do
   erb :index
@@ -26,60 +42,36 @@ end
 
 #ToDo's take priority. People and movies can be assigned to them.
 get '/todos' do
-  @todos =
+  @todos = Task.all
 
   erb :todos
 end
 
 #form for new tasks (todo)
 get '/todos/new' do
-
-  people_sql = "SELECT * FROM people"
-  movies_sql = "SELECT * FROM movies"
-
-  @movies = run_sql(movies_sql)
-  @people = run_sql(people_sql)
+  @movies = Movie.all
+  @people = Person.all
 
   erb :new_todo
 end
 
 #Add new tasks
 post '/todos' do
-
-  task = params[:task]
-  details = params[:details]
-  due = params[:due]
-  person_id = params[:person_id]
-  movie_id = params[:movie_id]
-
-  sql = "INSERT INTO tasks (task, details, due, person_id, movie_id) VALUES ('#{task}', '#{details}', '#{due}', #{person_id}, #{movie_id})"
-  run_sql(sql)
-
-  redirect to('todos')
+  Task.create(params)
+  redirect to('/todos')
 end
 
 #GET individual info on todos
 get '/todos/:id' do
 
-  id = params[:id]
-  person_id = [:person_id]
-  movie_id = [:movie_id]
+@todo = Task.find(params[:id])
 
-  #GET todo info from db
-  sql = "SELECT * FROM tasks WHERE id = #{id}"
-  @todo = run_sql(sql)[0]
-
-  #GET person for assigned todo
-  person_sql = "SELECT * FROM people WHERE id = #{@todo['person_id']}"
-  @person = run_sql(person_sql)[0]
-
-  #GET movie for assigned todo
-  movie_sql = "SELECT * FROM movies WHERE id = #{@todo['movie_id']}"
-  @movie = run_sql(movie_sql)[0]
+@person = @todo.person
+@movie = @todo.movie
 
   erb :todo
 end
-#Deleting tasks with their ID's
+#Deleting tasks with their ID's. Stays the same.
 get '/todos/:id/delete' do
   id = params[:id]
 
@@ -92,19 +84,9 @@ end
 #Edit todo's
 get '/todos/:id/edit' do
 
-  id = params[:id]
-  person_id = params[:person_id]
-  movie_id = params[:movies_id]
-
-
-  sql = "SELECT * FROM tasks WHERE id = #{id}"
-  people_sql = "SELECT * FROM people"
-  movies_sql = "SELECT * FROM movies"
-
-  #Got my instance variables
-  @todo = run_sql(sql)[0]
-  @people = run_sql(people_sql)
-  @movies = run_sql(movies_sql)
+  @todo = Task.find(params[:id])
+  @people = Person.all
+  @movies = Movie.all
 
   erb :edit_todo
 end
@@ -156,3 +138,5 @@ post '/people/:id/edit' do
   sql = "SELECT name FROM people WHERE id = #{id}"
 
 end
+
+#MOVIES
