@@ -25,3 +25,14 @@ get '/people' do
   erb :people
 end
 
+# displays input form to add new people
+get '/people/new' do
+  erb :new_person
+end
+
+# posts form info to database
+post '/people/new' do
+  name = params[:name]
+  sql = "INSERT INTO people (name) VALUES ('#{name}')"
+  run_sql(sql)
+  redirect to('/people')
