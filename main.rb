@@ -36,3 +36,27 @@ post '/people/new' do
   sql = "INSERT INTO people (name) VALUES ('#{name}')"
   run_sql(sql)
   redirect to('/people')
+end
+
+#list all movies
+get '/movies' do
+  sql = "SELECT * FROM movies"
+  @movies = run_sql(sql)
+  erb :movies
+end
+
+# displays input form to add new movie
+get '/movie/new' do
+  erb :new_movie
+end
+
+# posts form info to database
+post '/movie/new' do
+  name = params[:name]
+  date = params[:date]
+  director = params[:director]
+  sql = "INSERT INTO movie (name, release_date, director) VALUES ('#{name}', #{date}, '#{director}')"
+  run_sql(sql)
+  redirect to('/people')
+end
+
