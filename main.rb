@@ -60,3 +60,28 @@ post '/movie/new' do
   redirect to('/people')
 end
 
+# lists all tasks
+get '/todos' do
+  sql = "SELECT * FROM tasks"
+  @todos = run_sql(sql)
+  erb :todos
+end
+
+# displays input form to add new task
+get '/todo/new' do
+  erb :new_todo
+end
+
+# posts form info to database
+post '/todo/new' do
+  name = params[:name]
+  description = params[:description]
+  movie_id = params[:movie_id]
+  person_id = params[:person_id]
+  sql = "INSERT INTO tasks (name, description, movie_id, person_id) VALUES ('#{name}', '#{description}', #{movie_id}, #{person_id})"
+  run_sql(sql)
+  redirect to('/todos')
+end
+
+
+
