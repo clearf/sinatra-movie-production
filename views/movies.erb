@@ -1,0 +1,25 @@
+<% @movies.each do |movie| %>
+    <%= movie %>
+    <% end %>
+
+
+<form action="/movies" method="post">
+  <label for="title">Title</label>
+  <input type="text" name="title" value=""/>
+  <br />
+
+  <label for="image">Image</label>
+  <input type="text" name="image" value=""/>
+  <br />
+  <label for="person_id">Director</label>
+  <select id="person_id" name="person_id">
+    <option value="">Please choose</option>
+    <% @people.each do | person | %>
+    <option value="<%= person['id'] %>">
+      <%= person ['name']%>
+    </option>
+    <% end %>
+  </select>
+
+<button> Save </button>
+</form>

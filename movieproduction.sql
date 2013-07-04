@@ -22,7 +22,7 @@ CREATE TABLE TASKS
   description TEXT,
   person_id INT references people(id),
   movie_id INT references movies(id),
-  completed BOOLEAN
+  completed BOOLEAN DEFAULT FALSE
 );
 
 

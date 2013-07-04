@@ -1,0 +1,21 @@
+.movies {
+  background-color: blue
+  border: red;
+  margin: 50px;
+}
+
+.tasks {
+  background-color: green;
+  font: 'Times New Roman';
+  color: white;
+}
+
+body {
+  background-image: url('http://www.proprofs.com/quiz-school/user_upload/ckeditor/TaskUs%20Logo%20JPEG%20(2)(21).jpg');
+  background-repeat: no-repeat;
+  background-position: bottom center;
+}
+
+.people {
+  background-color: grey;
+}

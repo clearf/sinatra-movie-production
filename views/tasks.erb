@@ -1,0 +1,62 @@
+<h1> Welcome to Movie Manager Tasks</h1>
+
+<a href="/people"> Add Person </a> <br />
+<a href="/movies"> Add Movie</a>
+
+<% @tasks.each do |foobar| %>
+<p class='tasks'>
+  <span>
+    <a href="/tasks/<%=foobar["id"]%>"><%= foobar["task"] %></a>
+  </span>
+  <span><%= foobar["description"] %> </span>
+
+  <span>
+    <%=
+    p = @people.find do |person|
+      person["id"] == foobar["person_id"]
+    end
+    p["name"]
+    %>
+  </span>
+
+  <span>
+    <%=
+    m = @movies.find do |movie|
+      movie["id"] == foobar["movie_id"]
+    end
+    m["title"]
+    %>
+  </span>
+</p>
+<% end %>
+
+<!-- remove duplication between this and task.erb -->
+<form action="/tasks" method="post">
+  <label for="task">Task</label>
+  <input type="text" name="task" value=""/>
+  <br />
+  <label for="description">Description</label>
+  <input type="text" name="description" value=""/>
+  <br />
+  <label for="person_id">Person</label>
+  <select id="person_id" name="person_id">
+    <option value="">Please choose</option>
+    <% @people.each do | person | %>
+    <option value="<%= person['id'] %>">
+      <%= person ['name']%>
+    </option>
+    <% end %>
+  </select>
+  <br />
+  <label for="movie_id">Movie</label>
+  <select id="movie_id" name="movie_id">
+    <option value="">Please choose movie</option>
+    <% @movies.each do | movie | %>
+    <option value="<%= movie['id'] %>">
+      <%= movie['title'] %>
+    </option>
+    <% end %>
+  </select>
+  <br />
+  <button>Save</button>
+</form>
