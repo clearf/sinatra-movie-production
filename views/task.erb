@@ -1,0 +1,67 @@
+<p>
+  <span>
+   <%=@task["id"] %>
+  </span>
+
+  <span>
+    <%=@task["task"] %>
+  </span>
+
+  <span>
+    <%= @task["description"] %>
+  </span>
+
+  <span>
+    <%=
+    p = @people.find do |person|
+      person["id"] == @task["person_id"]
+    end
+    p ? p["name"] : ''
+    %>
+  </span>
+
+  <span>
+    <%=
+    m = @movies.find do |movie|
+      movie["id"] == @task["movie_id"]
+    end
+    m ? m["title"] : ''
+    %>
+  </span>
+</p>
+
+<!-- remove duplication between this and tasks.erb -->
+<form action="/tasks/<%=@task["id"]%>" method="post">
+  <label for="task">Task</label>
+  <input type="text" name="task" value="<%=@task["task"]%>"/>
+  <br />
+  <label for="description">Description</label>
+  <input type="text" name="description" value="<%=@task["description"]%>"/>
+  <br />
+  <label for="person_id">Person</label>
+  <select id="person_id" name="person_id">
+    <option value="">Please choose</option>
+    <% @people.each do | person | %>
+    <option value="<%= person['id'] %>" <%= @task['person_id'] == person['id'] ? 'selected' : '' %>>
+      <%= person ['name']%>
+    </option>
+    <% end %>
+  </select>
+  <br />
+  <label for="movie_id">Movie</label>
+  <select id="movie_id" name="movie_id">
+    <option value="">Please choose movie</option>
+    <% @movies.each do | movie | %>
+    <option value="<%= movie['id'] %>" <%= @task['movie_id'] == movie['id'] ? 'selected' : ''%>>
+      <%= movie['title'] %>
+    </option>
+    <% end %>
+  </select>
+  <br />
+  <label for="completed"> Task Complete?</label>
+  <input type="checkbox" name="completed" <%= @task["completed"] == "t" ? "checked" : "" %>>
+  <br />
+  <button>Save</button>
+</form>
+
+<button> Delete Task</button>
