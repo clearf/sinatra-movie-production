@@ -18,7 +18,7 @@ get '/' do
   erb :index
 end
 
-#show all people
+#list all people
 get '/people' do
   sql = "SELECT * FROM people"
   @people = run_sql(sql)
