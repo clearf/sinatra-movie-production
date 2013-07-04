@@ -18,3 +18,9 @@ get '/' do
 end
 
 #show all people
+get '/people' do
+  sql = "SELECT * FROM people"
+  @people = run_sql(sql)
+  erb :people
+end
+
