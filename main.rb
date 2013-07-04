@@ -8,7 +8,8 @@ helpers do
   def run_sql(sql)
     db = PG.connect(:dbname => 'movie_production', :host => 'localhost')
     result = db.exec(sql)
-    erb :people
+    db.close
+    result
   end
 end
 
