@@ -1,0 +1,8 @@
+<h3>Staff: <h3>
+  <ul>
+    <% @people.each do |person| %>
+    </li><a href="/people/<%= person['id'] %>"><%=person['name'].capitalize%></a></li>
+  <% end %>
+  </ul>
+
+<a href = 'people/new'><button>New Person</button></a>
