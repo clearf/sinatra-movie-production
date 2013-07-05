@@ -1,0 +1,23 @@
+<div class="wrapper well form">
+  <form action="/todo/<%= @task['id'] %>" method="post">
+    <p>Errand:</p> <input type="text" name="errand" value="<%= @task['errand'] %>" autofocus>
+    <p>Description:</p> <input type="text" name="description" value="<%= @task['description'] %>">
+    <p>For Movie:</p> <select name="movie_id">
+      <option selected="selected" value="<%= @task['movie_id'] %>">Chosen: <%= @specific_movie['name'] %></option>
+      <% @movies.each do |movie| %>
+        <option value="<%= movie['id'] %>">
+          <%= movie['name'] %>
+        </option>
+      <% end %>
+    </select>
+   <p>Responsible Person:</p>  <select name="person_id">
+      <option selected="selected" value="<%= @task['person_id'] %>">Chosen: <%= @specific_person['name'] %></option>
+      <% @people.each do |person| %>
+        <option value="<%= person['id'] %>">
+          <%= person['name'] %>
+        </option>
+      <% end %>
+    </select><br>
+    <button class="btn btn-primary">Update</button>
+  </form>
+</div>

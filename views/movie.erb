@@ -1,0 +1,23 @@
+<div class="wrapper well row-fluid">
+  <div class="pull-left movie_image">
+    <img src="<%= @movie['image'] %>" />
+  </div>
+  <div class="movie_content">
+    <div class="admin">
+       <a href="/movie/<%= @movie['id'] %>/edit"><button class="btn btn-warning btn-mini">Edit</button></a>
+       <form action="/movie/<%= @movie['id'] %>/delete" method="post">
+        <button class="btn btn-warning btn-mini">Delete</button>
+      </form>
+    </div>
+    <h3 class="headtitle"><%= @movie['name'] %></h3>
+    <h4><%= @movie['director'] %></h4>
+    <h4><%= @movie['releasedate'] %></h4>
+    <hr>
+    <h4>Related Tasks</h4>
+    <ul>
+      <% @tasks_of_movie.each do |task| %>
+        <li><a href="/todo/<%= task['id'] %>"><%= task['errand'] %></a></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
