@@ -1,0 +1,11 @@
+<h3>Tasks: <h3>
+  <ul>
+    <% @todos.each do |todo| %>
+    </li id="task"><a href="/todos/<%= todo['id'] %>"><%=todo['name'].capitalize%></a></li>
+    <p id="description"><%= todo["description"].capitalize %></p>
+  <% end %>
+  </ul>
+
+<a href = 'todos/new'><button>Add a New Task</button></a>
+
+
