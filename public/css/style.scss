@@ -65,22 +65,20 @@ input[type=text] {
   margin-left: 16px;
 }
 
-.avatar {
-  width: 25%;
-  float: left;
-  .person_image {
-    padding: 0 0 0 14px;
-    img {
-      width: 90%;
-      border: 2px solid #3D6785;
-    }
-  }
-  .person_name {
-    text-align: center;
-    padding: 10px 0 20px 0;
-    color: #d9474c;
+
+.person_image {
+  padding: 0 0 0 14px;
+  img {
+    width: 90%;
+    border: 2px solid #3D6785;
   }
 }
+.person_name {
+  text-align: center;
+  padding: 10px 0 20px 0;
+  color: #d9474c;
+}
+
 
 /* Movie */
 

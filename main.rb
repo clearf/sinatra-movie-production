@@ -14,16 +14,16 @@ set :database, {
 }
 
 class Movie < ActiveRecord::Base
-  belongs_to :tasks
+  has_many :tasks
 end
 
 class Person < ActiveRecord::Base
-  belongs_to :tasks
+  has_many :tasks
 end
 
 class Task < ActiveRecord::Base
-  has_one :movie
-  has_one :person
+  belongs_to :movie
+  belongs_to :person
 end
 
 #########################
