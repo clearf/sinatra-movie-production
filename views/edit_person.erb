@@ -1,5 +1,5 @@
 <h1>Edit the Person</h1>
-<form action='/edit_person/:id' method='post'>
+<form action='/person/<%= @person['id'] %>/edit' method='post'>
 What is their name?:
 <input type="text" name="name"><br>
 What is their occupation?:

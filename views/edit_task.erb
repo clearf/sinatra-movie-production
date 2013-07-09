@@ -1,4 +1,4 @@
-<form action='/:id/edit_todo' method='post'>
+<form action='/todos/<%=@todo['id']%>' method='post'>
 Task:<input type="text" name="task"><br>
 Specifics:<input type="text" name="task_description"><br>
    <% @people.each do |person| %>

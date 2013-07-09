@@ -53,7 +53,7 @@ erb :edit_todo
 end
 
 # posts the update back
-post '/edit_todo/:id/' do
+post '/todo/:id/' do
   sql = "update people set (task, task_description, person_id, movie_id) = ('#{task}', '#{task_description}', #{person_id}, #{movie_id}) WHERE id = #{id}"
   @todos =run_sql(sql)
 end
@@ -65,6 +65,7 @@ get '/create_todo' do
   @people = run_sql(sql)
   sql = "select id, movie_name from movies"
   @movies = run_sql(sql)
+  redirect to '/todos'
   erb :create_todo
 end
 
@@ -103,13 +104,13 @@ end
 
 
  # gives you the person information to edit
- get '/edit_person/:id' do
+ get '/person/:id/edit' do
   sql = "select * from people where id = #{id}"
   @person = run_sql(sql).first
  end
 
 #  posts the edits back to person
-post '/edit_person/:id' do
+post '/person/:id' do
   sql = "update people set (name, occupation) = ('#{name}', '#{occupation}') WHERE id = #{id}"
   @person = run_sql(sql).first
 end
@@ -118,6 +119,7 @@ end
 
 # creates an new person and assigns
 get '/create_person' do
+  redirect to '/people'
   erb :create_person
 end
 
@@ -156,6 +158,7 @@ end
 
 # creates an new person and assigns
 get '/create_movie' do
+  redirect to '/movie'
   erb :create_movie
 end
 
@@ -168,12 +171,12 @@ post '/create_movie' do
   run_sql(sql)
 end
 
-get '/edit_movie/:id' do
+get '/movie/:id/edit' do
 
 erb :edit_movie
 end
-
-post '/edit_movie/:id' do
+#updates movie entry and redirects back
+post '/movie/:id' do
   id = params[:id]
   @movie_name = params[:movie_name]
   @release_date = params[:release_date]
