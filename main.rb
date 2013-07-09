@@ -39,9 +39,16 @@ erb :todo
 end
 
 # goes to the edit task
-get '/edit_todo/:id/' do
-sql = "select * from todo where id = #{id}"
-@todos = run_sql(sql).first
+get '/todo/:id/edit' do
+  id = params[:id]
+  sql = "select * from todo where id = #{id}"
+  @todo = run_sql(sql).first
+  sql1 = "select * from people where id = #{id}"
+  @people = run_sql(sql1).first
+  sql2 = "select * from movies where id = #{id}"
+  @movies = run_sql(sql2).first
+
+
 erb :edit_todo
 end
 
