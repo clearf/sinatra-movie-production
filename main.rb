@@ -37,7 +37,6 @@ get '/home' do
   redirect to('/')
 end
 
-
 #Tasks - People - Movies
 
 #ToDo's take priority. People and movies can be assigned to them.
@@ -92,8 +91,16 @@ end
 #PEEPLE
 get '/people' do
   @people = Person.all
-
   erb :people
+end
+
+post '/people' do
+  Person.create(params)
+  redirect to('/people')
+end
+
+get '/people/new' do
+  erb :new_person
 end
 
 get '/people/:id' do
@@ -101,29 +108,34 @@ get '/people/:id' do
   erb :person
 end
 
-post '/people' do
-  Person.create(params)
-
-  redirect to('/people')
-end
-
 get '/people/:id/edit' do
-  id = params[:id]
-
-  sql = "SELECT * FROM people WHERE id = #{id}"
-  @person = run_sql(sql).first
-
+  @person = Person.find(params[:id])
   erb :edit_person
 end
 
 post '/people/:id/edit' do
 
-  id = params[:id]
-  name = params[:name]
-  email = params[:email]
+  @person = Person.find(params[:id])
+  @person.name = params[:name]
+  @person.email = params[:email]
+  @person.save
 
-  sql = "SELECT name FROM people WHERE id = #{id}"
+  redirect to('/people')
+end
 
+get '/people/:id/delete' do
+
+  person = Person.find(params[:id])
+
+  person.movies.each do |movie|
+    movie.destroy
+    end
+  person.tasks.each do |task|
+    task.destroy
+    end
+  Person.find(params[:id]).destroy
+
+  redirect to('/people')
 end
 
 #MOVIES
@@ -144,7 +156,19 @@ post '/movies' do
 end
 
 get '/movies/new' do
+  @people = Person.all
   erb :new_movie
 end
 
+post '/movies/:id' do
+
+  movie = Movie.find(params[:id])
+  movie.title = params[:title]
+  movie.description = params[:description]
+  movie.person_id = params[:person_id]
+
+  movie.save
+
+  redirect to('/movies')
+end
 
