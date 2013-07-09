@@ -1,0 +1,17 @@
+<div class ="todos_container">
+</br>
+</br>
+  <h2> <%=@person['name']%> </h2>
+  <h3> <a href=<%=@person['email']%>><%=@person['email']%></a></h3>
+  <!-- why not actual email? -->
+</br>
+</br>
+
+<a class="pure-button" href="/people/<%=@person['id']%>/edit">
+  Update
+</a>
+<a class="pure-button" href="/people/<%=@person['id']%>/delete">
+  Delete
+</a>
+</button>
+</div>

@@ -1,0 +1,69 @@
+@import url(http://fonts.googleapis.com/css?family=Oxygen);
+@import url(http://fonts.googleapis.com/css?family=Oxygen:300);
+@import url(http://fonts.googleapis.com/css?family=Arvo:400italic);
+@import url(http://fonts.googleapis.com/css?family=Fauna+One);
+
+body {
+  margin: 0 auto;
+  background-image: url('/views/images/grey_wash_wall.png');
+  background-repeat: repeat;
+  background-color: #424242;
+  font-family: "Oxygen:300", "Arvo", "Fauna One";
+  color: #E6E6E6;
+}
+h1 {
+  color: #EFFBF2;
+  text-shadow: 3px 10px 3px #2E2E2E;
+  text-align: center;
+  letter-spacing: 2.45px;
+}
+input[type="text"] {
+  line-height: 120%;
+}
+a {
+  text-decoration: none;
+  color: #A9F5A9;
+  font-family: "Oxygen", "Arvo:400italic", "Fauna One";
+}
+.warning {
+  color: red;
+}
+.container {
+  padding: 200px;
+  text-align: center;
+  display: block;
+  font-family: "Oxygen:300"
+}
+
+.main {
+  text-align: center;
+  font-size: 30px;
+  font-family: "Fauna One";
+}
+
+.pure-menu {
+  text-align: center;
+  padding-top: 5px;
+  margin: auto;
+}
+a.pure-menu {
+  font-size: 11px;
+  text-decoration: none;
+  font-family: "Oxygen";
+}
+
+.index_content {
+  text-align: center;
+  display: block;
+  padding: 50px;
+  font-family: "Fauna One";
+  font-size: 30px;
+  letter-spacing: 2px;
+}
+
+.todos_container {
+  font-size: 18px;
+  font-weight: lighter;
+  padding: 40px 100px 0 100px;
+  text-align: center;
+}

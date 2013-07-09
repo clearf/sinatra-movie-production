@@ -1,0 +1,11 @@
+<div class="todos_container">
+  <h2 span style="font-size: 35px; color:#FFB240">Edit Contact</h2>
+  <form action = "/people/<%= @person['id'] %>/edit" method = "post">
+    <input type = "text" name = "name" value = "<%= @person['name'] %>">
+  </br>
+    <input type = "text" name = "email" value = "<%= @person['email'] %>">
+  </br>
+</br>
+
+    <button class="pure-button">Update Contact</button>
+  </form>

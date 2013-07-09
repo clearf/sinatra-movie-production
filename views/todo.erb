@@ -1,0 +1,28 @@
+
+<div class="todos_container">
+  <h2 span style="color: #81F79F">Details</h2>
+  <p>"<%= @todo['task'] %>"</p>
+  <p>| <%= @todo['details'] %> |</p>
+  <p> Assigned to :</br>
+    <%=@person["name"] %>
+  </p>
+  <p> Movie:</br>
+    <%=@movie["title"] %>
+  </p>
+  <p span style="color:#FFB240">Due:</span>
+  </br>
+    <%= @todo['due'] %>
+  </p>
+
+</br>
+</br>
+  <a class="pure-button" href="/todos/<%=@todo["id"]%>/edit">
+    Edit
+  </a>
+</button>
+
+  <a class="pure-button" href="/todos/<%=@todo["id"]%>/delete">
+    Delete
+  </a>
+</button>
+</div>

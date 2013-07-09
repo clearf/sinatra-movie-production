@@ -1,0 +1,17 @@
+<div class="todos_container">
+  <h2 span style="font-size: 35px; color: #81F79F">People</h2>
+  <%@people.each do |person|%>
+   <p>
+   </br>
+    <a href ='/people/<%=person["id"]%>'>
+      <%=person["name"]%>
+    </a>
+  </br>
+  </p>
+  <%end%>
+</br>
+  <a class="pure-button" href='people/new'>
+    Add Member
+  </a>
+  </button>
+</div>
