@@ -4,7 +4,6 @@ class Tasks < ActiveRecord::Migration
         t.string :task
         t.string :details
         t.string :due
-        t.boolean :urgent
         t.boolean :complete
       t.references :person
       t.references :movie

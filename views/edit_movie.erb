@@ -1,0 +1,10 @@
+<div class="todos_container">
+<h2 span style="font-size: 35px; color:#FFB240">Edit Movie</h2>
+  <form action = '/movies/<%= @movie["id"] %>' method = "post">
+    <input type="text" name="title" value="<%= @movie['title'] %>">
+  </br>
+    <input type="text" name="description" value = "<%= @movie['description'] %>">
+  </br>
+</br>
+    <button class="pure-button">Update Movie</button>
+  </form>

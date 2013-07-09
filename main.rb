@@ -57,6 +57,7 @@ end
 #Add new tasks
 post '/todos' do
   Task.create(params)
+
   redirect to('/todos')
 end
 
@@ -70,10 +71,9 @@ get '/todos/:id' do
 
   erb :todo
 end
-#Deleting tasks with their ID's. Stays the same.
+#Destroying tasks with their ID's
 get '/todos/:id/delete' do
-  task = Task.find(params[:id])
-  task.destroy
+  Task.find(params[:id]).destroy
 
   redirect to('/todos')
 end
@@ -87,6 +87,21 @@ get '/todos/:id/edit' do
 
   erb :edit_todo
 end
+
+post '/todos/:id' do
+  todo = Task.find(params[:id])
+
+  todo.task = params[:task]
+  todo.details = params[:details]
+  todo.due = params[:due]
+  todo.complete = params[:complete]
+  todo.person_id = params[:person_id]
+  todo.movie_id = params[:movie_id]
+  todo.save
+
+  redirect to('/todos')
+end
+
 
 #PEEPLE
 get '/people' do
@@ -110,6 +125,7 @@ end
 
 get '/people/:id/edit' do
   @person = Person.find(params[:id])
+
   erb :edit_person
 end
 
@@ -127,13 +143,10 @@ get '/people/:id/delete' do
 
   person = Person.find(params[:id])
 
-  person.movies.each do |movie|
-    movie.destroy
-    end
-  person.tasks.each do |task|
+  Task.find_all_by_person_id(params[:id]).each do |task|
     task.destroy
-    end
-  Person.find(params[:id]).destroy
+  end
+  person.destroy
 
   redirect to('/people')
 end
@@ -155,19 +168,33 @@ post '/movies' do
   redirect to('/movies')
 end
 
+get '/movies/:id/edit' do
+  @movie = Movie.find(params[:id])
+  @people = Person.all
+  erb :edit_movie
+end
+
 get '/movies/new' do
   @people = Person.all
   erb :new_movie
 end
 
 post '/movies/:id' do
-
   movie = Movie.find(params[:id])
+
   movie.title = params[:title]
   movie.description = params[:description]
-  movie.person_id = params[:person_id]
-
   movie.save
+
+  redirect to('/movies')
+end
+
+get '/movies/:id/delete' do
+# Have to remove associated tasks.
+  Task.find_all_by_movie_id(params[:id]).each do |task|
+    task.destroy
+  end
+  Movie.find(params[:id]).destroy
 
   redirect to('/movies')
 end
